@@ -11,6 +11,16 @@ spring:
     properties:
       hibernate:
         enable_lazy_load_no_trans: true
+  freemarker:
+      request-context-attribute: req  #req访问request
+      suffix: .ftl  #后缀名
+      content-type: text/html
+      enabled: true
+      cache: false #缓存配置
+      template-loader-path: classpath:/templates/ #模板加载路径 按需配置
+      charset: UTF-8 #编码格式
+      settings:
+        number_format: '0.##'   #数字格式化，无小数点
 
 mybatis:
   config-location: classpath:mybatis.xml
@@ -19,4 +29,6 @@ mybatis:
 logging:
   level:
      wang.ismy.bloga.dao : debug
+server:
+  port: 80
 

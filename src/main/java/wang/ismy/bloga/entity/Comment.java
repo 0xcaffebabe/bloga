@@ -1,9 +1,7 @@
 package wang.ismy.bloga.entity;
 
+import javax.persistence.*;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.util.Date;
 
 @Entity
@@ -21,6 +19,7 @@ public class Comment extends wang.ismy.bloga.entity.Entity {
 
     private String email; //评论人邮箱
 
+    @Column(columnDefinition = "varchar(512)")
     private String content; //评论正文
 
     private int visible; //评论可见性

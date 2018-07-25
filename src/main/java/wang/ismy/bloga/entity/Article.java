@@ -1,9 +1,7 @@
 package wang.ismy.bloga.entity;
 
+import javax.persistence.*;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.util.Date;
 import java.util.List;
 @Entity
@@ -15,6 +13,7 @@ public class Article extends wang.ismy.bloga.entity.Entity {
 
     private String title;//文章标题
 
+    @Column(columnDefinition = "text")
     private String content; //正文
 
     private int user; //文章所属用户

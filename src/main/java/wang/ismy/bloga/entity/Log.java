@@ -1,9 +1,7 @@
 package wang.ismy.bloga.entity;
 
+import javax.persistence.*;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.util.Date;
 @Entity
 public class Log extends wang.ismy.bloga.entity.Entity {
@@ -14,8 +12,10 @@ public class Log extends wang.ismy.bloga.entity.Entity {
 
     private String ip;//来访者IP
 
+    @Column(columnDefinition = "varchar(2048)")
     private String url;//被访问的URL
 
+    @Column(columnDefinition ="varchar(1024)")
     private String ua;//来访者的UA头
 
     private Date time; //访问时间

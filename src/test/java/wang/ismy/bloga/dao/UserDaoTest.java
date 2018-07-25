@@ -16,5 +16,23 @@ import static org.junit.Assert.*;
 public class UserDaoTest {
 
 
+    @Autowired
+    UserDao dao;
+
+    @Test
+    public void getUsers() {
+        assertEquals(1,dao.getUsers().size());
+    }
+
+    @Test
+    public void check() {
+        User user=new User();
+
+        user.setName("admin");
+
+        user.setPassword("dsds");
+
+        System.out.println(dao.check(user));
+    }
 
 }

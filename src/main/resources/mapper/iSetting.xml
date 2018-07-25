@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wang.ismy.bloga.dao.inter.ISetting">
+   <select id="getSettingByKey" parameterType="string" resultType="wang.ismy.bloga.entity.Setting">
+       SELECT id,setting_key,setting_value FROM setting
+       WHERE setting_key = #{key}
+   </select>
+
+    <delete id="deleteSettingById" parameterType="int">
+        DELETE FROM setting
+        WHERE id=#{id}
+    </delete>
+
+    <delete id="deleteSettingByKey" parameterType="string">
+        DELETE FROM setting
+        WHERE setting_key=#{id}
+    </delete>
+
+    <update id="updateSetting" parameterType="wang.ismy.bloga.entity.Setting">
+        UPDATE setting
+        <set>
+            <if test="settingKey!=null">
+                setting_key=#{settingKey},
+            </if>
+            <if test="settingValue!=null">
+                setting_value=#{settingValue}
+            </if>
+        </set>
+        WHERE id=#{id}
+    </update>
+</mapper>
