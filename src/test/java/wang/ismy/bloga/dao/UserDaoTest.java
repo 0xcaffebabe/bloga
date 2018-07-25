@@ -15,17 +15,6 @@ import static org.junit.Assert.*;
 @SpringBootTest
 public class UserDaoTest {
 
-//    @Autowired
-//    private UserDao dao;
 
-    @Autowired
-    private TestRepository repository;
-    @Test
-    public void getUsers() {
-        User user=new User();
-        user.setName("admin");
-        user.setPassword("715711");
-        repository.save(user);
-    }
 
 }

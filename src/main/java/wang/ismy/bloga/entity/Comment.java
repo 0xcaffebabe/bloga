@@ -13,7 +13,7 @@ public class Comment extends wang.ismy.bloga.entity.Entity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id; //评论ID
 
-    private int parentid; //评论父ID
+    private int parentId; //评论父ID
 
     private int belongArticle; //所属文章ID
 
@@ -34,15 +34,6 @@ public class Comment extends wang.ismy.bloga.entity.Entity {
     public void setId(int id) {
         this.id = id;
     }
-
-    public int getParentid() {
-        return parentid;
-    }
-
-    public void setParentid(int parentid) {
-        this.parentid = parentid;
-    }
-
 
 
     public String getName() {
@@ -91,5 +82,13 @@ public class Comment extends wang.ismy.bloga.entity.Entity {
 
     public void setBelongArticle(int belongArticle) {
         this.belongArticle = belongArticle;
+    }
+
+    public int getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(int parentId) {
+        this.parentId = parentId;
     }
 }

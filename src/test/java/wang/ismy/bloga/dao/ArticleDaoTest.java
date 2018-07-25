@@ -55,11 +55,9 @@ public class ArticleDaoTest {
         article.setContent("第二内容"+new Date());
         article.setTags("1,5,6");
         System.out.println("123");
-        article.setUser(1);
         article.setCreateTime(new Date());
         article.setLastEditTime(new Date());
         article= dao.addArticle(article);
         assertEquals("1,5,6",article.getTags());
-        System.err.println(12121212);
     }
 }
