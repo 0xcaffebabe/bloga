@@ -54,6 +54,7 @@ public class ArticleDaoTest {
         article.setTitle("第二标题"+new Date());
         article.setContent("第二内容"+new Date());
         article.setTags("1,5,6");
+        System.out.println("123");
         article.setUser(1);
         article.setCreateTime(new Date());
         article.setLastEditTime(new Date());
