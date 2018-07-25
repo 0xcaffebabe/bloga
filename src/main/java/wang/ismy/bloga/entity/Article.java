@@ -4,6 +4,9 @@ import javax.persistence.*;
 import javax.persistence.Entity;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
 @Entity
 public class Article extends wang.ismy.bloga.entity.Entity {
 
@@ -16,9 +19,14 @@ public class Article extends wang.ismy.bloga.entity.Entity {
     @Column(columnDefinition = "text")
     private String content; //正文
 
-    private int user; //文章所属用户
+    private int user; //文章所属用户(实体属性)
+    @Transient
+    private String userName; //所属用户昵称
 
-    private String tags; //文章标签
+    private String tags; //文章标签(实体属性)
+
+    @Transient
+    private Set<String> tagSet; //标签集
 
     private Date createTime; //创建日期
 
@@ -82,5 +90,21 @@ public class Article extends wang.ismy.bloga.entity.Entity {
 
     public void setUser(int user) {
         this.user = user;
+    }
+
+    public Set<String> getTagSet() {
+        return tagSet;
+    }
+
+    public void setTagSet(Set<String> tagSet) {
+        this.tagSet = tagSet;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

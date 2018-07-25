@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import wang.ismy.bloga.entity.Article;
+import wang.ismy.bloga.service.SettingService;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -19,6 +21,9 @@ public class ArticleDaoTest {
 
     @Autowired
     private ArticleDao dao;
+
+    @Autowired
+    private SettingService settingService;
     @Test
     @Ignore
     public void getArticles() {
@@ -59,5 +64,14 @@ public class ArticleDaoTest {
         article.setLastEditTime(new Date());
         article= dao.addArticle(article);
         assertEquals("1,5,6",article.getTags());
+    }
+
+    @Test
+    public void getArticlesByPage() {
+        var map=new HashMap<String,Object>();
+        map.put("offset", (1-1)*settingService.getSinglePageNumber());
+        map.put("length",settingService.getSinglePageNumber());
+        List<Article> a= dao.getArticlesByPage(map);
+        System.out.println(a.get(1).getUserName());
     }
 }

@@ -94,26 +94,28 @@
                         <h1>近期文章</h1>
                     </div>
                     <ol>
-
+                    <#list articleList as i>
                         <article class="post">
-                            <h2 class="post-title"><a href="Essay.jsp?id=72">JAVASCRIPT跨域发起GET请求</a></h2>
+                            <h2 class="post-title"><a href="Essay.jsp?id=72">${i.title}</a></h2>
                             <ul class="post-meta">
                                 <li><span class='glyphicon glyphicon-user'></span>阅读数：119</li>
-                                <li><span class='glyphicon glyphicon-pencil'></span>'作者：ismy</li>
-                                <li><span class='glyphicon glyphicon-time'></span>时间：2018-06-02</li>
+                                <li><span class='glyphicon glyphicon-pencil'></span>'作者：${i.userName!}</li>
+                                <li><span class='glyphicon glyphicon-time'></span>时间：${i.createTime?string('yyyy')}</li>
                                 <li><span class='glyphicon glyphicon-tag'></span>标签：
-                                    <a class='label label-primary' href='tag.jsp?name=JAVA'>JAVA</a>,<a class='label label-info' href='tag.jsp?name=WEB'>WEB</a>,<a class='label label-success' href='tag.jsp?name=网络'>网络</a>                                </li>
+                                    <#list i.tagSet as j>
+                                        <a class='label label-primary' href='tag.jsp?name=JAVA'>
+                                            ${j}
+                                        </a>
+                                    </#list>
+                                </li>
                                 <li><span class='glyphicon glyphicon-comment'></span><a href="Essay.jsp?id=72#comments">评论<span class='badge'>0</span></a></li>
                             </ul>
                             <div class="post-content">
-                                <p>众所周知，JavaScript因为浏览器的同源策略是有着跨域资源访问限制，那我们如何跨域发起一个get请求？</p>
-                                <p>那就是用img script等元素进行。</p><p>使用JavaScript动态创建一个img元素，然后更新：<br/></p>
-                                <pre class="brush:js;toolbar:false">	var&nbsp;img=document.createElement(&quot;img&quot;);
-	img.src=&quot;http://www.baidu.com&quot;;
-	document.appendChild(img);</pre><p>这样就对baidu发起了一个get请求，不过缺点显而易见，无法获取响应信息。<br/></p>
+                                ${i.content}
                             </div>
                         </article>
 
+                    </#list>
 
                     </ol>
 

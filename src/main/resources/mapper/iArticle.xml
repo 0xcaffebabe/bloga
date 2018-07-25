@@ -26,4 +26,12 @@
         </set>
         WHERE id=#{id}
     </update>
+
+    <select id="getArticlesByPage" parameterType="map" resultType="wang.ismy.bloga.entity.Article">
+        SELECT id,content,create_time,last_edit_time,tags,title,
+        (SELECT name FROM user where article.user=user.id) user_name
+         FROM article
+        ORDER BY id DESC
+        LIMIT #{offset} , #{length}
+    </select>
 </mapper>
