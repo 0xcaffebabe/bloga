@@ -60,5 +60,6 @@ public class ArticleDaoTest {
         article.setLastEditTime(new Date());
         article= dao.addArticle(article);
         assertEquals("1,5,6",article.getTags());
+        System.err.println(12121212);
     }
 }
