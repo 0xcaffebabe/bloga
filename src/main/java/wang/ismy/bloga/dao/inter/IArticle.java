@@ -14,4 +14,12 @@ public interface IArticle {
     int updateArticle(Article article);
 
     List<Article> getArticlesByPage(Map<String,Object> map);
+
+    List<Article> getRelevantArticles(Map<String,Object> map);
+
+    List<Article> getRecommendArticles(int length);
+
+    List<String> getFile();
+
+    Article getArticlesById(int id);
 }

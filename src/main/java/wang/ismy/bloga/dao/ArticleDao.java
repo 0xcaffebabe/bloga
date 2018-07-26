@@ -32,7 +32,7 @@ public class ArticleDao  {
     }
     //根据ID获取文章
     public Article getArticleById(int id){
-        return repository.getOne(id);
+        return iArticle.getArticlesById(id);
     }
     //删除文章
     public int deleteArticle(int id){
@@ -45,5 +45,22 @@ public class ArticleDao  {
     //新增文章
     public Article addArticle(Article article){
         return repository.save(article);
+    }
+
+    //根据文章ID获取相关文章
+    public List<Article> getRelevantArticles(Map<String,Object> map){
+        return iArticle.getRelevantArticles(map);
+    }
+
+    //获取推荐文章
+    public List<Article> getRecommendArticles(int length){
+        return iArticle.getRecommendArticles(length);
+    }
+
+    //获取归档结果
+    public List<String> getFile(){return iArticle.getFile();}
+
+    public long getArticlesNumber(){
+        return repository.count();
     }
 }

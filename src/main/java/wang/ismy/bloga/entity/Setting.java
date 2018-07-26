@@ -16,6 +16,8 @@ public class Setting extends wang.ismy.bloga.entity.Entity {
 
     private String SettingValue; //设置内容
 
+    private String remarks; //备注
+
     public int getId() {
         return id;
     }
@@ -38,5 +40,13 @@ public class Setting extends wang.ismy.bloga.entity.Entity {
 
     public void setSettingValue(String settingValue) {
         SettingValue = settingValue;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 }

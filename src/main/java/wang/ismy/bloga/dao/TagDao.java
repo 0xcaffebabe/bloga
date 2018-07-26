@@ -18,23 +18,23 @@ public class TagDao {
     private ITag iTag;
 
     //获取全部标签
-    List<Tag> getTags(){
+    public List<Tag> getTags(){
         return repository.findAll();
     }
     //根据文章ID获取标签
-    String getTagsByArticleId(int id){
+    public String getTagsByArticleId(int id){
         return null;
     }
     //删除标签
-    int deleteTag(int id){
+    public int deleteTag(int id){
         return iTag.deleteTag(id);
     }
     //更新标签
-    int updateTag(Tag tag){
+    public int updateTag(Tag tag){
         return iTag.updateTag(tag);
     }
     //新增标签
-    Tag addTag(Tag tag){
+    public Tag addTag(Tag tag){
        return repository.save(tag);
     }
 }

@@ -28,5 +28,20 @@ public class SettingService {
         return ret;
     }
 
+    //获取边缘文章展示数量
+    public int getEdgeArticleNumber(){
+        var number=settingDao.getSettingByKey("EDGE_ARTICLE_NUMBER");
+        int ret=SettingEnum.DEFAULT_EDGE_ARTICLE_NUMBER.getCode();
+        if(number==null){
+            return ret;
+        }else{
+            try{
+                ret=Integer.parseInt(number.getSettingValue());
+            }catch (Exception e){
 
+            }
+        }
+        return ret;
+
+    }
 }

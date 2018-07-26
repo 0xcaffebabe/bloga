@@ -25,6 +25,8 @@ public class Article extends wang.ismy.bloga.entity.Entity {
 
     private String tags; //文章标签(实体属性)
 
+    private int browseNumber;//文章浏览次数
+
     @Transient
     private Set<String> tagSet; //标签集
 
@@ -106,5 +108,13 @@ public class Article extends wang.ismy.bloga.entity.Entity {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public int getBrowseNumber() {
+        return browseNumber;
+    }
+
+    public void setBrowseNumber(int browseNumber) {
+        this.browseNumber = browseNumber;
     }
 }
