@@ -162,7 +162,7 @@
 
 <script src="https://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-<script src="js/modernizr.js"></script>
-
+<script src="/js/modernizr.js"></script>
+<script src="/js/index.js"></script>
 </body>
 </html>

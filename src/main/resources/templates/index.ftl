@@ -59,15 +59,15 @@
                     <ol>
                     <#list articleList as i>
                         <article class="post">
-                            <h2 class="post-title"><a href="Essay.jsp?id=72">${i.title}</a></h2>
+                            <h2 class="post-title"><a href="/article/${i.id}" target="_blank">${i.title}</a></h2>
                             <ul class="post-meta">
                                 <li><span class='glyphicon glyphicon-user'></span>阅读数：${i.browseNumber}</li>
                                 <li><span class='glyphicon glyphicon-pencil'></span>'作者：${i.userName!}</li>
-                                <li><span class='glyphicon glyphicon-time'></span>时间：${i.createTime?string('yyyy')}</li>
+                                <li><span class='glyphicon glyphicon-time'></span>时间：${i.createTime?string('yyyy/MM/dd')}</li>
                                 <li><span class='glyphicon glyphicon-tag'></span>标签：
                                     <#assign tagColor=["primary",'success',"info","warning","danger"]>
                                     <#list i.tagSet as j>
-                                        <a class='label label-${tagColor[j_index]}' href='tag.jsp?name=JAVA'>
+                                        <a class='label label-${tagColor[j_index]}' href='/tag/${j}' target="_blank">
                                             ${j}
                                         </a>
                                     </#list>
@@ -107,6 +107,6 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/modernizr.js"></script>
-
+<script src="js/index.js"></script>
 </body>
 </html>

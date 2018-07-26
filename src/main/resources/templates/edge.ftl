@@ -1,8 +1,8 @@
-<aside class="col-md-4 blog-aside">
+<aside class="col-md-4 blog-aside" id="edge">
 
     <div class="aside-widget" style="margin-top:15px;" id="recommendList">
         <header>
-            <h3>推荐文章 <button class="close" id="recommendClose">&times;</button></h3>
+            <h3>推荐文章 <button class="close" >&times;</button></h3>
         </header>
 
         <div class="container-fluid">
@@ -21,7 +21,7 @@
 
     <div class="aside-widget" id="relateList">
         <header>
-            <h3>相关文章 <button class="close" id="relateClose">&times;</button></h3>
+            <h3>相关文章<button class="close" >&times;</button></h3>
         </header>
         <div class="container-fluid"  style="">
                         <#list edge["relevantArticles"] as relevant>
@@ -32,16 +32,12 @@
                             </div>
                             <div class="line"></div>
                         </#list>
-
-
-
-
         </div>
     </div>
 
     <div class="aside-widget">
         <header>
-            <h3>标签</h3>
+            <h3>标签<button class="close" >&times;</button></h3>
         </header>
         <div class="body clearfix">
             <ul class="tags">
@@ -56,7 +52,7 @@
 
     <div class="aside-widget">
         <header>
-            <h3>日期归档</h3>
+            <h3>日期归档<button class="close" >&times;</button></h3>
         </header>
         <div class="body clearfix">
             <ul class="tags">

@@ -32,6 +32,7 @@ public class GlobalExceptionHandler  {
             ModelAndView modelAndView=new ModelAndView();
             modelAndView.setViewName("error");
             modelAndView.addObject("msg",e.getMessage());
+            modelAndView.addObject("status",response.getStatus());
             return modelAndView;
         }
 
