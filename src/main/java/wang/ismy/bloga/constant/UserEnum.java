@@ -6,7 +6,9 @@ public enum UserEnum {
 
     PASSWORD_NOT_NULL("密码不能为空"),
 
-    NOT_MATCH("账号密码不匹配");
+    NOT_MATCH("账号密码不匹配"),
+
+    AUTH_FAILED("认证失败");
 
     private String msg;
     UserEnum(String str) {

@@ -9,9 +9,8 @@
                         <#list edge["recommendArticles"] as recommend>
                             <div class="row page">
                                 <div class="col-md-12 ">
-                                    <h5><a href='Essay.jsp?id=3'>${recommend.title}</a></h5>
+                                    <h5><a href='/article/${recommend.id}' target="_blank">${recommend.title}</a></h5>
                                 </div>
-
                             </div>
                             <div class="line"></div>
                         </#list>
@@ -27,7 +26,7 @@
                         <#list edge["relevantArticles"] as relevant>
                             <div class="row page">
                                 <div class="col-md-12 ">
-                                    <h5><a href='Essay.jsp?id=3'>${relevant.title}</a></h5>
+                                    <h5><a href='/article/${relevant.id}' target="_blank">${relevant.title}</a></h5>
                                 </div>
                             </div>
                             <div class="line"></div>
@@ -43,7 +42,7 @@
             <ul class="tags">
                 <#list edge["tagList"] as tag>
 
-                     <li><a href="tag.jsp?name=JAVA">${tag.name}</a></li>
+                     <li><a href="/tag/${tag.name}" target="_blank">${tag.name}</a></li>
                 </#list>
 
             </ul>
@@ -58,7 +57,7 @@
             <ul class="tags">
                 <#list edge["fileList"] as file>
 
-                    <li><a href="file.jsp?date=2018年6月">${file}</a> </li>
+                    <li><a href="/file/${file}" target="_blank"> ${file}</a> </li>
                 </#list>
 
 

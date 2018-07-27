@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Mapper;
 import wang.ismy.bloga.entity.Article;
 
 import javax.validation.constraints.Max;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,4 +27,12 @@ public interface IArticle {
     int getArticlesNumberByTag(String tag);
 
     List<Article> getArticlesByTag(Map<String,Object> map);
+
+    int getArticlesNumberByFile(String file);
+
+    List<Article> getArticlesByFile(Map<String,Object> map);
+
+    int getArticlesNumberBySearch(String keyWord);
+
+    List<Article> getArticlesBySearch(HashMap<String,Object> map);
 }

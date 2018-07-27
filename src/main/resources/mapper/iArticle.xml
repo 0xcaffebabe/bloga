@@ -3,11 +3,12 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="wang.ismy.bloga.dao.inter.IArticle">
+    <!--根据文章ID删除文章-->
     <delete id="deleteArticle" parameterType="int">
         DELETE FROM article
         WHERE id=#{id}
     </delete>
-
+    <!--更新文章内容-->
     <update id="updateArticle" parameterType="wang.ismy.bloga.entity.Article">
         UPDATE article
         <set>
@@ -23,16 +24,22 @@
             <if test="lastEditTime!=null">
                 last_edit_time=#{lastEditTime},
             </if>
+            <if test="browseNumber!=null">
+                browse_number=browse_number+1,
+            </if>
+            <if test="user!=null">
+                user=#{user}
+            </if>
         </set>
         WHERE id=#{id}
     </update>
-
+    <!--根据ID获取文章-->
     <select id="getArticlesById" parameterType="int" resultType="wang.ismy.bloga.entity.Article">
          SELECT id,content,create_time,last_edit_time,tags,title,browse_number,
         (SELECT name FROM user where article.user=user.id) user_name
          FROM article WHERE id=#{id}
     </select>
-
+    <!--以分页的方式按照ID倒序获取文章-->
     <select id="getArticlesByPage" parameterType="map" resultType="wang.ismy.bloga.entity.Article">
         SELECT id,content,create_time,last_edit_time,tags,title,browse_number,
         (SELECT name FROM user where article.user=user.id) user_name
@@ -40,33 +47,60 @@
         ORDER BY id DESC
         LIMIT #{offset} , #{length}
     </select>
-    
+    <!--获取edge相关文章-->
     <select id="getRelevantArticles" parameterType="map" resultType="wang.ismy.bloga.entity.Article">
         SELECT id,title
         FROM article
         ORDER BY rand() limit #{length}
     </select>
-
+    <!--获取edge推荐文章-->
     <select id="getRecommendArticles" parameterType="int" resultType="wang.ismy.bloga.entity.Article">
         SELECT id,title
         FROM article
         ORDER BY rand() limit #{length}
     </select>
-    
+    <!--获取归档列表-->
     <select id="getFile" resultType="String">
         SELECT CONCAT(YEAR(create_time),'年',MONTH(create_time),'月') file
         FROM article GROUP BY YEAR(create_time),MONTH(create_time)
         ORDER BY create_time desc;
     </select>
-
+    <!--根据标签获取含有该标签的的文章数-->
     <select id="getArticlesNumberByTag" parameterType="String" resultType="int">
         SELECT COUNT(id) FROM article WHERE tags like '%' #{tag} '%'
     </select>
-
+    <!--以分页且倒序的方式根据tag获取文章们-->
     <select id="getArticlesByTag" parameterType="map" resultType="wang.ismy.bloga.entity.Article">
         SELECT id,content,create_time,last_edit_time,tags,title,browse_number,
         (SELECT name FROM user where article.user=user.id) user_name
          FROM article WHERE tags like '%' #{tag} '%'
+         ORDER BY id DESC
+         LIMIT #{offset},#{length}
+    </select>
+    <!--根据归档条件获取文章数-->
+    <select id="getArticlesNumberByFile" parameterType="String" resultType="int">
+        SELECT COUNT(id) FROM article WHERE CONCAT(YEAR(create_time),'年',MONTH(create_time),'月')=#{file}
+    </select>
+
+    <!--根据归档条件倒序且分页获取文章们-->
+    <select id="getArticlesByFile" parameterType="map" resultType="wang.ismy.bloga.entity.Article">
+         SELECT id,content,create_time,last_edit_time,tags,title,browse_number,
+        (SELECT name FROM user where article.user=user.id) user_name
+         FROM article WHERE CONCAT(YEAR(create_time),'年',MONTH(create_time),'月')=#{file}
+         ORDER BY id DESC
+         LIMIT #{offset},#{length}
+    </select>
+    
+    <select id="getArticlesNumberBySearch" parameterType="String" resultType="int">
+        SELECT COUNT(id) FROM article WHERE title like '%' #{keyWord} '%' or content like '%' #{keyWord} '%' or
+        tags like '%' #{keyWord} '%'
+    </select>
+
+    <select id="getArticlesBySearch" parameterType="map" resultType="wang.ismy.bloga.entity.Article">
+         SELECT id,content,create_time,last_edit_time,tags,title,browse_number,
+        (SELECT name FROM user where article.user=user.id) user_name
+         FROM article WHERE title like '%' #{keyWord} '%' or content like '%' #{keyWord} '%' or
+        tags like '%' #{keyWord} '%'
          ORDER BY id DESC
          LIMIT #{offset},#{length}
     </select>

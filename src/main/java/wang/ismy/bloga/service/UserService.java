@@ -38,4 +38,8 @@ public class UserService {
 
 
     }
+
+    public User getUserByName(String name){
+        return dao.getUserByName(name);
+    }
 }

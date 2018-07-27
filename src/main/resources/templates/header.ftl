@@ -7,7 +7,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <img src="img/logo.png" alt="" class="center-block">
+                <img src="/img/logo.png" alt="" class="center-block">
             </div>
             <div id="myNav" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right text-center">

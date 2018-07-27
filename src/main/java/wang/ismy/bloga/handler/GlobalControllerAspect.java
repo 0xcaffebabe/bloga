@@ -24,7 +24,7 @@ public class GlobalControllerAspect {
     @Autowired
     private EdgeService edgeService;
 
-    @Pointcut("execution(* wang.ismy.bloga.controller.*.*(..))")
+    @Pointcut("execution(* wang.ismy.bloga.controller..*.*(..))")
     public void pointCut(){
 
     }

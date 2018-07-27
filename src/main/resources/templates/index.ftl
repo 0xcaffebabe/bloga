@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8">
-    <title>博客首页</title>
+    <title>${webTitle}</title>
     <meta name="Keywords" Content="<%=sys.getValue("index-keyword")%>">
     <meta name="description" content="<%=sys.getValue("index-description")%>">
     <meta name="viewport" content="width=device-width">

@@ -71,7 +71,6 @@ public class PagingUtils {
         }else{
             sb.append(pageUrl(pages+1,">",args));
         }
-        System.err.println(sb);
         return sb.toString();
     }
 

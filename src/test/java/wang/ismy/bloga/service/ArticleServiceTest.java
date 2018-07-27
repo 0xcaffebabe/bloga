@@ -15,4 +15,9 @@ public class ArticleServiceTest {
     @Autowired
     private ArticleService service;
 
+    @Test
+    public void filePagingNumber() {
+
+        assertEquals(2,service.filePagingNumber("2018年5月"));
+    }
 }

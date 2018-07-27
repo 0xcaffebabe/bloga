@@ -10,10 +10,7 @@ import wang.ismy.bloga.entity.Article;
 import wang.ismy.bloga.entity.Setting;
 import wang.ismy.bloga.exception.ArticleException;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class ArticleService {
@@ -24,6 +21,43 @@ public class ArticleService {
 
     @Autowired
     private SettingService settingService;
+    //新增一篇文章
+    public Article addArticle(Article article){
+        if(article==null){
+            throw new ArticleException(ArticleEnum.ARTICLE_NOT_NULL);
+        }else{
+            //设置文章的日期
+            if(article.getCreateTime()==null){
+                article.setCreateTime(new Date());
+            }
+
+            if(article.getLastEditTime()==null){
+                article.setLastEditTime(new Date());
+            }
+            return articleDao.addArticle(article);
+        }
+    }
+
+    //修改一篇文章
+    public int updateArticle(Article article){
+        if(article==null){
+            throw new ArticleException(ArticleEnum.ARTICLE_NOT_NULL);
+        }
+
+        if(article.getId()==null){
+            throw new ArticleException(ArticleEnum.ARTICLE_ID_NOT_NULL);
+        }
+        article.setLastEditTime(new Date());
+        return articleDao.updateArticle(article);
+    }
+
+    //删除一篇文章
+    public Object deleteArticle(Integer id){
+        if(id==null){
+            throw new ArticleException(ArticleEnum.ARTICLE_ID_NOT_NULL);
+        }
+        return articleDao.deleteArticle(id);
+    }
     //用ID来获取文章
     public Article getArticleById(Integer id){
         var article=articleDao.getArticleById(id);
@@ -54,6 +88,9 @@ public class ArticleService {
         return ret;
     }
 
+    public List<Article> getArticles(){
+        return articleDao.getArticles();
+    }
 //    根据文章ID获取（相关）文章
     public List<Article> getRelevantArticles(Integer articleId){
         if(articleId==null || articleId<1){
@@ -99,6 +136,53 @@ public class ArticleService {
         }
         return list;
     }
+
+    //根据file获取文章
+    public List<Article> getArticlesByFile(String file,Integer pageNumber){
+        if(file==null ||"".equals(file)){
+            throw new ArticleException(ArticleEnum.FILE_NOT_NULL);
+        }
+
+        int pagingNumber=getArticlesNumberByFile(file);
+        if(pageNumber< 1 || pageNumber>pagingNumber){
+            throw new ArticleException(ArticleEnum.PAGE_NUMBER_OUT_BOUND);
+        }
+        int single=settingService.getSinglePageNumber();
+        var map=new HashMap<String,Object>();
+        map.put("offset",(pageNumber-1)*single);
+        map.put("length",single);
+        map.put("file",file);
+        var list=articleDao.getArticlesByFile(map);
+        if(list==null || list.size()==0){
+            throw new ArticleException(ArticleEnum.ARTICLE_NOT_EXIST);
+        }
+        for(var i :list){
+            processTagSet(i);
+        }
+        return list;
+    }
+    public List<Article> getArticlesBySearch(String keyWord,Integer pageNumber){
+        if(keyWord==null ||"".equals(keyWord)){
+            throw new ArticleException(ArticleEnum.SEARCH_NOT_NULL);
+        }
+        int pagingNumber=getArticlesNumberBySearch(keyWord);
+        if(pageNumber< 1 || pageNumber>pagingNumber){
+            throw new ArticleException(ArticleEnum.PAGE_NUMBER_OUT_BOUND);
+        }
+        int single=settingService.getSinglePageNumber();
+        var map=new HashMap<String,Object>();
+        map.put("offset",(pageNumber-1)*single);
+        map.put("length",single);
+        map.put("keyWord",keyWord);
+        var list=articleDao.getArticlesBySearch(map);
+        if(list==null || list.size()==0){
+            throw new ArticleException(ArticleEnum.ARTICLE_NOT_EXIST);
+        }
+        for(var i :list){
+            processTagSet(i);
+        }
+        return list;
+    }
     //获取归档结果
     public List<String> getFile(){
         return articleDao.getFile();
@@ -108,13 +192,26 @@ public class ArticleService {
         return articleDao.getArticlesNumber();
     }
 
+    //根据归档条件获取文章数量
+    public int getArticlesNumberByFile(String file) {
+        var i=articleDao.getArticlesNumberByFile(file);
+        if(i==0){
+            throw new ArticleException(ArticleEnum.FILE_NOT_EXIST);
+        }
+        return i;
+    }
     public int getArticlesNumberByTag(String tag){
         if(tag==null || "".equals(tag)){
             throw new ArticleException(ArticleEnum.ARTICLE_TAG_NOT_NULL);
         }
         return articleDao.getArticlesNumberByTag(tag);
     }
-
+    public int getArticlesNumberBySearch(String keyWord){
+        if(keyWord==null || "".equals(keyWord)){
+            throw new ArticleException(ArticleEnum.SEARCH_NOT_NULL);
+        }
+        return articleDao.getArticlesNumberBySearch(keyWord);
+    }
     //处理tagset
     public void processTagSet(Article article){
         article.setTagSet(Set.of(article.getTags().split(",")));
@@ -140,4 +237,28 @@ public class ArticleService {
             return (articlesNumber/single)+1;
         }
     }
+
+    //计算归档页分页数
+    public int filePagingNumber(String file){
+        int single=settingService.getSinglePageNumber();
+        int articlesNumber=getArticlesNumberByFile(file);
+        if(articlesNumber%single==0 && articlesNumber!=0){
+            return (articlesNumber/single);
+        }else{
+            return articlesNumber/single+1;
+        }
+    }
+
+    //计算搜索页分页数
+    public int searchPagingNumber(String keyWord){
+        int single=settingService.getSinglePageNumber();
+        int articlesNumber=getArticlesNumberBySearch(keyWord);
+        if(articlesNumber%single==0 && articlesNumber!=0){
+            return (articlesNumber/single);
+        }else{
+            return articlesNumber/single+1;
+        }
+    }
+
+
 }

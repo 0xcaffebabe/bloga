@@ -27,4 +27,8 @@ public class UserDao {
     public User check(User user){
         return iUser.check(user);
     }
+
+    public User getUserByName(String name) {
+        return iUser.getUserByName(name);
+    }
 }

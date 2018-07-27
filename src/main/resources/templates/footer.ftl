@@ -8,7 +8,7 @@
             </div>
         </div>
     </div>
-    <script src="https://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+
 
     <div class="widewrapper copyright">
         Copyright 2018 <a href="#" target="_blank" title="ISMY">ISMY</a>

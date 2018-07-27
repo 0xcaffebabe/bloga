@@ -9,6 +9,7 @@ import wang.ismy.bloga.dao.inter.IArticle;
 import wang.ismy.bloga.dao.repository.ArticleRepository;
 import wang.ismy.bloga.entity.Article;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -68,5 +69,21 @@ public class ArticleDao  {
 
     public List<Article> getArticlesByTag(Map<String,Object> map) {
         return iArticle.getArticlesByTag(map);
+    }
+
+    public int getArticlesNumberByFile(String file) {
+        return iArticle.getArticlesNumberByFile(file);
+    }
+
+    public List<Article> getArticlesByFile(Map<String,Object> map) {
+        return iArticle.getArticlesByFile(map);
+    }
+
+    public int getArticlesNumberBySearch(String keyWord) {
+        return iArticle.getArticlesNumberBySearch(keyWord);
+    }
+
+    public List<Article> getArticlesBySearch(HashMap<String,Object> map) {
+        return iArticle.getArticlesBySearch(map);
     }
 }

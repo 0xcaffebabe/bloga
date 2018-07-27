@@ -7,4 +7,9 @@
         SELECT name,password FROM user WHERE
         name=#{name} and password=#{password}
     </select>
+
+    <select id="getUserByName" parameterType="String" resultType="wang.ismy.bloga.entity.User">
+        SELECT id,name,password FROM user WHERE
+        name=#{name}
+    </select>
 </mapper>

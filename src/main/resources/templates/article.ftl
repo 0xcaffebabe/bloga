@@ -65,7 +65,7 @@
                         <h3>${article.title}</h3>
                         <#assign tagColor=["primary",'success',"info","warning","danger"]>
                         <#list article.tagSet as j>
-                           <a class='label label-${tagColor[j_index]}' href='tag.jsp?name=JAVA'>
+                           <a class='label label-${tagColor[j_index]}' href=/tag/${j}'>
                               ${j}
                             </a>
                         </#list>

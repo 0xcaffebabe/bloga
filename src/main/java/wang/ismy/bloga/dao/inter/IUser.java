@@ -7,4 +7,6 @@ import wang.ismy.bloga.entity.User;
 public interface IUser {
 
     User check(User user);
+
+    User getUserByName(String name);
 }

@@ -20,7 +20,7 @@ public class GlobalExceptionHandler  {
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public Object handle(Exception e, HttpServletRequest request,HttpServletResponse response){
-
+        e.printStackTrace();
         String requestType = request.getHeader("Blog");
         if("Restful".equals(requestType)){
             Result result=new Result();
