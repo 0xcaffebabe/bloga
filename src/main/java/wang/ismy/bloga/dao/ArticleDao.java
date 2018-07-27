@@ -63,4 +63,10 @@ public class ArticleDao  {
     public long getArticlesNumber(){
         return repository.count();
     }
+
+    public int getArticlesNumberByTag(String tag){return iArticle.getArticlesNumberByTag(tag);}
+
+    public List<Article> getArticlesByTag(Map<String,Object> map) {
+        return iArticle.getArticlesByTag(map);
+    }
 }

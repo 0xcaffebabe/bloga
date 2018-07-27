@@ -22,4 +22,8 @@ public interface IArticle {
     List<String> getFile();
 
     Article getArticlesById(int id);
+
+    int getArticlesNumberByTag(String tag);
+
+    List<Article> getArticlesByTag(Map<String,Object> map);
 }

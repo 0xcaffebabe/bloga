@@ -100,7 +100,7 @@ public class PagingUtils {
         if(args.length==0){
             return "<a href=\"./"+(pages)+"\">"+a+"</a>";
         }else{
-            return "<a href=\"/"+args[0]+"?page="+(pages)+"&"+args[1]+"\">"+a+"</a>";
+            return "<a href=\"/"+args[0]+"/"+(pages)+"\">"+a+"</a>";
         }
 
 

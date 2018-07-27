@@ -9,13 +9,11 @@
     <meta name="viewport" content="width=device-width">
 
     <!-- Bootstrap styles -->
-    <link rel="stylesheet" href="https://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
     <!-- Font-Awesome -->
     <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
 
-    <!-- Google Webfonts -->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600|PT+Serif:400,400italic' rel='stylesheet' type='text/css'>
 
     <!-- Styles -->
     <link rel="stylesheet" href="/css/style.css" id="theme-styles">
@@ -160,8 +158,8 @@
 
 
 
-<script src="https://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
 <script src="/js/modernizr.js"></script>
 <script src="/js/index.js"></script>
 </body>

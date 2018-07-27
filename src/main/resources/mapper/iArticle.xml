@@ -58,4 +58,16 @@
         FROM article GROUP BY YEAR(create_time),MONTH(create_time)
         ORDER BY create_time desc;
     </select>
+
+    <select id="getArticlesNumberByTag" parameterType="String" resultType="int">
+        SELECT COUNT(id) FROM article WHERE tags like '%' #{tag} '%'
+    </select>
+
+    <select id="getArticlesByTag" parameterType="map" resultType="wang.ismy.bloga.entity.Article">
+        SELECT id,content,create_time,last_edit_time,tags,title,browse_number,
+        (SELECT name FROM user where article.user=user.id) user_name
+         FROM article WHERE tags like '%' #{tag} '%'
+         ORDER BY id DESC
+         LIMIT #{offset},#{length}
+    </select>
 </mapper>

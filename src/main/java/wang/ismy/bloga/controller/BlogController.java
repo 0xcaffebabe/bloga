@@ -47,4 +47,22 @@ public class BlogController {
         map.put("article",article);
         return "article";
     }
+
+    @GetMapping("/tag/{name}/{pageNumber}")
+    @BlogEdge
+    public String tag(ModelMap map,@PathVariable("name") String tag,@PathVariable(value = "pageNumber") Integer pageNumber){
+        var list=articleService.getArticlesByTag(tag,pageNumber);
+        map.put("articleList",list);
+        map.put("paging",PagingUtils.calcPages(articleService.tagPagingNumber(tag),pageNumber,"tag/"+tag));
+        return "index";
+    }
+
+    @GetMapping("/tag/{name}")
+    @BlogEdge
+    public String tag1(ModelMap map,@PathVariable("name") String tag){
+        var list=articleService.getArticlesByTag(tag,1);
+        map.put("articleList",list);
+        map.put("paging",PagingUtils.calcPages(articleService.tagPagingNumber(tag),1,"tag/"+tag));
+        return "index";
+    }
 }

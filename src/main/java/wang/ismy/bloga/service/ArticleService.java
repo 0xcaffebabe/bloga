@@ -70,6 +70,35 @@ public class ArticleService {
         return articleDao.getRecommendArticles(settingService.getEdgeArticleNumber());
     }
 
+    //根据tag获取文章
+    /*
+    * @param tag 欲被寻找的标签
+    * @param pageNumber 页数
+    * */
+    public List<Article> getArticlesByTag(String tag,Integer pageNumber){
+        var pagingNumber=getArticlesNumberByTag(tag);
+        var singlePageNumber=settingService.getSinglePageNumber();
+        if(pageNumber==null){
+            pageNumber=1;
+        }
+        if(tag==null || "".equals(tag)){
+            throw new ArticleException(ArticleEnum.ARTICLE_TAG_NOT_NULL);
+        }else if(pageNumber<1 || pageNumber>pagingNumber){
+            throw new ArticleException(ArticleEnum.PAGE_NUMBER_OUT_BOUND);
+        }
+        var map=new HashMap<String,Object>();
+        map.put("tag",tag);
+        map.put("offset",(pageNumber-1)*singlePageNumber);
+        map.put("length",singlePageNumber);
+        var list=articleDao.getArticlesByTag(map);
+        if(list==null || list.size()==0){
+            throw new ArticleException(ArticleEnum.ARTICLE_NOT_EXIST);
+        }
+        for(var i :list){
+            processTagSet(i);
+        }
+        return list;
+    }
     //获取归档结果
     public List<String> getFile(){
         return articleDao.getFile();
@@ -79,6 +108,17 @@ public class ArticleService {
         return articleDao.getArticlesNumber();
     }
 
+    public int getArticlesNumberByTag(String tag){
+        if(tag==null || "".equals(tag)){
+            throw new ArticleException(ArticleEnum.ARTICLE_TAG_NOT_NULL);
+        }
+        return articleDao.getArticlesNumberByTag(tag);
+    }
+
+    //处理tagset
+    public void processTagSet(Article article){
+        article.setTagSet(Set.of(article.getTags().split(",")));
+    }
     //计算首页分页数
     public int indexPagingNumber(){
         int single=settingService.getSinglePageNumber();
@@ -87,6 +127,17 @@ public class ArticleService {
             return (int) (articlesNumber/single);
         }else{
             return (int) (articlesNumber/single)+1;
+        }
+    }
+
+    //计算标签分类页分页数
+    public int tagPagingNumber(String tag){
+        int single=settingService.getSinglePageNumber();
+        int articlesNumber=getArticlesNumberByTag(tag);
+        if(articlesNumber%single==0 && articlesNumber!=0){
+            return (articlesNumber/single);
+        }else{
+            return (articlesNumber/single)+1;
         }
     }
 }

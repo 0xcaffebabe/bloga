@@ -15,10 +15,4 @@ public class ArticleServiceTest {
     @Autowired
     private ArticleService service;
 
-
-
-    @Test
-    public void getArticlesNumber() {
-    assertEquals(7,service.indexPagingNumber());
-    }
 }

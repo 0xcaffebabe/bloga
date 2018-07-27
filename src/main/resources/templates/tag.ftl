@@ -19,11 +19,11 @@
     <script src="/js/vendor/google/html5-3.6-respond-1.1.0.min.js"></script>
     <![endif]-->
 
-    <link rel="stylesheet" type="text/css" href="/css/normalize.css" />
-    <link rel="stylesheet" type="text/css" href="/css/htmleaf-demo.css">
-    <link rel="stylesheet" href="/css/pages.css">
-    <link rel="stylesheet" href="/css/article.css"/>
-    <link rel="stylesheet" href="/css/style.css" id="theme-styles">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="css/htmleaf-demo.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/article.css"/>
+    <link rel="stylesheet" href="css/style.css" id="theme-styles">
     <style>
         .recent-art{
             margin-top:32px;
@@ -58,9 +58,9 @@
 
 <#include "./footer.ftl">
 
-<script src="/js/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/modernizr.js"></script>
-<script src="/js/index.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/modernizr.js"></script>
+<script src="js/index.js"></script>
 </body>
 </html>
