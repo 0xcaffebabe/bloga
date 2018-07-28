@@ -5,6 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import wang.ismy.bloga.constant.SettingEnum;
 import wang.ismy.bloga.dao.SettingDao;
+import wang.ismy.bloga.entity.Setting;
+import wang.ismy.bloga.exception.SettingException;
+
+import java.util.List;
 
 @Service
 public class SettingService {
@@ -44,4 +48,29 @@ public class SettingService {
         return ret;
 
     }
+
+    public List<Setting> getSettings(){
+        return settingDao.getSettings();
+    }
+
+    public Setting addSetting(Setting setting) {
+        return settingDao.addSetting(setting);
+    }
+
+    public int updateSetting(Setting setting) {
+        if(setting==null){
+            throw new NullPointerException();
+        }
+
+        if(setting.getId()==null){
+            throw new SettingException(SettingEnum.ID_NOT_NULL);
+        }
+        return settingDao.updateSetting(setting);
+    }
+
+    public Setting getSettingByKey(String key){
+        return settingDao.getSettingByKey(key);
+    }
+
+    public int deleteSettingByKey(String key){return settingDao.deleteSettingByKey(key);}
 }

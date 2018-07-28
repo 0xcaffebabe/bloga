@@ -34,6 +34,7 @@ public class ArticleService {
             if(article.getLastEditTime()==null){
                 article.setLastEditTime(new Date());
             }
+            article.setBrowseNumber(0);
             return articleDao.addArticle(article);
         }
     }

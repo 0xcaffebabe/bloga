@@ -16,19 +16,19 @@ public class Article extends wang.ismy.bloga.entity.Entity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id; //文章ID
 
-//    @NotEmpty(message = "文章标题不能为空")
+    @NotEmpty(message = "文章标题不能为空")
     private String title;//文章标题
 
-//    @NotEmpty(message = "文章正文不能为空")
+    @NotEmpty(message = "文章正文不能为空")
     @Column(columnDefinition = "text")
     private String content; //正文
 
-//    @NotNull(message = "文章所属用户不能为空")
+    @NotNull(message = "文章所属用户不能为空")
     private Integer user; //文章所属用户(实体属性)
     @Transient
     private String userName; //所属用户昵称
 
-//    @NotEmpty(message = "文章标签不能为空")
+    @NotEmpty(message = "文章标签不能为空")
     private String tags; //文章标签(实体属性)
 
     private Integer browseNumber;//文章浏览次数

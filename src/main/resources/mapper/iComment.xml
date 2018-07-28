@@ -10,10 +10,10 @@
     <update id="updateComment" parameterType="wang.ismy.bloga.entity.Comment">
         UPDATE comment
         <set>
-            <if test="parentId!=0">
+            <if test="parentId!=null">
                 parent_id=#{parentId},
             </if>
-            <if test="belongArticle!=0">
+            <if test="belongArticle!=null">
                 article_id=#{articleId},
             </if>
             <if test="name!=null &amp;&amp; !&quot;&quot;.equals(name)">
@@ -25,7 +25,7 @@
             <if test="email!=null &amp;&amp; !&quot;&quot;.equals(email)">
                 email=#{email},
             </if>
-            <if test="visible!=-1">
+            <if test="visible!=null">
                 visible=#{visible},
             </if>
             <if test="time!=null">

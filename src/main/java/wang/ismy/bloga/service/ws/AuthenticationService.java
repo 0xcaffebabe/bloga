@@ -7,13 +7,19 @@ import org.springframework.util.DigestUtils;
 import wang.ismy.bloga.Result;
 import wang.ismy.bloga.constant.UserEnum;
 import wang.ismy.bloga.exception.AuthenticationException;
+import wang.ismy.bloga.service.CacheService;
 import wang.ismy.bloga.service.UserService;
+
+import java.util.Random;
 
 @Service
 public class AuthenticationService {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private CacheService cacheService;
     public Result auth(String userName, String salt, String sign){
         var user=userService.getUserByName(userName);
         if(user==null){
@@ -26,11 +32,20 @@ public class AuthenticationService {
             //返回token
             Result result=new Result();
             result.setMsg("认证成功");
-            result.setData("假装这是token");
+            //生成token
+            var token=createToken(md5);
+            cacheService.set("token",token);
+            result.setData(token);
             return result;
         }else{
             //抛出身份认证失败异常
             throw new AuthenticationException(UserEnum.AUTH_FAILED);
         }
+    }
+
+    private String createToken(String sign){
+        Random random=new Random();
+        sign+=sign+random.nextLong();
+        return DigestUtils.md5DigestAsHex(sign.getBytes());
     }
 }

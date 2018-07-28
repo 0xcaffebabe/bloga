@@ -39,7 +39,8 @@ public class ArticleController {
     @Token
     public Object addArticle(@RequestParam("token") String token,
                              @RequestBody @Valid Article article){
-        return articleService.addArticle(article);
+
+                return articleService.addArticle(article);
     }
 
     @PostMapping("")

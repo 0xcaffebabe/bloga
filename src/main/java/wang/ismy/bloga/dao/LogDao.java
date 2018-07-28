@@ -17,11 +17,11 @@ public class LogDao {
     private ILog log;
 
     //获取全部日志
-    List<Log> getLogs(){
+    public List<Log> getLogs(){
         return repository.findAll();
     }
     //新增一条日志
-    Log addLog(Log log){
+    public Log addLog(Log log){
         return repository.save(log);
     }
 

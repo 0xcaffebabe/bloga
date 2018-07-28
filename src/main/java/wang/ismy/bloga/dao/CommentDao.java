@@ -19,23 +19,23 @@ public class CommentDao {
     private IComment iComment;
 
     //获取全部评论
-    List<Comment> getComments(){
+    public List<Comment> getComments(){
        return repository.findAll();
     }
     //根据文章ID获取评论
-    Comment getCommentByArticleId(int id){
+    public Comment getCommentByArticleId(int id){
         return repository.getOne(id);
     }
     //删除评论
-    int deleteComment(int id){
+    public int deleteComment(int id){
         return iComment.deleteComment(id);
     }
     //修改评论
-    int updateComment(Comment comment){
+    public int updateComment(Comment comment){
         return iComment.updateComment(comment);
     }
     //新增评论
-    Comment addComment(Comment comment){
+    public Comment addComment(Comment comment){
         return repository.save(comment);
     }
 }
