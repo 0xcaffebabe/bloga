@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import wang.ismy.bloga.service.ArticleService;
 import wang.ismy.bloga.service.EdgeService;
+import wang.ismy.bloga.service.LogService;
 
 import java.util.Map;
 
@@ -19,7 +20,7 @@ import java.util.Map;
 public class GlobalControllerAspect {
 
     @Autowired
-    private ArticleService articleService;
+    private LogService logService;
 
     @Autowired
     private EdgeService edgeService;
@@ -78,6 +79,7 @@ public class GlobalControllerAspect {
         long end=System.currentTimeMillis();
         System.err.println("执行"+point.getTarget().getClass().getName()+"的"+point.getSignature().getName()
         +"方法,耗时:"+(end-start)+"ms");
+
         return object;
     }
 

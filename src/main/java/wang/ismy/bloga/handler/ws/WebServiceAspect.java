@@ -29,11 +29,13 @@ public class WebServiceAspect {
         if(token.equals(cacheService.get("token"))){
             Result result=new Result();
             result.setMsg("操作完成");
+            result.setStatus(200);
             result.setData(point.proceed());
             return result;
         }else{
             Result result=new Result();
             result.setMsg("没有经过授权");
+            result.setStatus(403);
             result.setData(null);
             return result;
         }

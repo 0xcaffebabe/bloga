@@ -32,6 +32,7 @@ public class AuthenticationService {
             //返回token
             Result result=new Result();
             result.setMsg("认证成功");
+            result.setStatus(200);
             //生成token
             var token=createToken(md5);
             cacheService.set("token",token);

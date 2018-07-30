@@ -20,6 +20,8 @@ public class Log extends wang.ismy.bloga.entity.Entity {
 
     private Date time; //访问时间
 
+    private int delay;
+
     public int getId() {
         return id;
     }
@@ -58,5 +60,13 @@ public class Log extends wang.ismy.bloga.entity.Entity {
 
     public void setTime(Date time) {
         this.time = time;
+    }
+
+    public int getDelay() {
+        return delay;
+    }
+
+    public void setDelay(int delay) {
+        this.delay = delay;
     }
 }

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>后台主页</title>
+
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap-select.min.js">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<nav class="navbar navbar-inverse">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8">
+					<div class="navbar-brand">
+						<p>后台管理</p>
+					</div>
+				</div>
+				
+				<div class="col-md-4">
+					<p id="loginName">登录用户:admin</p>
+				</div>
+			</div>
+		</div>
+	</nav>
+	
+
+	<div>
+		<div class="col-md-2">
+			<ul class="nav nav-pills nav-stacked" id="leftNav">
+				<li role="presentation" class="active" url="dashBoard.html"><a href="#">数据概况</a></li>
+				<li role="presentation"><a href="#">文章管理</a></li>
+				<li role="presentation"><a href="#">XX管理</a></li>
+			</ul>
+		</div>
+
+		<div class="container-fluid col-md-10"  id="context">
+				<div class="style-edit">
+					<input type="text" id="article-title" placeholder="文章标题">	
+				</div>
+				<div id="editor">
+		        			<p>欢迎使用 <b>wangEditor</b> 富文本编辑器</p>
+		    	</div>
+				<div id="tag-pane">
+					<span href="" class="label label-info">JAVA &times;</span>
+					<input type="text">
+				</div>
+
+				<select class="form-control" id="tags" style="display: none">
+					  <option>SQL</option>
+					  <option>PHP</option>
+					  <option>MYSQL</option>
+					  <option>CSS</option>
+					  <option>HTML</option>
+				</select>
+    			<button class="btn btn-primary" style="margin-top:10px;float: right;">
+					发布文章
+    			</button>
+		</div>
+	</div>
+</body>
+
+<script type="text/javascript" src="js/jquery.js"></script>
+
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script src="js/bootstrap-select.min.js"></script>
+ <script type="text/javascript" src="js/wangEditor.min.js"></script>
+<script type="text/javascript" src="js/jquery.chose.js"></script>
+<script type="text/javascript">
+        var E = window.wangEditor
+        var editor = new E('#editor')
+        // 或者 var editor = new E( document.getElementById('editor') )
+        editor.create();
+        
+</script>
+
+<script>
+	$("#leftNav li").on("click",function(e){
+		$("#leftNav li[class=active]").removeClass("active");
+		$(this).addClass("active");
+		$("#context").load($(this).attr("url"));
+	});
+
+</script>
+
+<script type="text/javascript">
+	$("#tag-pane input").on("focus",function(){
+		$("#tags").show(800);
+	});
+
+	$("#tag-pane span").on("click",function(){
+		$(this).remove();
+	});
+
+	$("#tags").on("change",function(e){
+		var child='<span href="" class="label label-info">'+$("#tags option:selected").text()+' &times;</span>';
+		$(child).insertBefore( $("#tag-pane input"));
+		
+	});
+ </script>
+</html>

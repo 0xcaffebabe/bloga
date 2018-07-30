@@ -23,7 +23,7 @@ public class BlogController {
     private ArticleService articleService;
 
     //处理首页分页
-    @GetMapping("{page}")
+    @GetMapping("/page/{page}")
     @BlogEdge
     public String index(ModelMap map,@PathVariable("page") Integer page){
         var list=articleService.getArticles(page);

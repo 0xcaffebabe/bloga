@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>评论管理</title>
+
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<nav class="navbar navbar-inverse">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8">
+					<div class="navbar-brand">
+						<p style="color: white;font-weight: bold;font-size: 18px;">IM后台管理</p>
+					</div>
+				</div>
+				
+				<div class="col-md-4">
+					<div id="login-user">
+						
+						<div class="btn-group">
+
+						  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-user"></span> MY9527</button>
+						  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						    <span class="caret"></span>
+						   	
+						  </button>
+						  <ul class="dropdown-menu">
+						    <li><a href="#"><span class="glyphicon glyphicon-user"></span>个人信息</a></li>
+						    <li role="separator" class="divider"></li>
+						    <li><a href="#"><span class="glyphicon glyphicon-off"></span>注销</a></li>
+						  </ul>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+	
+
+	<div>
+		<div class="col-md-2">
+			<button class="btn btn-primary"  id="menuBtn">菜单 ↓</button>
+			<ul class="nav nav-pills nav-stacked text-center" id="leftNav">
+				<li role="presentation" ><a href="./main.html"><span class="glyphicon glyphicon-dashboard"></span>&nbsp;数据概况</a></li>
+				<li role="presentation"><a href="./article.html"><span class="glyphicon glyphicon-book"></span>&nbsp;文章管理</a></li>
+				<li role="presentation" class="active"><a href="./comment.html"><span class="glyphicon glyphicon-comment"></span>&nbsp;评论管理</a></li>
+				<li role="presentation"><a href="./tag.html"><span class="glyphicon glyphicon-tags"></span>&nbsp;标签管理</a></li>
+				<li role="presentation"><a href="./setting.html"><span class="glyphicon glyphicon-cog"></span>&nbsp;设置管理</a></li>
+
+			</ul>
+		</div>
+		
+		<div class="container-fluid col-md-10"  id="context">
+
+			<ol class="breadcrumb">
+			  <li><a href="main.html">主页</a></li>
+			  <li class="active">评论管理</li>
+			</ol>
+
+			
+			
+			<div class="form-group">
+				<input type="text" class="form-control" style="float: left;">
+				<button class="btn btn-info" style="float: left; margin-left: 10px;">
+				<span class="glyphicon glyphicon-search"></span>
+				搜索</button>
+			</div>
+
+			<div class="btn-group" style="float:right;padding-bottom:10px;">
+				<button class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span>&nbsp;修改评论</button>
+				<button class="btn btn-danger"><span class="glyphicon glyphicon-edit"></span>&nbsp;删除评论</button>
+			</div>
+			
+			<table class="table table-hover table-striped table-condensed table-responsive">
+				<tr>
+					<th>ID</th>
+					<th>父ID</th>
+					<th>所属文章</th>
+					<th>评论人</th>
+					<th>邮箱</th>
+					<th>正文</th>
+				</tr>
+
+				<tr>
+					<td>1</td>
+					<td>0</td>
+					<td>JAVASCRIPT...</td>
+					<td>MY</td>
+					<td>admin@ismy.wang</td>
+					<td>的范德萨发的发的....</td>
+				</tr>
+			</table>
+
+			<ul class="pagination" style="float:center">
+			    <li><a href="#">&laquo;</a></li>
+			    <li><a href="#">1</a></li>
+			    <li><a href="#">2</a></li>
+			    <li><a href="#">3</a></li>
+			    <li><a href="#">4</a></li>
+			    <li><a href="#">5</a></li>
+			    <li><a href="#">&raquo;</a></li>
+			</ul>
+
+		</div>
+		
+	</div>
+</body>
+
+<script type="text/javascript" src="js/jquery.js"></script>
+
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/Chart.js"></script>
+<script src="js/custom.js"></script>
+
+<script>
+	
+</script>
+</html>

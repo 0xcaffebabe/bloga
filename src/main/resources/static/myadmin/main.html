@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<title>后台主页</title>
+
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<nav class="navbar navbar-inverse">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8">
+					<div class="navbar-brand">
+						<p style="color: white;font-weight: bold;font-size: 18px;">IM后台管理</p>
+					</div>
+				</div>
+				
+				<div class="col-md-4">
+					<div id="login-user">
+						
+						<div class="btn-group">
+
+						  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-user"></span> MY9527</button>
+						  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						    <span class="caret"></span>
+						   	
+						  </button>
+						  <ul class="dropdown-menu">
+						    <li><a href="#"><span class="glyphicon glyphicon-user"></span>个人信息</a></li>
+						    <li role="separator" class="divider"></li>
+						    <li><a href="#"><span class="glyphicon glyphicon-off"></span>注销</a></li>
+						  </ul>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+	
+
+	<div>
+		<div class="col-md-2">
+			<button class="btn btn-primary"  id="menuBtn">菜单 ↓</button>
+			<ul class="nav nav-pills nav-stacked text-center" id="leftNav">
+				<li role="presentation"   class="active"><a href="./main.html"><span class="glyphicon glyphicon-dashboard"></span>&nbsp;数据概况</a></li>
+				<li role="presentation"><a href="./article.html"><span class="glyphicon glyphicon-book"></span>&nbsp;文章管理</a></li>
+				<li role="presentation"><a href="./comment.html"><span class="glyphicon glyphicon-comment"></span>&nbsp;评论管理</a></li>
+				<li role="presentation"><a href="./tag.html"><span class="glyphicon glyphicon-tags"></span>&nbsp;标签管理</a></li>
+				<li role="presentation"><a href="./setting.html"><span class="glyphicon glyphicon-cog"></span>&nbsp;设置管理</a></li>
+
+			</ul>
+		</div>
+		
+		<div class="container-fluid col-md-10"  id="context">
+			<ol class="breadcrumb">
+			  <li><a href="main.html">主页</a></li>
+			  <li class="active">数据概况</li>
+			</ol>
+			<div class="row" id="forthPane">
+				<div class="col-md-3 col-xs-6">
+					<div class="box purple" id="today-request">
+						<span class="glyphicon glyphicon-arrow-down" style="float: right;"></span>
+						<h1>785</h1>
+						<h4>今日请求数</h4>
+					</div>
+
+				</div>
+
+				<div class="col-md-3 col-xs-6">
+					<div class="box green" id="today-visitor">
+						
+						<span class="glyphicon glyphicon-arrow-up" style="float: right;"></span>
+						<h1>785</h1>
+						<h4>今日访客数</h4>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-xs-6">
+					<div class="box blue" id="today-pages">
+					<span class="glyphicon glyphicon-arrow-up " style="float: right;"></span>
+						<h1>785</h1>
+						<h4>今日页访数</h4>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-xs-6">
+					<div class="box red" id="today-reads">
+					<span class="glyphicon glyphicon-arrow-down " style="float: right;"></span>
+						<h1>785</h1>
+						<h4>今日阅读数</h4>
+					</div>
+				</div>
+			</div>
+
+			<div class="row" style="padding-top:10px;">
+				<div class="col-md-6 col-xs-6">
+					<div class="box blue" style="height: 324px;">
+						
+						<canvas id="reginChart"></canvas>
+
+
+
+					</div>
+				</div>
+
+				<div class="col-md-6 col-xs-6">
+					<div class="box red" style="height:324px;" id="browser-pane">
+							<canvas id="browserChart"></canvas>
+							
+
+					</div>
+				</div>
+			</div>
+
+			<div class="box ngreen" style="height: 432px; margin-top:10px;">
+				<canvas id="timeChart" height="100%"></canvas>
+			</div>
+
+		</div>
+		
+	
+		
+	</div>
+
+	
+	
+</body>
+
+<script type="text/javascript" src="js/jquery.js"></script>
+
+<script type="text/javascript" src="js/bootstrap.js"></script>
+
+<script src="js/Chart.js"></script>
+
+<script type="text/javascript" src=js/custom.js></script>
+
+<script type="text/javascript" src="js/main.js"></script>
+
+<script>
+
+ 
+</script>
+</html>

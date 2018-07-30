@@ -7,6 +7,8 @@ import wang.ismy.bloga.dao.UserDao;
 import wang.ismy.bloga.entity.User;
 import wang.ismy.bloga.exception.UserException;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -41,5 +43,9 @@ public class UserService {
 
     public User getUserByName(String name){
         return dao.getUserByName(name);
+    }
+
+    public List<User> getUsers(){
+        return dao.getUsers();
     }
 }

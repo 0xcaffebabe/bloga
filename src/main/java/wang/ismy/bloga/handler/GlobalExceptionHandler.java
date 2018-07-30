@@ -25,7 +25,8 @@ public class GlobalExceptionHandler  {
         if("Restful".equals(requestType)){
             Result result=new Result();
             result.setData(null);
-            result.setStatus(response.getStatus());
+            result.setStatus(403);
+            response.setStatus(403);
             result.setMsg(e.getLocalizedMessage());
             return result;
         }else{

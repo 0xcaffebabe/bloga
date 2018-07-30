@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
 @Entity
@@ -13,6 +14,7 @@ public class Tag extends wang.ismy.bloga.entity.Entity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id; //标签ID
 
+    @NotEmpty(message = "标签名不得为空")
     private String name; //标签名
 
     private Date time; //创建时间

@@ -1,0 +1,167 @@
+@charset "utf-8";
+
+/*登录页相关开始*/
+#loginPane{
+	padding:10px;
+}
+
+#loginPane h1{
+	font-size:1000%;
+}
+
+#loginPane-edit{
+	margin-top: 8%;
+}
+
+.form-control{
+	max-width: 400px;
+	margin:0 auto;
+}
+
+.form-group input[type=button]{
+	margin-top: 10px;
+}
+
+#loginName{
+	color:#ccc;
+	vertical-align: middle;
+}
+/*登录页相关结束*/
+
+
+/*主页相关开始*/
+
+#forthPane h1{
+	color: rgb(238,238,238);
+}
+
+#forthPane span{
+	padding:20px;
+	font-size: 64px;
+	color:rgb(238,238,238);
+}
+
+#forthPane h4{
+	color:rgb(238,238,238);
+}
+
+/*主页相关结束*/
+
+/*文章相关开始*/
+#article-title{
+	min-width: 100%;
+	font-size: 18px;
+	font-weight: bold;
+	border:none;
+}
+
+.style-edit{
+	padding:10px;
+	border:1px rgb(238,238,238) solid;
+}
+
+
+/*文章相关结束*/
+
+/*标签相关开始*/
+#tag-pane{
+	width:auto;
+	border:1px rgb(238,238,238) solid;
+	padding:10px;
+}
+#tag-pane input{
+	width:auto;
+	border:none;
+}
+
+#tags{
+	width: auto;
+	float: left;
+}
+/*标签相关结束*/
+
+
+/*公共*/
+.gray-bg{
+	background-color: rgb(243,243,244);
+}
+
+.box{
+	height:108px;
+	box-shadow: 1px 2px 2px rgb(38,38,38);
+}
+
+.box:hover{
+	box-shadow: none;
+	cursor: pointer;
+}
+.purple{
+	background-color: rgb(134,116,166)
+}
+.green{
+	background-color: rgb(67,181,173);
+}
+.ngreen{
+	background-color: rgb(92, 184, 92);
+}
+.blue{
+	background-color:rgb(87,142,190);
+}
+.red{
+	background-color: rgb(226,90,89)
+}
+#login-user{
+	float: right;
+	padding:10px;
+	font-size: 18px;
+}	
+#leftNav{
+		display: block;
+}
+.label{
+	text-decoration: none;
+	padding:4px;
+}
+.label:hover{
+	cursor: pointer;
+}
+#menuBtn{
+	width:100%;
+	display: none
+}
+#context{
+	display: none;
+}
+
+.modal-content{
+	margin-top:25%;
+}
+
+@media screen and (max-width: 991px) {
+	#leftNav{
+		display: none;
+	}
+	#menuBtn{
+		display: inline;
+	}
+}
+
+@media screen and (min-width: 991px) {
+	#leftNav{
+		display: block;
+	}	
+}
+
+#footer{
+	height: 72px;
+	background:rgb(34,34,34);
+	float: left;
+	bottom: 0;
+	
+}
+
+
+
+
+
+
