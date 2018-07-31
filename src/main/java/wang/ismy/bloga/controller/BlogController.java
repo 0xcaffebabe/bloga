@@ -126,5 +126,10 @@ public class BlogController {
         return "index";
     }
 
+    @GetMapping("/myadmin")
+    public String backEnd(){
+        return "/myadmin/index.html";
+    }
+
 
 }

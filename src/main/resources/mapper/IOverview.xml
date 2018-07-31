@@ -3,14 +3,28 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="wang.ismy.bloga.dao.inter.IOverview">
-    <select id="getTodayOverview" resultType="int">
-      SELECT COUNT(*) FROM log where DAY(time)=DAY(now()) and MONTH(time)=MONTH(now()) and YEAR(time)=YEAR(now())
+    <select id="getTodayOverview" resultType="map">
+      SELECT "today-requests" name,COUNT(*) FROM log where DAY(time)=DAY(now()) and MONTH(time)=MONTH(now()) and YEAR(time)=YEAR(now())
 UNION
-SELECT COUNT(distinct ip) FROM log where DAY(time)=DAY(now()) and MONTH(time)=MONTH(now()) and YEAR(time)=YEAR(now())
+SELECT "today-visitors",COUNT(distinct ip) FROM log where DAY(time)=DAY(now()) and MONTH(time)=MONTH(now()) and YEAR(time)=YEAR(now())
 UNION
-SELECT COUNT(distinct url) FROM log where DAY(time)=DAY(now()) and MONTH(time)=MONTH(now()) and YEAR(time)=YEAR(now()) and url not like '%.css'
+SELECT "today-pages",COUNT(distinct url) FROM log where DAY(time)=DAY(now()) and MONTH(time)=MONTH(now()) and YEAR(time)=YEAR(now()) and url not like '%.css'
 and url not like '%.js'
 UNION
-SELECT COUNT(*) FROM log where id in(select log_id from article_viewer) and DAY(time)=DAY(now()) and MONTH(time)=MONTH(now()) and YEAR(time)=YEAR(now());
+SELECT "todat-reads",COUNT(*) FROM log where id in(select log_id from article_viewer) and DAY(time)=DAY(now()) and MONTH(time)=MONTH(now()) and YEAR(time)=YEAR(now());
+    </select>
+
+    <select id="getRegionSort" resultType="wang.ismy.bloga.entity.Region">
+      SELECT country,province,city,count FROM region ORDER BY count
+    </select>
+
+    <select id="getBrowsers" resultType="map">
+        SELECT ua,COUNT(ua) from log GROUP BY ua ORDER BY COUNT(ua) DESC
+    </select>
+    
+    <select id="getTimeInterval" resultType="map">
+        SELECT HOUR(time),COUNT(id) FROM log
+        where DAY(time)=DAY(now()) and MONTH(time)=MONTH(now()) and YEAR(time)=YEAR(now())
+        GROUP BY HOUR(time)
     </select>
 </mapper>

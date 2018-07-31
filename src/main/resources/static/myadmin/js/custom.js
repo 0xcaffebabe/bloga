@@ -9,7 +9,7 @@ $("#menuBtn").on("click",function(){
  	$("#leftNav").toggle(800);
  });
 
-if(location.pathname.indexOf("index.html")!=-1){
+if(location.pathname.indexOf("index.html")!=-1 ||location.pathname=="/"){
 
 }else{
     checkToken();

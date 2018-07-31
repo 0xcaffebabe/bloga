@@ -1,12 +1,15 @@
 package wang.ismy.bloga.service;
 
 
+import net.ipip.datx.IPv4FormatException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import wang.ismy.bloga.dao.LogDao;
 import wang.ismy.bloga.entity.ArticleViewer;
 import wang.ismy.bloga.entity.Log;
+import wang.ismy.bloga.entity.Region;
+import wang.ismy.bloga.service.ws.IpService;
 
 @Service
 public class LogService {
@@ -16,6 +19,12 @@ public class LogService {
 
     @Autowired
     private ArticleViewerService articleViewerService;
+
+    @Autowired
+    private IpService ipService;
+
+    @Autowired
+    private RegionService regionService;
 
     public Log addLog(Log log){
         Log returnLog=logDao.addLog(log);
@@ -40,6 +49,15 @@ public class LogService {
             articleViewerService.insert(viewer);
 
         }
+
+        //记录下相关地区信息
+        try {
+            Region region=ipService.getRegionByIp(log.getIp());
+            regionService.updateRegion(region);
+        } catch (IPv4FormatException e) {
+
+        }
+
         return returnLog;
     }
 }

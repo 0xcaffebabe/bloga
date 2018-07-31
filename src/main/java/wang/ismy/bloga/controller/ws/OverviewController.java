@@ -20,4 +20,24 @@ public class OverviewController {
     public Object getTodayOverView(@RequestParam("token") String token){
         return overviewService.getTodayOverview();
     }
+
+    @GetMapping("/region")
+    @Token
+    public Object getRegion(@RequestParam("token") String token){
+        return overviewService.getRegion();
+    }
+
+    @GetMapping("/browser")
+    @Token
+    public Object getBrowser(@RequestParam("token") String token){
+        return overviewService.getBrowser();
+    }
+
+    @GetMapping("/timeInterval")
+    @Token
+    public Object getTimeInterval(@RequestParam("token") String token){
+        return overviewService.getTimeInterval();
+    }
+
+
 }
