@@ -33,6 +33,8 @@ mybatis:
 logging:
   level:
      wang.ismy.bloga.dao : info
+
+
 server:
   port: 80
 

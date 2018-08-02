@@ -7,17 +7,24 @@ import com.aliyun.oss.OSSException;
 import com.aliyun.oss.model.CompleteMultipartUploadResult;
 import com.aliyun.oss.model.UploadFileRequest;
 import com.aliyun.oss.model.UploadFileResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import wang.ismy.bloga.config.Config;
 import wang.ismy.bloga.constant.UploadEnum;
 import wang.ismy.bloga.exception.UploadException;
+
+import javax.persistence.Access;
 
 @Service
 public class UploadService {
 
+
+    private static Config config=new Config();
+
     private static String endpoint = "oss-cn-qingdao.aliyuncs.com";
-    private static String accessKeyId = "LTAI8M8FEYq6S0ph";
-    private static String accessKeySecret = "cpXqlYzPPo4TaCYKfR18VROXJJ9jAF";
-    private static String bucketName = "ismy1";
+    private static String accessKeyId = config.getId(); //阿里OOSid
+    private static String accessKeySecret =config.getSecret(); //阿里OOSsecret
+    private static String bucketName = "ismy1"; //OOS 桶名
     private static String key = "<downloadKey>";
     private static String uploadFile = "<uploadFile>";
 
