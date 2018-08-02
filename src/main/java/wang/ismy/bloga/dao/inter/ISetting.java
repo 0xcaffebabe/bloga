@@ -17,4 +17,6 @@ public interface ISetting {
     int updateSetting(Setting setting);
 
     List<Setting> getSettingBySearch(String keyWord);
+
+    int deleteSettingBatch(List<Integer> idList);
 }

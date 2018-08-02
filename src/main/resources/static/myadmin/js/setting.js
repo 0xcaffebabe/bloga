@@ -209,3 +209,45 @@ $("#searchBtn").on("click",function(){
        getSettingBySearch(keyWord);
    }
 });
+
+
+//清空按钮
+$("#cleanBtn").on("click",function(){
+   $("#searchBox").val("");
+   getSettings();
+});
+
+$("#deleteBtn").on("click",function(){
+    var list=document.getElementsByName("setting-checked");
+    var ret=[];
+    for(var i in list){
+        if(list[i].checked){
+            ret.push(list[i].value);
+        }
+    }
+    if(ret.length==0){
+        showAlert("提示","请选择要删除的设置!");
+        return;
+    }
+    console.log(ret);
+   deleteSettingBatch(ret);
+});
+
+//批量删除
+function deleteSettingBatch(list){
+    $.ajax({
+        url:"/ws/setting?token="+token,
+        method:"DELETE",
+        headers:{"Blog":"Restful","Content-Type":"application/json"},
+        data:JSON.stringify(list),
+        success:function(data){
+            showAlert("成功","操作成功，影响条数："+data.data,function(){
+                location.reload();
+            });
+        }
+        ,
+        error:function (data) {
+            showAlert("错误","删除失败:"+data.status);
+        }
+    });
+}

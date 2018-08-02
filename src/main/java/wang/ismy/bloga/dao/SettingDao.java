@@ -51,4 +51,8 @@ public class SettingDao {
     public List<Setting> getSettingBySearch(String keyWord) {
         return iSetting.getSettingBySearch(keyWord);
     }
+
+    public int deleteSettingBatch(List<Integer> idList) {
+        return iSetting.deleteSettingBatch(idList);
+    }
 }

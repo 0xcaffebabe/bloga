@@ -8,6 +8,7 @@ import wang.ismy.bloga.entity.Setting;
 import wang.ismy.bloga.service.SettingService;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/ws/setting")
@@ -54,6 +55,14 @@ public class SettingController {
     public Object getSettingBySearch(@RequestParam("token") String token,
                                      @PathVariable("keyWord") String keyWord){
         return settingService.getSettingBySearch(keyWord);
+    }
+
+    //批量删除
+    @DeleteMapping("")
+    @Token
+    public Object deleteSettingBatch(@RequestParam("token") String token,
+                                     @RequestBody List<Integer> idList){
+        return settingService.deleteSettingBatch(idList);
     }
 
 

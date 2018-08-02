@@ -56,8 +56,24 @@
 		</div>
 
 		<div class="container-fluid col-md-10"  id="context">
-			
-			
+			<ol class="breadcrumb">
+				<li><a href="main.html">主页</a></li>
+				<li class="active">标签管理</li>
+			</ol>
+
+			<input type="text" class="form-control" style="float: left;" id="searchBox">
+
+			<button class="btn btn-info" style="float: left; margin-left: 10px;" id="searchBtn">
+				<span class="glyphicon glyphicon-search"></span>
+				搜索</button>
+			<button class="btn btn-success" style="float: left; margin-left: 10px;" id="cleanBtn">
+				<span class="glyphicon glyphicon-remove"></span>
+				清空</button>
+
+			<div class="btn-group" style="float: right;">
+				<button class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> &nbsp;新增</button>
+				<button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> &nbsp;删除</button>
+			</div>
 			<table class="table table-hover table-striped table-condensed table-responsive" id="setting-table">
 				<tr>
 					<th>操作</th>
@@ -67,24 +83,12 @@
 					<th>时间</th>
 				</tr>
 
-				<tr>
-					<td><input type="checkbox"></td>
-					<td>1</td>
-					<td>JAVA</td>
-					<td>10</td>
-					<td>2018/06/22</td>
-				</tr>
+				<tbody id="tags-main">
+				</tbody>
+
 			</table>
 
-			<ul class="pagination" style="float:center">
-			    <li><a href="#">&laquo;</a></li>
-			    <li><a href="#">1</a></li>
-			    <li><a href="#">2</a></li>
-			    <li><a href="#">3</a></li>
-			    <li><a href="#">4</a></li>
-			    <li><a href="#">5</a></li>
-			    <li><a href="#">&raquo;</a></li>
-			</ul>
+
 
 		</div>
 		
@@ -96,11 +100,9 @@
 <script type="text/javascript" src="js/bootstrap.js"></script>
 <script type="text/javascript" src="js/Chart.js"></script>
 <script src="js/custom.js"></script>
+<script src="js/tag.js"></script>
 
 <script>
 
-	$("#setting-table td").hover(function(){
-		$("#setting-table td .btn-danger").toggle(400);
-	});
 </script>
 </html>

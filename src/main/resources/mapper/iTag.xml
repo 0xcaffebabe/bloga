@@ -20,4 +20,13 @@
         </set>
         WHERE id=#{id}
     </update>
+
+    <select id="getAll" resultType="wang.ismy.bloga.entity.Tag">
+
+SELECT id,name,time,
+(SELECT COUNT(*) FROM article WHERE article.tags like CONCAT('%',tag.name,'%')) relevant
+FROM tag
+
+
+    </select>
 </mapper>

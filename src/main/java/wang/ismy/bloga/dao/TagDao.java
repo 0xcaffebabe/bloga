@@ -37,4 +37,6 @@ public class TagDao {
     public Tag addTag(Tag tag){
        return repository.save(tag);
     }
+
+    public List<Tag> getAll(){return iTag.getAll();}
 }

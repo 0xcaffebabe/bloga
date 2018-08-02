@@ -89,4 +89,8 @@ public class SettingService {
     public List<Setting> getSettingBySearch(String keyWord) {
         return settingDao.getSettingBySearch(keyWord);
     }
+
+    public int deleteSettingBatch(List<Integer> idList) {
+        return settingDao.deleteSettingBatch(idList);
+    }
 }

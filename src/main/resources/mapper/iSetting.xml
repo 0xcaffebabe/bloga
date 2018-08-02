@@ -38,4 +38,14 @@
         SELECT id,setting_key,setting_value,remarks FROM setting
        WHERE setting_key like '%' #{keyWord} '%' or setting_value like '%' #{keyWord} '%' or remarks like '%' #{keyWord} '%'
     </select>
+
+    <!--批量删除-->
+    <delete id="deleteSettingBatch" parameterType="list">
+        DELETE FROM setting
+        WHERE
+        id in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
 </mapper>

@@ -29,4 +29,8 @@ public class TagService {
     public int deleteTag(Integer id) {
         return tagDao.deleteTag(id);
     }
+
+    public List<Tag> getAll() {
+        return tagDao.getAll();
+    }
 }

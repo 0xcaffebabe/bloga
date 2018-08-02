@@ -1,9 +1,7 @@
 package wang.ismy.bloga.entity;
 
+import javax.persistence.*;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
@@ -18,6 +16,10 @@ public class Tag extends wang.ismy.bloga.entity.Entity {
     private String name; //标签名
 
     private Date time; //创建时间
+
+
+    @Transient
+    private Integer relevant;
 
     public int getId() {
         return id;
@@ -41,5 +43,13 @@ public class Tag extends wang.ismy.bloga.entity.Entity {
 
     public void setTime(Date time) {
         this.time = time;
+    }
+
+    public Integer getRelevant() {
+        return relevant;
+    }
+
+    public void setRelevant(Integer relevant) {
+        this.relevant = relevant;
     }
 }

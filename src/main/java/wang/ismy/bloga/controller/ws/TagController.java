@@ -19,7 +19,7 @@ public class TagController {
     @GetMapping("")
     @Token
     public Object getAllTags(@RequestParam("token") String token){
-        return tagService.getTags();
+        return tagService.getAll();
     }
 
     @PutMapping("")
