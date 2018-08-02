@@ -1,15 +1,18 @@
 
-var token=location.search.replace("?token=","");
-
-//替换掉系统的alert
-window.alert=showAlert;
+var token=location.search.substring(location.search.indexOf("?token=")+7,32+location.search.indexOf("?token=")+7);
 
 //公共
 $("#menuBtn").on("click",function(){
  	$("#leftNav").toggle(800);
  });
 
-if(location.pathname.indexOf("index.html")!=-1 ||location.pathname=="/"){
+//处理数据跳转
+$("a").on("click",function(){
+   window.location=$(this).attr("href")+"?token="+token;
+   return false;
+});
+
+if(location.pathname.indexOf("index.html")!=-1 ||location.pathname=="/myadmin/"){
 
 }else{
     checkToken();
@@ -66,5 +69,40 @@ function showAlert(title,content,callback){
 
     $("#myModal").on("hidden.bs.modal",callback);
 
+}
+
+//日期格式化
+function dateFormat(dateStr){
+    var datetime = new Date(dateStr);
+    var year = datetime.getFullYear();
+    var month = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
+    var date = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
+    var hour = datetime.getHours()< 10 ? "0" + datetime.getHours() : datetime.getHours();
+    var minute = datetime.getMinutes()< 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();
+    var second = datetime.getSeconds()< 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
+    return year + "-" + month + "-" + date+" "+hour+":"+minute+":"+second;
+}
+
+//取随机整数
+function randomInt(min, max){
+    var r = Math.random() * (max - min);
+    var re = Math.round(r + min);
+    re = Math.max(Math.min(re, max), min);
+
+    return re;
+}
+
+//取中间文本
+function getMiddleText(str,before,after) {
+    var pre=str.indexOf(before);
+    var next=str.indexOf(after);
+    if(after==""){
+        next=str.length;
+    }
+
+    if(pre==-1 || next==-1){
+        return undefined;
+    }
+    return str.substring(pre+before.length,next);
 }
 

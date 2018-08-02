@@ -23,7 +23,6 @@ public class Article extends wang.ismy.bloga.entity.Entity {
     @Column(columnDefinition = "text")
     private String content; //正文
 
-    @NotNull(message = "文章所属用户不能为空")
     private Integer user; //文章所属用户(实体属性)
     @Transient
     private String userName; //所属用户昵称

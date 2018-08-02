@@ -86,4 +86,8 @@ public class ArticleDao  {
     public List<Article> getArticlesBySearch(HashMap<String,Object> map) {
         return iArticle.getArticlesBySearch(map);
     }
+
+    public int deleteArticleBatch(List<Integer> idList) {
+        return iArticle.deleteArticleBatch(idList);
+    }
 }

@@ -35,13 +35,15 @@
     </update>
     <!--根据ID获取文章-->
     <select id="getArticlesById" parameterType="int" resultType="wang.ismy.bloga.entity.Article">
-         SELECT id,content,create_time,last_edit_time,tags,title,browse_number,
+         SELECT id,content,create_time,last_edit_time,tags,title,
+         (SELECT COUNT(*) FROM article_viewer where article_viewer.article_id=article.id)+browse_number browse_number,
         (SELECT name FROM user where article.user=user.id) user_name
          FROM article WHERE id=#{id}
     </select>
     <!--以分页的方式按照ID倒序获取文章-->
     <select id="getArticlesByPage" parameterType="map" resultType="wang.ismy.bloga.entity.Article">
-        SELECT id,content,create_time,last_edit_time,tags,title,browse_number,
+        SELECT id,content,create_time,last_edit_time,tags,title,
+       (SELECT COUNT(*) FROM article_viewer where article_viewer.article_id=article.id)+browse_number browse_number,
         (SELECT name FROM user where article.user=user.id) user_name
          FROM article
         ORDER BY id DESC
@@ -71,7 +73,8 @@
     </select>
     <!--以分页且倒序的方式根据tag获取文章们-->
     <select id="getArticlesByTag" parameterType="map" resultType="wang.ismy.bloga.entity.Article">
-        SELECT id,content,create_time,last_edit_time,tags,title,browse_number,
+        SELECT id,content,create_time,last_edit_time,tags,title,
+        (SELECT COUNT(*) FROM article_viewer where article_viewer.article_id=article.id)+browse_number browse_number,
         (SELECT name FROM user where article.user=user.id) user_name
          FROM article WHERE tags like '%' #{tag} '%'
          ORDER BY id DESC
@@ -84,7 +87,8 @@
 
     <!--根据归档条件倒序且分页获取文章们-->
     <select id="getArticlesByFile" parameterType="map" resultType="wang.ismy.bloga.entity.Article">
-         SELECT id,content,create_time,last_edit_time,tags,title,browse_number,
+         SELECT id,content,create_time,last_edit_time,tags,title,
+         (SELECT COUNT(*) FROM article_viewer where article_viewer.article_id=article.id)+browse_number browse_number,
         (SELECT name FROM user where article.user=user.id) user_name
          FROM article WHERE CONCAT(YEAR(create_time),'年',MONTH(create_time),'月')=#{file}
          ORDER BY id DESC
@@ -97,11 +101,20 @@
     </select>
 
     <select id="getArticlesBySearch" parameterType="map" resultType="wang.ismy.bloga.entity.Article">
-         SELECT id,content,create_time,last_edit_time,tags,title,browse_number,
+         SELECT id,content,create_time,last_edit_time,tags,title,
+         (SELECT COUNT(*) FROM article_viewer where article_viewer.article_id=article.id)+browse_number browse_number,
         (SELECT name FROM user where article.user=user.id) user_name
          FROM article WHERE title like '%' #{keyWord} '%' or content like '%' #{keyWord} '%' or
         tags like '%' #{keyWord} '%'
          ORDER BY id DESC
          LIMIT #{offset},#{length}
     </select>
+
+    <!--根据idLIST批量进行删除-->
+    <delete id="deleteArticleBatch" parameterType="list">
+        DELETE FROM article WHERE id in
+        <foreach collection="list" item="item" index="no" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
 </mapper>

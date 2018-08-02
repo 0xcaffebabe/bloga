@@ -25,6 +25,7 @@ public class SettingController {
     @GetMapping("/{key}")
     @Token
     public Object getSetting(@RequestParam("token") String token, @PathVariable("key") String key){
+
         return settingService.getSettingByKey(key);
     }
     @PutMapping("")
@@ -48,6 +49,12 @@ public class SettingController {
         return settingService.deleteSettingByKey(key);
     }
 
+    @GetMapping("/search/{keyWord}")
+    @Token
+    public Object getSettingBySearch(@RequestParam("token") String token,
+                                     @PathVariable("keyWord") String keyWord){
+        return settingService.getSettingBySearch(keyWord);
+    }
 
 
 

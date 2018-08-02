@@ -13,20 +13,42 @@ $.ajax({
         getTimeInterval();
     },
     error:function(data){
-        alert("错误","错误原因:"+data.status+",详细信息:"+data.msg);
+        showAlert("错误","错误原因:"+data.status+",详细信息:"+data.msg);
     }
 });
 
 function fillForthPane(){
-    //今日请求数
-    $("#today-requests h1").html(map["today-requests"]);
-    //今日访客数
-    $("#today-visitors h1").html(map["today-visitors"]);
-    //今日页访数
-    $("#today-pages h1").html(map["today-pages"]);
-    //今日阅读数
-    $("#today-reads h1").html(map["todat-reads"]);
+    var paneList=["today-requests","today-visitors","today-pages","today-reads"];
+
+    //循环显示识图
+    for(var i in paneList){
+        $("#"+paneList[i]+" h1").html(map[paneList[i]]);
+    }
+    var tendMap;
+    //判断趋势
+    $.ajax({
+        url:"/ws/overview/olderDay/1?token="+token,
+        method:"GET",
+        headers:{"Blog":"Restful"},
+        success:function(data){
+            tendMap=data.data;
+            for(var i in paneList){
+                if(tendMap[paneList[i].replace("today-","olderDay-")]
+                        <map[paneList[i]]){
+                    $("#"+paneList[i]+" span").addClass("glyphicon-arrow-up");
+                }else{
+                    $("#"+paneList[i]+" span").addClass("glyphicon-arrow-down");
+                }
+                // console.log(tendMap[paneList[i]]+"||"+map[paneList[i]]+"\n");
+            }
+        }
+        ,
+        error:function(data){
+            showAlert("错误","原因:"+data.status+","+data.msg);
+        }
+    })
 }
+
 
 //获取数据并创建图表
 function getRegion(){

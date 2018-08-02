@@ -8,8 +8,10 @@ import wang.ismy.bloga.dao.ArticleDao;
 import wang.ismy.bloga.dao.SettingDao;
 import wang.ismy.bloga.entity.Article;
 import wang.ismy.bloga.entity.Setting;
+import wang.ismy.bloga.entity.User;
 import wang.ismy.bloga.exception.ArticleException;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
@@ -22,7 +24,7 @@ public class ArticleService {
     @Autowired
     private SettingService settingService;
     //新增一篇文章
-    public Article addArticle(Article article){
+    public Article addArticle(String token,Article article){
         if(article==null){
             throw new ArticleException(ArticleEnum.ARTICLE_NOT_NULL);
         }else{
@@ -34,8 +36,11 @@ public class ArticleService {
             if(article.getLastEditTime()==null){
                 article.setLastEditTime(new Date());
             }
+            var user=(User) CacheService.cachePool.get(token);
+            article.setUser(user.getId());
             article.setBrowseNumber(0);
             return articleDao.addArticle(article);
+
         }
     }
 
@@ -89,6 +94,26 @@ public class ArticleService {
         return ret;
     }
 
+    public List<Article> getArticles(Integer pageNumber,Integer pagingNumber1){
+        int pagingNumber=indexPagingNumber(pagingNumber1);
+        if(pageNumber==null){
+            pageNumber=1;
+        }else if(pageNumber<1 || pageNumber>pagingNumber){
+            throw new ArticleException(ArticleEnum.PAGE_NUMBER_OUT_BOUND);
+        }
+
+        //设置分页相关参数
+        var map=new HashMap<String,Object>();
+        int single=pagingNumber1;
+        map.put("offset",(pageNumber-1)*single);
+        map.put("length",single);
+        var ret=articleDao.getArticlesByPage(map);
+        //对tags进行分割，并将其存储到tagSet
+        for(var i:ret){
+            i.setTagSet(Set.of(i.getTags().split(",")));
+        }
+        return ret;
+    }
     public List<Article> getArticles(){
         return articleDao.getArticles();
     }
@@ -162,6 +187,7 @@ public class ArticleService {
         }
         return list;
     }
+    //搜索条件获取文章
     public List<Article> getArticlesBySearch(String keyWord,Integer pageNumber){
         if(keyWord==null ||"".equals(keyWord)){
             throw new ArticleException(ArticleEnum.SEARCH_NOT_NULL);
@@ -171,6 +197,29 @@ public class ArticleService {
             throw new ArticleException(ArticleEnum.PAGE_NUMBER_OUT_BOUND);
         }
         int single=settingService.getSinglePageNumber();
+        var map=new HashMap<String,Object>();
+        map.put("offset",(pageNumber-1)*single);
+        map.put("length",single);
+        map.put("keyWord",keyWord);
+        var list=articleDao.getArticlesBySearch(map);
+        if(list==null || list.size()==0){
+            throw new ArticleException(ArticleEnum.ARTICLE_NOT_EXIST);
+        }
+        for(var i :list){
+            processTagSet(i);
+        }
+        return list;
+    }
+
+    public List<Article> getArticlesBySearch(String keyWord,Integer pageNumber,Integer pagingNumber1){
+        if(keyWord==null ||"".equals(keyWord)){
+            throw new ArticleException(ArticleEnum.SEARCH_NOT_NULL);
+        }
+        int pagingNumber=searchPagingNumber(keyWord,pagingNumber1);
+        if(pageNumber< 1 || pageNumber>pagingNumber){
+            throw new ArticleException(ArticleEnum.PAGE_NUMBER_OUT_BOUND);
+        }
+        int single=pagingNumber1;
         var map=new HashMap<String,Object>();
         map.put("offset",(pageNumber-1)*single);
         map.put("length",single);
@@ -228,6 +277,15 @@ public class ArticleService {
         }
     }
 
+    //重载版本计算首页分页
+    public int indexPagingNumber(int single){
+        long articlesNumber=getArticlesNumber();
+        if(articlesNumber%single==0 && articlesNumber!=0){
+            return (int) (articlesNumber/single);
+        }else{
+            return (int) (articlesNumber/single)+1;
+        }
+    }
     //计算标签分类页分页数
     public int tagPagingNumber(String tag){
         int single=settingService.getSinglePageNumber();
@@ -261,5 +319,18 @@ public class ArticleService {
         }
     }
 
+    //计算搜索页分页数（重载版）
+    public int searchPagingNumber(String keyWord,Integer pagingNumber){
+        int single=pagingNumber;
+        int articlesNumber=getArticlesNumberBySearch(keyWord);
+        if(articlesNumber%single==0 && articlesNumber!=0){
+            return (articlesNumber/single);
+        }else{
+            return articlesNumber/single+1;
+        }
+    }
 
+    public Object deleteArticleBatch(List<Integer> idList) {
+        return articleDao.deleteArticleBatch(idList);
+    }
 }

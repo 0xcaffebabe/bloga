@@ -44,5 +44,11 @@ public class SettingDao {
     }
 
 
+    public Setting getSettingById(Integer id) {
+        return repository.getOne(id);
+    }
 
+    public List<Setting> getSettingBySearch(String keyWord) {
+        return iSetting.getSettingBySearch(keyWord);
+    }
 }

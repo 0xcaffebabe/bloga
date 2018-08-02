@@ -34,9 +34,16 @@ public class AuthenticationService {
             result.setMsg("认证成功");
             result.setStatus(200);
             //生成token
-            var token=createToken(md5);
-            cacheService.set("token",token);
+            //如果缓存中有，就直接从缓存中获取
+            String token=null;
+            if(cacheService.isExist("token")){
+                token=cacheService.get("token").toString();
+            }else{
+                token=createToken(md5);
+                cacheService.set("token",token,1800);
+            }
             result.setData(token);
+            CacheService.cachePool.put(token,user);
             return result;
         }else{
             //抛出身份认证失败异常

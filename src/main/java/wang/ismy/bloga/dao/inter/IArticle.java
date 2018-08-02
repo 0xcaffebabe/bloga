@@ -35,4 +35,6 @@ public interface IArticle {
     int getArticlesNumberBySearch(String keyWord);
 
     List<Article> getArticlesBySearch(HashMap<String,Object> map);
+
+    int deleteArticleBatch(List<Integer> idList);
 }

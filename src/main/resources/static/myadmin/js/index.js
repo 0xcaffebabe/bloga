@@ -53,3 +53,4 @@ $("#password").keydown(function(e){
 //页面动效
 
 $("#loginPane").show(800);
+

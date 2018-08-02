@@ -56,30 +56,79 @@
 		</div>
 
 		<div class="container-fluid col-md-10"  id="context">
-			
-			
+
+
+			<ol class="breadcrumb">
+				<li><a href="main.html">主页</a></li>
+				<li class="active">设置管理</li>
+			</ol>
+
+			<input type="text" class="form-control" style="float: left;" id="searchBox">
+
+			<button class="btn btn-info" style="float: left; margin-left: 10px;" id="searchBtn">
+				<span class="glyphicon glyphicon-search"></span>
+				搜索</button>
+			<button class="btn btn-success" style="float: left; margin-left: 10px;" id="cleanBtn">
+				<span class="glyphicon glyphicon-remove"></span>
+				清空</button>
+
+			<div class="btn-group"  style="float: right" >
+				<button class="btn btn-primary" data-toggle="modal" data-target="#addModal"><span class="glyphicon glyphicon-plus"></span> &nbsp;新增</button>
+				<button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> &nbsp;删除</button>
+			</div>
+
 			<table class="table table-hover table-striped table-condensed table-responsive" id="setting-table">
-				<th>系统设置</th>
-				<tr>
-					<td>这里有个内容<span class="label label-info">标签备注</span>
-					<button class="btn btn-success" style="float: right;">编辑</button>
-					<button class="btn btn-danger" style="float: right;display: none;margin-left: : 10px;">删除</button>
-					</td>
-				</tr>
+
+				<tbody id="settings-main" style="display: none">
+
+				</tbody>
+
 			</table>
 
-			<ul class="pagination" style="float:center">
-			    <li><a href="#">&laquo;</a></li>
-			    <li><a href="#">1</a></li>
-			    <li><a href="#">2</a></li>
-			    <li><a href="#">3</a></li>
-			    <li><a href="#">4</a></li>
-			    <li><a href="#">5</a></li>
-			    <li><a href="#">&raquo;</a></li>
-			</ul>
 
 		</div>
 		
+	</div>
+
+
+	<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">添加一个设置</h4>
+				</div>
+				<div class="modal-body" style="font-weight: bold">
+					<input class="form-control" placeholder="设置key" id="addModalKey"/>
+					<input class="form-control" placeholder="设置value" id="addModalValue"/>
+					<textarea class="form-control" placeholder="备注" id="addModalRemarks"></textarea>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" id="addModalSubmit">提交更改</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
+
+	<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" >添加一个设置</h4>
+				</div>
+				<div class="modal-body" style="font-weight: bold">
+					<input class="form-control" placeholder="设置key" id="editModalKey"/>
+					<input class="form-control" placeholder="设置value" id="editModalValue"/>
+					<textarea class="form-control" placeholder="备注" id="editModalRemarks"></textarea>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" id="editModalSubmit">提交更改</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
 	</div>
 </body>
 
@@ -88,10 +137,9 @@
 <script type="text/javascript" src="js/bootstrap.js"></script>
 <script type="text/javascript" src="js/Chart.js"></script>
 <script src="js/custom.js"></script>
+<script src="js/setting.js"></script>
 
 <script>
-	$("#setting-table td").hover(function(){
-		$("#setting-table td .btn-danger").toggle(50);
-	});
+
 </script>
 </html>

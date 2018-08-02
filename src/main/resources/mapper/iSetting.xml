@@ -33,4 +33,9 @@
         </set>
         WHERE id=#{id}
     </update>
+
+    <select id="getSettingBySearch" parameterType="String" resultType="wang.ismy.bloga.entity.Setting">
+        SELECT id,setting_key,setting_value,remarks FROM setting
+       WHERE setting_key like '%' #{keyWord} '%' or setting_value like '%' #{keyWord} '%' or remarks like '%' #{keyWord} '%'
+    </select>
 </mapper>

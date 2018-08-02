@@ -64,18 +64,24 @@
 			
 			
 			<div class="form-group">
-				<input type="text" class="form-control" style="float: left;">
-				<button class="btn btn-info" style="float: left; margin-left: 10px;">
-				<span class="glyphicon glyphicon-search"></span>
-				搜索</button>
+				<input type="text" class="form-control" style="float: left;" id="searchBox">
+
+					<button class="btn btn-info" style="float: left; margin-left: 10px;" id="searchBtn">
+						<span class="glyphicon glyphicon-search"></span>
+						搜索</button>
+					<button class="btn btn-success" style="float: left; margin-left: 10px;" id="cleanBtn">
+						<span class="glyphicon glyphicon-remove"></span>
+						清空</button>
+
+
+
 			</div>
 			<div class="btn-group" style="float:right;padding-bottom:10px; width: auto;">
 				
-				<button class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>&nbsp;发布文章</button>
-				<button class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span>&nbsp;修改文章</button>
-				<button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>&nbsp;删除文章</button>
+				<button class="btn btn-primary" id="publishBtn"><span class="glyphicon glyphicon-plus"></span>&nbsp;发布文章</button>
+				<button class="btn btn-danger" id="deleteBtn"><span class="glyphicon glyphicon-remove"></span>&nbsp;删除文章</button>
 			</div>
-			<table class="table table-hover table-striped table-condensed table-responsive" id="article-table">
+			<table class="table table-hover table-striped  table-responsive" id="article-table">
 				<tr>
 					<th>选择</th>
 					<th>ID</th>
@@ -86,77 +92,21 @@
 					<th class="hidden-xs">最后编辑日期</th>
 					<th>浏览次数</th>
 					<th>评论数</th>
+					<th>操作</th>
 				</tr>
 
-				<tr>
-					<td><input type="checkbox" name=""></td>
-					<td>1</td>
-					<td><a href="#">JAVASCRIPT跨域发起GET请求</a></td>
-					<td>ismy</td>
-					<td class="hidden-xs">
-						<a href="#"><span class="label label-primary">JAVA</span></a>
-						<a href="#"><span class="label label-info">WEB</span></a>
-						<a href="#"><span class="label label-warning">JAVASCRIPT</span></a>
-					</td>
-					<td class="hidden-xs">
-						2018年6月22日 
-					</td>
-					<td class="hidden-xs">
-						2018年6月22日 
-					</td>
-					<td>58</td>
-					<td>0</td>
-				</tr>
+				<tbody id="article-main">
+					<tr><td>
+						没数据1
+					</td></tr>
+				</tbody>
 
-				<tr>
-					<td><input type="checkbox" name=""></td>
-					<td>1</td>
-					<td>JAVASCRIPT跨域发起GET请求</td>
-					<td>ismy</td>
-					<td class="hidden-xs">
-						<a href="#"><span class="label label-primary">JAVA</span></a>
-						<a href="#"><span class="label label-info">WEB</span></a>
-						<a href="#"><span class="label label-warning">JAVASCRIPT</span></a>
-					</td>
-					<td class="hidden-xs">
-						2018年6月22日 
-					</td>
-					<td class="hidden-xs">
-						2018年6月22日 
-					</td>
-					<td>58</td>
-					<td>0</td>
-				</tr>
 
-				<tr>
-					<td><input type="checkbox" name=""></td>
-					<td>1</td>
-					<td>JAVASCRIPT跨域发起GET请求</td>
-					<td>ismy</td>
-					<td class="hidden-xs">
-						<a href="#"><span class="label label-primary">JAVA</span></a>
-						<a href="#"><span class="label label-info">WEB</span></a>
-						<a href="#"><span class="label label-warning">JAVASCRIPT</span></a>
-					</td>
-					<td class="hidden-xs">
-						2018年6月22日 
-					</td>
-					<td class="hidden-xs">
-						2018年6月22日 
-					</td>
-					<td>58</td>
-					<td>0</td>
-				</tr>
 			</table>
 
-			<ul class="pagination" style="float:center">
-			    <li><a href="#">&laquo;</a></li>
-			    <li><a href="#">1</a></li>
-			    <li><a href="#">2</a></li>
-			    <li><a href="#">3</a></li>
-			    <li><a href="#">4</a></li>
-			    <li><a href="#">5</a></li>
-			    <li><a href="#">&raquo;</a></li>
+			<ul class="pagination" id="article-paging">
+
+
 			</ul>
 
 		</div>
@@ -170,6 +120,7 @@
 
 <script src="js/Chart.js"></script>
 <script type="text/javascript" src=js/custom.js></script>
+<script src="js/article.js"></script>
 <script>
 	
 </script>

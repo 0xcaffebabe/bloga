@@ -36,4 +36,8 @@ public class OverviewDao {
     public List<Map<String,Object>> getTimeInterval() {
         return iOverview.getTimeInterval();
     }
+
+    public List<Map<Object,Object>> getOlderOverview(Integer older) {
+        return iOverview.getOlderOverview(older);
+    }
 }

@@ -3,6 +3,8 @@ package wang.ismy.bloga.dao.inter;
 import org.apache.ibatis.annotations.Mapper;
 import wang.ismy.bloga.entity.Setting;
 
+import java.util.List;
+
 @Mapper
 public interface ISetting {
 
@@ -13,4 +15,6 @@ public interface ISetting {
     int deleteSettingByKey(String key);
 
     int updateSetting(Setting setting);
+
+    List<Setting> getSettingBySearch(String keyWord);
 }

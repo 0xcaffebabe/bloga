@@ -14,49 +14,72 @@
 			<div class="row">
 				<div class="col-md-8">
 					<div class="navbar-brand">
-						<p>后台管理</p>
+						<p style="color: white;font-weight: bold;font-size: 18px;">IM后台管理</p>
 					</div>
 				</div>
-				
+
 				<div class="col-md-4">
-					<p id="loginName">登录用户:admin</p>
+					<div id="login-user">
+
+						<div class="btn-group">
+
+							<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-user"></span> MY9527</button>
+							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<span class="caret"></span>
+
+							</button>
+							<ul class="dropdown-menu">
+								<li><a href="#"><span class="glyphicon glyphicon-user"></span>个人信息</a></li>
+								<li role="separator" class="divider"></li>
+								<li><a href="#"><span class="glyphicon glyphicon-off"></span>注销</a></li>
+							</ul>
+						</div>
+					</div>
+
 				</div>
 			</div>
 		</div>
 	</nav>
-	
 
-	<div>
-		<div class="col-md-2">
-			<ul class="nav nav-pills nav-stacked" id="leftNav">
-				<li role="presentation" class="active" url="dashBoard.html"><a href="#">数据概况</a></li>
-				<li role="presentation"><a href="#">文章管理</a></li>
-				<li role="presentation"><a href="#">XX管理</a></li>
-			</ul>
-		</div>
 
-		<div class="container-fluid col-md-10"  id="context">
+<div>
+	<div class="col-md-2">
+		<button class="btn btn-primary"  id="menuBtn">菜单 ↓</button>
+		<ul class="nav nav-pills nav-stacked text-center" id="leftNav">
+			<li role="presentation" ><a href="./main.html"><span class="glyphicon glyphicon-dashboard"></span>&nbsp;数据概况</a></li>
+			<li role="presentation" class="active"><a href="./article.html"><span class="glyphicon glyphicon-book"></span>&nbsp;文章管理</a></li>
+			<li role="presentation"><a href="./comment.html"><span class="glyphicon glyphicon-comment"></span>&nbsp;评论管理</a></li>
+			<li role="presentation"><a href="./tag.html"><span class="glyphicon glyphicon-tags"></span>&nbsp;标签管理</a></li>
+			<li role="presentation"><a href="./setting.html"><span class="glyphicon glyphicon-cog"></span>&nbsp;设置管理</a></li>
+
+		</ul>
+	</div>
+
+	<div class="container-fluid col-md-10"  id="context">
+		<ol class="breadcrumb">
+			<li><a href="main.html">主页</a></li>
+			<li><a href="main.html">文章管理</a></li>
+			<li class="active">发布文章</li>
+		</ol>
 				<div class="style-edit">
 					<input type="text" id="article-title" placeholder="文章标题">	
 				</div>
 				<div id="editor">
-		        			<p>欢迎使用 <b>wangEditor</b> 富文本编辑器</p>
-		    	</div>
-				<div id="tag-pane">
-					<span href="" class="label label-info">JAVA &times;</span>
-					<input type="text">
-				</div>
 
-				<select class="form-control" id="tags" style="display: none">
-					  <option>SQL</option>
-					  <option>PHP</option>
-					  <option>MYSQL</option>
-					  <option>CSS</option>
-					  <option>HTML</option>
+		    	</div>
+				<div id="tag-pane" >
+
+					<input type="text" placeholder="请选择标签">
+				</div>
+	
+				<select class="form-control" id="tags" style="display: none;width:120px;">
+
 				</select>
-    			<button class="btn btn-primary" style="margin-top:10px;float: right;">
+				<span id="tip" style="margin-left: 25%;"></span>
+    			<button class="btn btn-primary" style="margin-top:10px;float: right;" id="submitBtn">
 					发布文章
     			</button>
+
 		</div>
 	</div>
 </body>
@@ -64,39 +87,8 @@
 <script type="text/javascript" src="js/jquery.js"></script>
 
 <script type="text/javascript" src="js/bootstrap.js"></script>
-<script src="js/bootstrap-select.min.js"></script>
- <script type="text/javascript" src="js/wangEditor.min.js"></script>
-<script type="text/javascript" src="js/jquery.chose.js"></script>
-<script type="text/javascript">
-        var E = window.wangEditor
-        var editor = new E('#editor')
-        // 或者 var editor = new E( document.getElementById('editor') )
-        editor.create();
-        
-</script>
+<script type="text/javascript" src="js/wangEditor.min.js"></script>
+<script src="js/custom.js"></script>
+<script type="text/javascript" src="js/write.js"></script>
 
-<script>
-	$("#leftNav li").on("click",function(e){
-		$("#leftNav li[class=active]").removeClass("active");
-		$(this).addClass("active");
-		$("#context").load($(this).attr("url"));
-	});
-
-</script>
-
-<script type="text/javascript">
-	$("#tag-pane input").on("focus",function(){
-		$("#tags").show(800);
-	});
-
-	$("#tag-pane span").on("click",function(){
-		$(this).remove();
-	});
-
-	$("#tags").on("change",function(e){
-		var child='<span href="" class="label label-info">'+$("#tags option:selected").text()+' &times;</span>';
-		$(child).insertBefore( $("#tag-pane input"));
-		
-	});
- </script>
 </html>

@@ -69,8 +69,24 @@ public class SettingService {
     }
 
     public Setting getSettingByKey(String key){
+        //如果key可以被转为整数的话
+        int id;
+        try{
+            id=Integer.parseInt(key);
+            return getSettingById(id);
+        }catch (Exception e){
+
+        }
         return settingDao.getSettingByKey(key);
     }
 
+    public Setting getSettingById(Integer id){
+        return settingDao.getSettingById(id);
+    }
+
     public int deleteSettingByKey(String key){return settingDao.deleteSettingByKey(key);}
+
+    public List<Setting> getSettingBySearch(String keyWord) {
+        return settingDao.getSettingBySearch(keyWord);
+    }
 }

@@ -17,4 +17,6 @@ public interface IOverview {
     List<Map<String,Object>> getBrowsers();
 
     List<Map<String,Object>> getTimeInterval();
+
+    List<Map<Object, Object>> getOlderOverview(Integer older);
 }
