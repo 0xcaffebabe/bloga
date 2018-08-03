@@ -24,7 +24,7 @@ spring:
         template_exception_handler: wang.ismy.bloga.handler.FreemarkerExceptionHandler
   devtools:
       restart:
-        enabled: true
+        enabled: false
         additional-paths: src/main/java
 mybatis:
   config-location: classpath:mybatis.xml

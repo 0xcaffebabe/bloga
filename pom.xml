@@ -89,6 +89,8 @@
             <groupId>org.ip</groupId>
             <artifactId>datx</artifactId>
             <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>D:/学习/jar/ip.jar</systemPath>
         </dependency>
 
 
@@ -114,6 +116,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <includeSystemScope>true</includeSystemScope>
+                </configuration>
             </plugin>
         </plugins>
     </build>

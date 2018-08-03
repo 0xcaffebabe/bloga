@@ -61,6 +61,12 @@
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/modernizr.js"></script>
-
+<script>
+    $("#searchbox").keydown(function(e){
+        if(e.keyCode==13){
+            window.location="/search/"+this.value;
+        }
+    });
+</script>
 </body>
 </html>

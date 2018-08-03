@@ -13,4 +13,8 @@ public interface ITag {
     int updateTag(Tag tag);
 
     List<Tag> getAll();
+
+    List<Tag> searchTag(String keyWord);
+
+    int deleteTagBatch(List<Integer> idLis);
 }

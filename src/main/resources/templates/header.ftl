@@ -15,10 +15,10 @@
                     <li><a href="/about">关于</a></li>
                     <li><a href="/contact">联系</a></li>
                 </ul>
-                <form  action="search.jsp" method="get" accept-charset="utf-8" class="navbar-form navbar-right" id="searchForm">
+                <form  action="/search" method="get" accept-charset="utf-8" class="navbar-form navbar-right" id="searchForm" onsubmit="return false">
                     <div class="form-group">
                         <div class="input-group">
-                            <input id="searchbox" name="searchbox" type="text" class="form-control" placeholder="输入内容后按下回车以搜索" value="">
+                            <input id="searchbox" name="search" type="text" class="form-control" placeholder="输入内容后按下回车以搜索" value="">
                             <span id="searchbtn" class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
                         </div>
                     </div>
@@ -27,9 +27,14 @@
         </div>
 
     </nav>
-
 </header>
+<script>
 
+
+
+
+
+</script>
 <div class="alert alert-info alert-dismissible text-center" role="alert" style="margin-top:50px;display: none;" id="board">
     <button type="button" class="close" id="boardClose"><span aria-hidden="true">&times;</span></button>
     <strong>公告：</strong>大家好，我是渣渣辉

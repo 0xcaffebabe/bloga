@@ -39,4 +39,12 @@ public class TagDao {
     }
 
     public List<Tag> getAll(){return iTag.getAll();}
+
+    public List<Tag> searchTag(String keyWord) {
+        return iTag.searchTag(keyWord);
+    }
+
+    public int deleteTagBatch(List<Integer> idLis) {
+        return iTag.deleteTagBatch(idLis);
+    }
 }

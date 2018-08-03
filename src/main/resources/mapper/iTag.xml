@@ -29,4 +29,19 @@ FROM tag
 
 
     </select>
+
+    <select id="searchTag" resultType="wang.ismy.bloga.entity.Tag">
+        SELECT id,name,time,
+(SELECT COUNT(*) FROM article WHERE article.tags like CONCAT('%',tag.name,'%')) relevant
+FROM tag
+WHERE name like '%' #{keyWord} '%'
+    </select>
+
+    <delete id="deleteTagBatch" parameterType="list">
+        DELETE FROM tag
+        WHERE id in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            ${item}
+        </foreach>
+    </delete>
 </mapper>

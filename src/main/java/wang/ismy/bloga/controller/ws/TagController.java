@@ -8,6 +8,7 @@ import wang.ismy.bloga.entity.Tag;
 import wang.ismy.bloga.service.TagService;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/ws/tag")
@@ -34,5 +35,19 @@ public class TagController {
     public Object deleteTag(@RequestParam("token") String token,
                          @PathVariable("id") Integer id){
         return tagService.deleteTag(id);
+    }
+
+    @DeleteMapping("")
+    @Token
+    public Object deleteTagBatch(@RequestParam("token") String token,
+                            @RequestBody List<Integer> idLis){
+        return tagService.deleteTagBatch(idLis);
+    }
+
+    @GetMapping("/search/{keyWord}")
+    @Token
+    public Object searchTag(@RequestParam("token") String token,
+                            @PathVariable("keyWord") String keyWord){
+        return tagService.searchTag(keyWord);
     }
 }

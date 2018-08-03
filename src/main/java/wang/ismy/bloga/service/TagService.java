@@ -33,4 +33,12 @@ public class TagService {
     public List<Tag> getAll() {
         return tagDao.getAll();
     }
+
+    public List<Tag> searchTag(String keyWord) {
+        return tagDao.searchTag(keyWord);
+    }
+
+    public int deleteTagBatch(List<Integer> idLis) {
+        return tagDao.deleteTagBatch(idLis);
+    }
 }
