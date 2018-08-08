@@ -3,10 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="wang.ismy.bloga.dao.inter.IComment">
+
+    <!--删除评论-->
     <delete id="deleteComment" parameterType="int">
         DELETE FROM comment WHERE id=#{id}
     </delete>
 
+    <!--更新评论-->
     <update id="updateComment" parameterType="wang.ismy.bloga.entity.Comment">
         UPDATE comment
         <set>

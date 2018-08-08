@@ -6,7 +6,7 @@ public class Result {
     private int status=200;
 
     //提示信息
-    private String msg;
+    private String message;
 
     private Object data;
 
@@ -18,12 +18,12 @@ public class Result {
         this.status = status;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setMessage(String msg) {
+        this.message = msg;
     }
 
     public Object getData() {

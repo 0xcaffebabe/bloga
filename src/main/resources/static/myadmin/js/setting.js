@@ -7,36 +7,31 @@ var editId;
 //获取所有的设置
 getSettings();
 function getSettings(){
-    $.ajax({
-        url:"/ws/setting?token="+token,
-        method:"GET",
-        headers:{"Blog":"Restful"},
+    ajaxRequest({
+        url:"/ws/setting",
         success:function(data){
             settingList=data.data;
             showSettings();
         }
         ,
-        error:function(data){
-            showAlert("失败","获取设置数据失败:"+data.status);
-        }
+        errorMsg:"获取设置数据失败"
     });
+
 }
 
 //搜索设置
 function getSettingBySearch(keyWord){
-    $.ajax({
-        url:"/ws/setting/search/"+keyWord+"?token="+token,
-        method:"GET",
-        headers:{"Blog":"Restful"},
+
+    ajaxRequest({
+        url:"/ws/setting/search/"+keyWord,
         success:function(data){
             settingList=data.data;
             showSettings();
         }
         ,
-        error:function(data){
-            showAlert("失败","获取设置数据失败:"+data.status);
-        }
+        errorMsg:"获取设置数据失败"
     });
+
 }
 
 function showSettings(){
@@ -60,10 +55,9 @@ function showSettings(){
 //增加一个设置
 function addSetting(key,value,remarks){
     var obj={"settingKey":key,"settingValue":value,"remarks":remarks};
-    $.ajax({
-        url:"/ws/setting?token="+token,
+    ajaxRequest({
+        url:"/ws/setting",
         method:"PUT",
-        headers:{"Blog":"Restful","Content-Type":"application/json"},
         data:JSON.stringify(obj),
         success:function(data){
             if(data.data!=null){
@@ -76,15 +70,31 @@ function addSetting(key,value,remarks){
 
         }
         ,
-        error:function(data){
-            showAlert("失败","获取设置数据失败:"+data.status);
-        }
+        errorMsg:"添加设置失败"
     });
+
 }
 
 //更新设置
 function updateSetting(id,key,value,remarks){
     var obj={"id":id,"settingKey":key,"settingValue":value,"remarks":remarks};
+    // ajaxRequest({
+    //     url:"/ws/setting",
+    //     method:"POST",
+    //     data:JSON.stringify(obj),
+    //     success:function(data){
+    //         if(data.data!=null){
+    //             showAlert("成功","更新成功，受影响条数:"+data.data,function(){
+    //                 location.reload();
+    //             });
+    //         }else{
+    //             showAlert("错误","更新失败");
+    //         }
+    //
+    //     }
+    //     ,
+    //     errorMsg:"更新设置数据失败"
+    // })
     $.ajax({
         url:"/ws/setting?token="+token,
         method:"POST",
@@ -145,10 +155,8 @@ $("#addModalSubmit").on("click",function(){
 //编辑设置
 function editSetting(id){
     var setting;
-    $.ajax({
-        url:"/ws/setting/"+id+"?token="+token,
-        method:"GET",
-        headers:{"Blog":"Restful"},
+    ajaxRequest({
+        url:"/ws/setting/id/"+id,
         success:function(data){
             setting=data.data;
             editId=data.data.id;
@@ -156,12 +164,27 @@ function editSetting(id){
             $("#editModalValue").val(setting.settingValue);
             $("#editModalRemarks").val(setting.remarks);
             $("#editModal").modal("show");
-           }
-        ,
-        error:function(data){
-            showAlert("失败","获取设置失败:"+data.status);
         }
+        ,
+        errorMsg:"获取设置失败"
     });
+    // $.ajax({
+    //     url:"/ws/setting/"+id+"?token="+token,
+    //     method:"GET",
+    //     headers:{"Blog":"Restful"},
+    //     success:function(data){
+    //         setting=data.data;
+    //         editId=data.data.id;
+    //         $("#editModalKey").val(setting.settingKey);
+    //         $("#editModalValue").val(setting.settingValue);
+    //         $("#editModalRemarks").val(setting.remarks);
+    //         $("#editModal").modal("show");
+    //        }
+    //     ,
+    //     error:function(data){
+    //         showAlert("失败","获取设置失败:"+data.status);
+    //     }
+    // });
 
 }
 

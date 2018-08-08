@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Mapper;
 import wang.ismy.bloga.entity.Setting;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface ISetting {
@@ -19,4 +20,6 @@ public interface ISetting {
     List<Setting> getSettingBySearch(String keyWord);
 
     int deleteSettingBatch(List<Integer> idList);
+
+    List<Map<String,String>> siteSetting();
 }

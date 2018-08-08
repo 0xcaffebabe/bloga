@@ -40,4 +40,44 @@ public class OverviewDao {
     public List<Map<Object,Object>> getOlderOverview(Integer older) {
         return iOverview.getOlderOverview(older);
     }
+
+    public List<Map<String,Object>> getTodaySpider() {
+        return iOverview.getTodaySpider();
+    }
+
+    public List<Map<String,Object>> getWholeSpider() {
+        return iOverview.getWholeSpider();
+    }
+
+    public List<Map<String,Object>> getTop10() {
+        return iOverview.getTop10();
+    }
+
+    public Object getTend() {
+        return iOverview.getTend();
+    }
+
+    public Object getInterval() {
+        return iOverview.getInterval();
+    }
+
+    public List<Map<String,Object>> performanceToday() {
+        return iOverview.performanceToday();
+    }
+
+    public List<Map<String,Object>> performanceInterval() {
+        return iOverview.performanceInterval();
+    }
+
+    public List<Map<String,Object>> getVisitorOver() {
+        return iOverview.getVisitorOver();
+    }
+
+    public List<Map<String,Object>> getVisitorTop() {
+        return iOverview.getVisitorTop();
+    }
+
+    public List<Map<String,Object>> getVisitorPage() {
+        return iOverview.getVisitorPage();
+    }
 }

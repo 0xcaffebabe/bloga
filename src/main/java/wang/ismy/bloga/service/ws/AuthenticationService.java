@@ -20,7 +20,17 @@ public class AuthenticationService {
 
     @Autowired
     private CacheService cacheService;
+
+//    认证接口
     public Result auth(String userName, String salt, String sign){
+
+        /*
+        * 原理说明：
+        * 首先，外部会传入用户名、随机数以及签名(签名由用户名+加密过的密码+随机数加密而成)
+        * 从数据库根据用户名取得加密过后的密码，并且使用传入的前两个参数进行加密
+        * 把加密过后的结果与传进来的sign进行比对，若相符，则返回token给用户
+        * （注意：加密的时候务必注意大小写问题）
+        * */
         var user=userService.getUserByName(userName);
         if(user==null){
             throw new AuthenticationException(UserEnum.AUTH_FAILED);
@@ -31,7 +41,7 @@ public class AuthenticationService {
         if(md5.equals(sign)){
             //返回token
             Result result=new Result();
-            result.setMsg("认证成功");
+            result.setMessage("认证成功");
             result.setStatus(200);
             //生成token
             //如果缓存中有，就直接从缓存中获取

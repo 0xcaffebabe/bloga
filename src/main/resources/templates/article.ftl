@@ -3,25 +3,14 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8">
-    <title>${article.title}</title>
-    <meta name="keywords" content="ISMY博客,JAVA,WEB,网络">
-    <meta name="description" content="众所周知，JavaScript因为浏览器的同源策略是有着跨域资源访问限制，那我们如何跨域发起一个get请求？那就是用img script等元素进行。使用JavaScript动态创建一个img元素，然后...">
+    <title>${webTitle!""}</title>
+    <meta name="keywords" content="${keyWord}">
+    <meta name="description" content="${description}">
     <meta name="viewport" content="width=device-width">
 
-    <!-- Bootstrap styles -->
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-    <!-- Font-Awesome -->
-    <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+    <#include "style.ftl">
 
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="/css/style.css" id="theme-styles">
-
-    <!--[if lt IE 9]>
-    <script src="/js/vendor/google/html5-3.6-respond-1.1.0.min.js"></script>
-
-    <![endif]-->
 
     <style>
         img{
@@ -92,7 +81,7 @@
                 </aside>
                 <script>
                     function shareQQ(){
-                        var url=encodeURI("www.ismy.wang/page/"+location.search.replace("?id=","")+".html");
+                        var url=encodeURI("www.ismy.wang"+location.pathname);
                         var desc=encodeURI("内容分享");
                         var title=encodeURI(document.title);
                         var pics=encodeURI("https://ismy.wang/img/logo.png");
@@ -107,11 +96,6 @@
 
 
 
-
-
-
-
-
                 </aside>
 
                 <aside class="create-comment" id="create-comment">
@@ -119,7 +103,7 @@
 
                     <h2><i class="fa fa-pencil"></i> 评论</h2>
 
-                    <form action="Comment" method="get" accept-charset="utf-8">
+                    <form  method="get" accept-charset="utf-8">
                         <div class="row">
                             <div class="col-md-6">
                                 <input type="text" name="name" id="comment-name" placeholder="你的昵称" class="form-control input-lg">
@@ -134,7 +118,7 @@
                         <textarea rows="10" name="message" id="comment-body" placeholder="你要说的" class="form-control input-lg"></textarea>
 
                         <div class="buttons clearfix">
-                            <button type="submit" class="btn btn-xlarge btn-clean-one">提交</button>
+                            <button type="submit" class="btn btn-xlarge btn-clean-one" onclick="alert('还没写好');return false;">提交</button>
                         </div>
                     </form>
                 </aside>
@@ -162,5 +146,6 @@
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/modernizr.js"></script>
 <script src="/js/index.js"></script>
+<script src="/js/custom.js"></script>
 </body>
 </html>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import wang.ismy.bloga.service.ArticleService;
 import wang.ismy.bloga.service.EdgeService;
 import wang.ismy.bloga.service.LogService;
+import wang.ismy.bloga.service.StatisticsService;
 
 import java.util.Map;
 
@@ -24,6 +25,9 @@ public class GlobalControllerAspect {
 
     @Autowired
     private EdgeService edgeService;
+
+    @Autowired
+    private StatisticsService statisticsService;
 
     @Pointcut("execution(* wang.ismy.bloga.controller..*.*(..))")
     public void pointCut(){
@@ -69,16 +73,26 @@ public class GlobalControllerAspect {
 
     @Around("pointCut()")
     public Object around(ProceedingJoinPoint point) {
-        long start=System.currentTimeMillis();
+        //如果请求第一个参数是map类型，就注入footer这个玩意
+        if(point.getArgs().length==0){
+
+        }else{
+            try{
+                var t=(Map)point.getArgs()[0];
+                t.put("footer",statisticsService.getVisitorsStatistics());
+            }catch (Exception e){
+
+            }
+
+        }
+
         Object object= null;
         try {
             object = point.proceed();
         } catch (Throwable throwable) {
             throw new RuntimeException(throwable);
         }
-        long end=System.currentTimeMillis();
-        System.err.println("执行"+point.getTarget().getClass().getName()+"的"+point.getSignature().getName()
-        +"方法,耗时:"+(end-start)+"ms");
+
 
         return object;
     }

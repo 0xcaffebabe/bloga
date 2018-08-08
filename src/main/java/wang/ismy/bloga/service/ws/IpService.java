@@ -17,6 +17,7 @@ public class IpService {
     @Autowired
     private City city;
 
+    //根据IP返回一个地区对象
     public Region getRegionByIp(String ip) throws IPv4FormatException {
         String[] ret=city.find(ip);
         String country="";

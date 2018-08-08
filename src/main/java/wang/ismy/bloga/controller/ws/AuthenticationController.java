@@ -15,6 +15,7 @@ public class AuthenticationController {
     @Autowired
     private AuthenticationService authenticationService;
 
+//    认证
     @PostMapping("/auth")
     public Result auth(@RequestParam("user") String user,
                        @RequestParam("salt") String salt,@RequestParam("sign") String sign){

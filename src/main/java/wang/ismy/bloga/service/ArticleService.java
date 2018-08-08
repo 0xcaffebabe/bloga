@@ -211,6 +211,7 @@ public class ArticleService {
         return list;
     }
 
+//    获取搜索文件数
     public List<Article> getArticlesBySearch(String keyWord,Integer pageNumber,Integer pagingNumber1){
         if(keyWord==null ||"".equals(keyWord)){
             throw new ArticleException(ArticleEnum.SEARCH_NOT_NULL);
@@ -238,6 +239,7 @@ public class ArticleService {
         return articleDao.getFile();
     }
 
+//    获取文章总数
     public long getArticlesNumber(){
         return articleDao.getArticlesNumber();
     }
@@ -250,6 +252,8 @@ public class ArticleService {
         }
         return i;
     }
+
+//    根据标签获取文章总数
     public int getArticlesNumberByTag(String tag){
         if(tag==null || "".equals(tag)){
             throw new ArticleException(ArticleEnum.ARTICLE_TAG_NOT_NULL);
@@ -262,10 +266,12 @@ public class ArticleService {
         }
         return articleDao.getArticlesNumberBySearch(keyWord);
     }
+
     //处理tagset
     public void processTagSet(Article article){
         article.setTagSet(Set.of(article.getTags().split(",")));
     }
+
     //计算首页分页数
     public int indexPagingNumber(){
         int single=settingService.getSinglePageNumber();
@@ -330,6 +336,7 @@ public class ArticleService {
         }
     }
 
+//    批量删除文章
     public Object deleteArticleBatch(List<Integer> idList) {
         return articleDao.deleteArticleBatch(idList);
     }

@@ -3,11 +3,14 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="wang.ismy.bloga.dao.inter.IRegion">
+
+    <!--指定地区是否存在-->
     <select id="existByRegion" parameterType="wang.ismy.bloga.entity.Region" resultType="int">
         SELECT COUNT(id) FROM region WHERE country=#{country} and province=#{province} and
         city=#{city}
     </select>
 
+    <!--更新地区受访数-->
     <update id="updateRegion" parameterType="wang.ismy.bloga.entity.Region">
         UPDATE region set count=count+1 WHERE country=#{country} and province=#{province} and
         city=#{city}

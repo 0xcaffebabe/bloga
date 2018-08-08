@@ -21,26 +21,21 @@ function checkUser(){
 function login(user,pwd){
     var salt =Date.parse(new Date());
     var sign=hex_md5((user+hex_md5(pwd).toLocaleUpperCase()+salt).toLocaleUpperCase());
-    $.ajax({
+    ajaxRequest({
         url:"/ws/auth",
         method:"POST",
-        headers:{
-            "Blog":"Restful"
-        },
         data:{
-          "user":user,
+            "user":user,
             "salt":salt,
             "sign":sign
-        }
-        ,
+        },
         success:function(a){
             token=a.data;
             window.location="./main.html?token="+token;
         },
-        error:function(data){
-           showAlert("错误","登录失败："+data.responseJSON.msg);
-        }
-    })
+        errorMsg:"登录失败"
+    });
+
 }
 //监听密码输入框
 

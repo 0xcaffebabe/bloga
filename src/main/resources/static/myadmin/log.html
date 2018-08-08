@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>后台主页</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        #pane h1{
+            color:rgb(238,238,238);
+            font-size: 36px;
+            float: right;
+        }
+        #pane h2{
+            color:rgb(238,238,238);
+            font-size: 48px;
+        }
+        #pane h4{
+            color:rgb(238,238,238);
+            font-size: 18px;
+            position: absolute;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="navbar-brand">
+                    <p style="color: white;font-weight: bold;font-size: 18px;">IM后台管理</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div id="login-user">
+
+                    <div class="btn-group">
+
+                        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-user"></span> MY9527</button>
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caret"></span>
+
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#"><span class="glyphicon glyphicon-user"></span>个人信息</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-off"></span>注销</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<div>
+    <div class="col-md-2">
+        <button class="btn btn-primary"  id="menuBtn">菜单 ↓</button>
+        <ul class="nav nav-pills nav-stacked text-center" id="leftNav">
+        </ul>
+    </div>
+
+    <div class="container-fluid col-md-10"  id="context">
+        <ol class="breadcrumb">
+            <li><a href="main.html">主页</a></li>
+            <li class="active">日志管理</li>
+        </ol>
+        <div class="row">
+            <div class="col-md-2">
+                <input type="date" class="form-control" style="float: left">
+            </div>
+            <div class="col-md-7">
+                <div class="form-group">
+                    <input type="text" class="form-control date-picker" style="display: inline">
+                    <button class="btn btn-info" style="display: inline">搜索</button>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="btn-group">
+                    <button class="btn btn-primary">清理</button>
+                    <button class="btn btn-success">设置</button>
+                </div>
+            </div>
+        </div>
+        <div>
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist" id="myTabs">
+                <li role="presentation" class="active"><a href="#request" aria-controls="home" role="tab" data-toggle="tab">请求日志</a></li>
+                <li role="presentation"><a href="#visitor" aria-controls="profile" role="tab" data-toggle="tab">访问日志</a></li>
+                <li role="presentation"><a href="#exception" aria-controls="messages" role="tab" data-toggle="tab">异常日志</a></li>
+                <li role="presentation"><a href="#sql" aria-controls="settings" role="tab" data-toggle="tab">SQL日志</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="request">
+                    <table class="table table-hover table-striped  table-responsive">
+                        <tr>
+                            <th>ID</th>
+                            <th>IP</th>
+                            <th>URL</th>
+                            <th>UA</th>
+                            <th>日期</th>
+                            <th>耗时</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>127.0.0.1</td>
+                            <td>/</td>
+                            <td>chrome</td>
+                            <td>2018.8.05.12:30:00</td>
+                            <td>30ms</td>
+                        </tr>
+                    </table>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="visitor">
+                    <table class="table table-hover table-striped  table-responsive">
+                        <tr>
+                            <th>ID</th>
+                            <th>IP</th>
+                            <th>URL</th>
+                            <th>日期</th>
+                            <th>停留时间</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>127.0.0.1</td>
+                            <td>/</td>
+                            <td>2018.8.05.12:30:00</td>
+                            <td>30s</td>
+                        </tr>
+                    </table>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="exception">
+                    <table class="table table-hover table-striped  table-responsive">
+                        <tr>
+                            <th>ID</th>
+                            <th>消息</th>
+                            <th>日期</th>
+                            <th>操作</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td style="max-width: 250px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;">Failed to convert value of type
+                                'java.lang.String' to required type 'java.lang.Integer'; nested exception is java.lang.NumberFormatException: For input string: "robots.txt"</td>
+                            <td>2018.8.05.12:30:00</td>
+                            <td><button class="btn btn-primary">查看</button></td>
+                        </tr>
+                    </table>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="sql">
+                    <table class="table table-hover table-striped  table-responsive">
+                        <tr>
+                            <th>ID</th>
+                            <th>SQL语句</th>
+                            <th>日期</th>
+                            <th>耗时</th>
+                            <th>操作</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td style="max-width: 250px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;">SELECT id,title
+                                FROM article
+                                ORDER BY rand() limit ?</td>
+                            <td>2018.8.05.12:30:00</td>
+                            <td>5ms</td>
+                            <td><button class="btn btn-primary">查看</button></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+</div>
+</body>
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script src="js/Chart.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/wangEditor.min.js"></script>
+<script src="js/custom.js"></script>
+<script src="js/log.js"></script>
+
+</html>

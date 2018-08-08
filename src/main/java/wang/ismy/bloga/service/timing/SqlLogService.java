@@ -16,11 +16,13 @@ public class SqlLogService {
     @Autowired
     private SqlLogDao sqlLogDao;
 
+//    往队列中入一条sqlLog
     public SqlLog addLog(SqlLog sqlLog){
         sqlLog.setTime(new Date());
         return sqlLogDao.insert(sqlLog);
     }
 
+//    对外提供的一个添加sqlLog到队列的接口
     public static void addLogToQueue(SqlLog sqlLog){
         synchronized (sqlLogs){
             sqlLogs.push(sqlLog);
@@ -31,6 +33,7 @@ public class SqlLogService {
     @Scheduled(cron = "0/10 * * * * ? ")
     public void addQueue(){
 
+//        每10秒取出队列中的所有sqlLog然后写到数据库
         synchronized (sqlLogs){
             List<SqlLog> list=new ArrayList<>();
             while(true){

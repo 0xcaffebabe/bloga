@@ -3,11 +3,14 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="wang.ismy.bloga.dao.inter.ITag">
+
+    <!--删除标签-->
     <delete id="deleteTag" parameterType="int">
         DELETE FROM tag
         WHERE id=#{id}
     </delete>
 
+    <!--更新标签-->
     <update id="updateTag" parameterType="wang.ismy.bloga.entity.Tag">
         UPDATE tag
         <set>
@@ -21,22 +24,25 @@
         WHERE id=#{id}
     </update>
 
+    <!--获取所有标签-->
     <select id="getAll" resultType="wang.ismy.bloga.entity.Tag">
 
-SELECT id,name,time,
-(SELECT COUNT(*) FROM article WHERE article.tags like CONCAT('%',tag.name,'%')) relevant
-FROM tag
+        SELECT id,name,time,
+        (SELECT COUNT(*) FROM article WHERE article.tags like CONCAT('%',tag.name,'%')) relevant
+        FROM tag
 
 
     </select>
 
+    <!--搜索标签-->
     <select id="searchTag" resultType="wang.ismy.bloga.entity.Tag">
         SELECT id,name,time,
-(SELECT COUNT(*) FROM article WHERE article.tags like CONCAT('%',tag.name,'%')) relevant
-FROM tag
-WHERE name like '%' #{keyWord} '%'
+        (SELECT COUNT(*) FROM article WHERE article.tags like CONCAT('%',tag.name,'%')) relevant
+        FROM tag
+        WHERE name like '%' #{keyWord} '%'
     </select>
 
+    <!--批量删除标签-->
     <delete id="deleteTagBatch" parameterType="list">
         DELETE FROM tag
         WHERE id in

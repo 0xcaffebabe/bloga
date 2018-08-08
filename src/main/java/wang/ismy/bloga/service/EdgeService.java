@@ -22,19 +22,23 @@ public class EdgeService {
         return tagService.getTags();
     }
 
+//    获取相关文章
     public List<Article> getRelevantArticles(Integer articleId){
         return  articleService.getRelevantArticles(articleId);
     }
 
+//    推荐文章
     public List<Article> getRecommendArticles(){
         return articleService.getRecommendArticles();
     }
 
+//    归档类目
     public List<String> getFile(){
         return articleService.getFile();
     }
 
 
+//    获取边缘那块东西的显示模型
     public Map<String,Object> getEdge(Integer articleId){
         var map=new HashMap<String,Object>();
         map.put("relevantArticles",articleService.getRelevantArticles(articleId));

@@ -1,10 +1,8 @@
 
 //四个面板
 var map;
-$.ajax({
-    url:"/ws/overview/today?token="+token,
-    method:"GET",
-    headers:{"Blog":"Restful"},
+ajaxRequest({
+    url: "/ws/overview/today",
     success:function(data) {
         map=data.data;
         fillForthPane();
@@ -12,29 +10,25 @@ $.ajax({
         getBrowser();
         getTimeInterval();
     },
-    error:function(data){
-        showAlert("错误","错误原因:"+data.status+",详细信息:"+data.msg);
-    }
+    errorMsg:"获取今日概览数据失败"
 });
+
 
 function fillForthPane(){
     var paneList=["today-requests","today-visitors","today-pages","today-reads"];
-
     //循环显示识图
     for(var i in paneList){
         $("#"+paneList[i]+" h1").html(map[paneList[i]]);
     }
-    var tendMap;
     //判断趋势
-    $.ajax({
-        url:"/ws/overview/olderDay/1?token="+token,
-        method:"GET",
-        headers:{"Blog":"Restful"},
+    var tendMap;
+    ajaxRequest({
+        url:"/ws/overview/olderDay/1",
         success:function(data){
             tendMap=data.data;
             for(var i in paneList){
                 if(tendMap[paneList[i].replace("today-","olderDay-")]
-                        <map[paneList[i]]){
+                    <map[paneList[i]]){
                     $("#"+paneList[i]+" span").addClass("glyphicon-arrow-up");
                 }else{
                     $("#"+paneList[i]+" span").addClass("glyphicon-arrow-down");
@@ -43,19 +37,16 @@ function fillForthPane(){
             }
         }
         ,
-        error:function(data){
-            showAlert("错误","原因:"+data.status+","+data.msg);
-        }
-    })
+        errorMsg:"渲染数据概览趋势失败"
+    });
+
 }
 
 
 //获取数据并创建图表
 function getRegion(){
-    $.ajax({
-        url:"/ws/overview/region?token="+token,
-        method:"GET",
-        headers:{"Blog":"Restful"},
+    ajaxRequest({
+        url:"/ws/overview/region",
         success:function(data){
             var list=data.data;
             var labelList=[];
@@ -64,43 +55,19 @@ function getRegion(){
                 labelList[i]=list[i].country+list[i].province+list[i].city;
                 countList[i]=list[i].count;
             }
-            var regionChart = new Chart($("#regionChart"), {
-                type: 'bar',
-                data: {
-                    labels: labelList,
-                    datasets: [{
-                        label: '访问统计',
-                        data: countList,
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.6)',
-                            'rgba(54, 162, 235, 0.6)',
-                            'rgba(255, 206, 86, 0.6)',
-                            'rgba(75, 192, 192, 0.6)',
-                            'rgba(153, 102, 255, 0.6)',
-                            'rgba(255, 159, 64, 0.6)',
-                            'rgba(255, 99, 132, 0.6)',
-                            'rgba(54, 162, 235, 0.6)',
-                            'rgba(255, 206, 86, 0.6)',
-                            'rgba(75, 192, 192, 0.6)',
-                            'rgba(153, 102, 255, 0.6)'
-                        ]
-                    }]
-                }
-            });
+            createBarChart($("#regionChart"),labelList,countList,"地区访问统计");
+
 
         }
         ,
-        error:function(data){
-            showAlert("失败","获取地区数据失败,原因:"+data.status+","+data.msg);
-        }
-    })
+        errorMsg:"获取地区访问统计数据失败"
+    });
+
 }
 
 function getBrowser(){
-    $.ajax({
-        url:"/ws/overview/browser?token="+token,
-        method:"GET",
-        headers:{"Blog":"Restful"},
+    ajaxRequest({
+        url:"/ws/overview/browser",
         success:function(data){
             var map;
             map=data.data;
@@ -110,44 +77,17 @@ function getBrowser(){
                 labelList.push(i);
                 dataList.push(map[i]);
             }
-            var browserChart=new Chart($("#browserChart"),{
-                type:"doughnut",
-                data:{
-                    labels:labelList,
-                    datasets:[
-                        {
-                            label:"浏览器",
-                            data:dataList,
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.6)',
-                                'rgba(54, 162, 235, 0.6)',
-                                'rgba(255, 206, 86, 0.6)',
-                                'rgba(75, 192, 192, 0.6)',
-                                'rgba(153, 102, 255, 0.6)',
-                                'rgba(255, 159, 64, 0.6)',
-                                'rgba(255, 99, 132, 0.6)',
-                                'rgba(54, 162, 235, 0.6)',
-                                'rgba(255, 206, 86, 0.6)',
-                                'rgba(75, 192, 192, 0.6)',
-                                'rgba(153, 102, 255, 0.6)'
-                            ]
-                        }
-                    ]
-                }
-            });
+            createDoughnutChart($("#browserChart"),labelList,dataList,"浏览器分布")
         }
         ,
-        error:function(data){
-            showAlert("错误","获取浏览器表格失败，原因:"+data.status+","+data.msg);
-        }
+        errorMsg:"获取浏览器排行数据失败"
     });
+
 }
 
 function getTimeInterval(){
-    $.ajax({
-        url:"/ws/overview/timeInterval?token="+token,
-        method:"GET",
-        headers:{"Blog":"Restful"},
+    ajaxRequest({
+        url:"/ws/overview/timeInterval",
         success:function(data){
             var map=data.data;
             var labelList=[];
@@ -156,25 +96,10 @@ function getTimeInterval(){
                 labelList.push(i);
                 dataList.push(map[i]);
             }
-
-            var timeChart=new Chart($("#timeChart"),{
-                type:"line",
-                data:{
-                    labels:labelList,
-                    datasets:[
-                        {
-                            label:"时段统计",
-                            data:dataList,
-                            backgroundColor:"rgba(55,102,255,0.6)"
-                        }
-                    ]
-                }
-            });
-
+            createLineChart($("#timeChart"),labelList,dataList,"各时段请求量");
         }
         ,
-        error:function(data){
-            showAlert("错误","原因:"+data.status+","+data.msg);
-        }
+        errorMsg:"各时段请求类数据请求失败"
     });
+
 }

@@ -16,6 +16,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+//    获取用户列表
     @GetMapping("")
     @Token
     public Object getUsers(@RequestParam("token") String token){

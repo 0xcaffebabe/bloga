@@ -16,6 +16,8 @@ public class CacheService {
     public static Map<String,Integer> ttl=new HashMap<>();
 
     public static Map<String,Integer> tmp=new HashMap<>();
+
+//    加入缓存
     public synchronized CacheService set(String key,Object value,int expire){
         cachePool.put(key,value);
         ttl.put(key,expire);
@@ -23,6 +25,7 @@ public class CacheService {
         return this;
     }
 
+//    获取缓存
     public Object get(String key){
         if(isExist(key)){
             synchronized (ttl){
@@ -33,10 +36,12 @@ public class CacheService {
         return null;
     }
 
+//    指定缓存是否存在
     public boolean isExist(String key){
         return cachePool.containsKey(key);
     }
 
+//    定时清理缓存任务
     @Scheduled(cron = "0/1 * * * * ? ")
     public synchronized void clean(){
         ArrayList<String> keys=new ArrayList<>();

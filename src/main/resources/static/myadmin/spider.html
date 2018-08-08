@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>后台主页</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="navbar-brand">
+                    <p style="color: white;font-weight: bold;font-size: 18px;">IM后台管理</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div id="login-user">
+
+                    <div class="btn-group">
+
+                        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-user"></span> MY9527</button>
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caret"></span>
+
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#"><span class="glyphicon glyphicon-user"></span>个人信息</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-off"></span>注销</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<div>
+    <div class="col-md-2">
+        <button class="btn btn-primary"  id="menuBtn">菜单 ↓</button>
+        <ul class="nav nav-pills nav-stacked text-center" id="leftNav">
+                  </ul>
+    </div>
+
+    <div class="container-fluid col-md-10"  id="context">
+        <ol class="breadcrumb">
+            <li><a href="main.html">主页</a></li>
+            <li class="active">爬虫分析</li>
+        </ol>
+
+        <div class="row">
+            <div class="col-md-6 col-xs-6">
+                <h3>今日爬虫</h3>
+                <div class="box red" style="height: 324px;">
+
+                   <canvas id="todayChart"></canvas>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xs-6">
+                <h3>往日爬虫</h3>
+                <div class="box blue" style="height: 324px;">
+
+                    <canvas id="wholeChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:10px">
+            <div class="col-md-6 col-xs-6">
+
+                <div class="box ngreen" style="height: 324px;">
+                    <canvas id="pageChart"></canvas>
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-6">
+
+                <div class="box red" style="height: 324px;">
+                    <canvas id="tendChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:10px">
+
+            <div class="col-md-12">
+
+                <div class="box purple" style="height:432px;">
+                    <canvas id="intervalChart" height="100%"></canvas>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+</body>
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script src="js/Chart.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/wangEditor.min.js"></script>
+<script src="js/custom.js"></script>
+<script type="text/javascript" src="js/spider.js"></script>
+
+</html>

@@ -1,22 +1,32 @@
+Chart.defaults.global.defaultFontColor = "rgb(238,238,238)";
+Chart.defaults.global.defaultFontSize=14;
 
 var token=location.search.substring(location.search.indexOf("?token=")+7,32+location.search.indexOf("?token=")+7);
+//动态载入导航们
+var fileName=getMiddleText(location.pathname,"/myadmin/","");
+$("#leftNav").load("nav.html",null,function(){
+    $("#leftNav a[href$='"+fileName+"']").parent("li").addClass("active");
+    //处理数据跳转
+    $("a").on("click",function(){
+        window.location=$(this).attr("href")+"?token="+token;
+        return false;
+    });
+    if(location.pathname.indexOf("index.html")!=-1 ||location.pathname=="/myadmin/"){
+
+    }else{
+        checkToken();
+    }
+});
+
 
 //公共
 $("#menuBtn").on("click",function(){
  	$("#leftNav").toggle(800);
  });
 
-//处理数据跳转
-$("a").on("click",function(){
-   window.location=$(this).attr("href")+"?token="+token;
-   return false;
-});
 
-if(location.pathname.indexOf("index.html")!=-1 ||location.pathname=="/myadmin/"){
 
-}else{
-    checkToken();
-}
+
 
 //校验token是否有效
 function checkToken(){
@@ -105,4 +115,133 @@ function getMiddleText(str,before,after) {
     }
     return str.substring(pre+before.length,next);
 }
+//简单格式日期
+function simpleDateFormat(datetime){
+
+    var month = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
+    var day = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
+    ret=month+"."+day;
+    return ret;
+}
+
+//批量随机创建颜色
+function getColorByRandomBatch(n){
+    if(n<=1){
+        return getColorByRandom();
+    }else{
+
+        var ret=[];
+        for(var i=0;i<n;i++){
+            ret.push(getColorByRandom());
+        }
+        return ret;
+    }
+
+}
+
+//随机创建颜色
+function getColorByRandom(){
+    var arr=[
+        'rgba(255, 99, 132, 0.6)',
+        'rgba(54, 162, 235, 0.6)',
+        'rgba(255, 206, 86, 0.6)',
+        'rgba(75, 192, 192, 0.6)',
+        'rgba(153, 102, 255, 0.6)',
+        'rgba(255, 159, 64, 0.6)',
+        'rgba(255, 99, 132, 0.6)',
+        'rgba(54, 162, 235, 0.6)',
+        'rgba(255, 206, 86, 0.6)',
+        'rgba(75, 192, 192, 0.6)',
+        'rgba(153, 102, 255, 0.6)'
+    ];
+
+    return arr;
+}
+
+//创建一个条状图表
+function createBarChart(canvasObj,labelList,dataList,label){
+    var chart = new Chart(canvasObj, {
+        type: 'bar',
+        data: {
+            labels: labelList,
+            datasets: [{
+                label:label,
+                data: dataList,
+                backgroundColor: getColorByRandom()
+            }]
+        }
+    });
+    return chart;
+}
+
+//创建一个线状图表
+function createLineChart(canvasObj,labelList,dataList,label){
+    var chart=new Chart(canvasObj,{
+        type:"line",
+        data:{
+            labels:labelList,
+            datasets:[
+                {
+                    label:label,
+                    data:dataList,
+                    backgroundColor:"rgba(55,102,255,0.6)"
+                }
+            ]
+        }
+    });
+    return chart;
+}
+
+//创建一个pie图表
+function createPieChart(canvasObj,labelList,dataList,label){
+    var chart=new Chart(canvasObj,{
+        type:"pie",
+        data:{
+            labels:labelList,
+            datasets:[
+                {
+                    label:label,
+                    data:dataList,
+                    backgroundColor: getColorByRandom()
+                }
+            ]
+        }
+    });
+    return chart;
+}
+
+//创建一个doughnut图表
+function createDoughnutChart(canvasObj,labelList,dataList,label){
+    var chart=new Chart(canvasObj,{
+        type:"doughnut",
+        data:{
+            labels:labelList,
+            datasets:[
+                {
+                    label:label,
+                    data:dataList,
+                    backgroundColor: getColorByRandom()
+                }
+            ]
+        }
+    });
+    return chart;
+}
+
+function ajaxRequest(obj){
+    $.ajax({
+        url:obj.url+(token==""?token:"?token="+token),
+        method:obj.method,
+        headers:obj.method=="PUT"?{"Blog":"Restful","Content-Type":"application/json"}:{"Blog":"Restful"},
+        data:obj.data,
+        success:obj.success
+        ,
+        error:function(data){
+            showAlert("错误",obj.errorMsg+"原因:"+data.responseJSON.message);
+        }
+    });
+}
+
+
+
 

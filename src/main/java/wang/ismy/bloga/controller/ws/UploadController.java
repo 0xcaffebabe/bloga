@@ -20,6 +20,8 @@ public class UploadController {
 
     @Autowired
     private UploadService uploadService;
+
+//    文件上传接口
     @PostMapping("")
     @Token
     public Object upload(@RequestParam("token") String token, @RequestParam("file")MultipartFile file) throws IOException {

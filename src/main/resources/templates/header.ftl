@@ -31,9 +31,6 @@
 <script>
 
 
-
-
-
 </script>
 <div class="alert alert-info alert-dismissible text-center" role="alert" style="margin-top:50px;display: none;" id="board">
     <button type="button" class="close" id="boardClose"><span aria-hidden="true">&times;</span></button>

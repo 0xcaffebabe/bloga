@@ -9,26 +9,30 @@ import com.aliyun.oss.model.UploadFileRequest;
 import com.aliyun.oss.model.UploadFileResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import wang.ismy.bloga.config.Config;
 import wang.ismy.bloga.constant.UploadEnum;
 import wang.ismy.bloga.exception.UploadException;
-
-import javax.persistence.Access;
+import wang.ismy.bloga.service.SettingService;
 
 @Service
 public class UploadService {
 
 
-    private static Config config=new Config();
+    @Autowired
+    private SettingService settingService;
 
-    private static String endpoint = "oss-cn-qingdao.aliyuncs.com";
-    private static String accessKeyId = config.getId(); //阿里OOSid
-    private static String accessKeySecret =config.getSecret(); //阿里OOSsecret
+    private static String endpoint ;
+    private static String accessKeyId ; //阿里OOSid
+    private static String accessKeySecret; //阿里OOSsecret
     private static String bucketName = "ismy1"; //OOS 桶名
     private static String key = "<downloadKey>";
     private static String uploadFile = "<uploadFile>";
 
     public String aliyunUpload(String uri){
+        endpoint=settingService.getSettingByKey("site-address").getSettingValue();
+        accessKeyId=settingService.getSettingByKey("site-oosid").getSettingValue();
+        accessKeySecret=settingService.getSettingByKey("site-ooss").getSettingValue();
+        bucketName=settingService.getSettingByKey("site-bucket").getSettingValue();
+
         key="blog/"+System.currentTimeMillis();
         String back=uri.substring(uri.lastIndexOf("."),uri.length());
         key+=back;

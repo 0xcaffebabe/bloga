@@ -6,6 +6,8 @@ import wang.ismy.bloga.dao.OverviewDao;
 import wang.ismy.bloga.entity.Region;
 import wang.ismy.bloga.util.UaUtils;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,6 +69,120 @@ public class OverviewService {
         }
         for(var i:list){
             ret.put(i.get("HOUR(time)").toString(),i.get("COUNT(id)"));
+        }
+        return ret;
+    }
+
+    //获取今日蜘蛛数据
+    public Map<String,Long> getTodaySpider() {
+        var list=overviewDao.getTodaySpider();
+        var ret=new HashMap<String,Long>();
+        for(var m:list){
+            var spider=UaUtils.getSpider(m.get("ua").toString());
+            if(ret.containsKey(spider)){
+                ret.put(spider, (Long) m.get("COUNT(id)")+ret.get(spider));
+            }else{
+                ret.put(spider, (Long) m.get("COUNT(id)"));
+            }
+
+        }
+        return ret;
+    }
+
+//    历史蜘蛛数据
+    public Map<String,Long> getWholeSpider() {
+        var list=overviewDao.getWholeSpider();
+        var ret=new HashMap<String,Long>();
+        for(var m:list){
+            var spider=UaUtils.getSpider(m.get("ua").toString());
+            if(ret.containsKey(spider)){
+                ret.put(spider, (Long) m.get("COUNT(id)")+ret.get(spider));
+            }else{
+                ret.put(spider, (Long) m.get("COUNT(id)"));
+            }
+
+        }
+        return ret;
+    }
+
+    //蜘蛛最爱的页面
+    public Object getTop10() {
+        var list=overviewDao.getTop10();
+        var ret=new ArrayList<HashMap<String,Long>>();
+        for(var m:list){
+            var t=new HashMap<String,Long>();
+
+            t.put(m.get("url").toString(),(Long) m.get("COUNT(id)"));
+
+            ret.add(t);
+
+        }
+        return ret;
+    }
+
+    //最近7日蜘蛛请求数
+    public Object getTend() {
+        return overviewDao.getTend();
+
+    }
+
+    //各时间段蜘蛛请求数
+    public Object getInterval() {
+        return overviewDao.getInterval();
+    }
+
+//    当日性能数据
+    public Map<String,BigDecimal> performanceToday() {
+        var list=overviewDao.performanceToday();
+        var ret=new HashMap<String,BigDecimal>();
+        for(var i:list){
+            ret.put(i.get("name").toString(), (BigDecimal) i.get("number"));
+        }
+        return ret;
+    }
+
+//    当日SQL各时段执行数
+    public List<Long> performanceInterval() {
+        var list= overviewDao.performanceInterval();
+        var ret=new ArrayList<Long>();
+        for(int i=0;i<24;i++){
+            ret.add(0L);
+        }
+        for(var i:list){
+            ret.set((Integer) i.get("hour"),(Long)i.get("number"));
+        }
+        return ret;
+    }
+
+
+//    当日访客数据
+    public Map<String,BigDecimal> getVisitorOver() {
+        var list=overviewDao.getVisitorOver();
+        var ret=new HashMap<String,BigDecimal>();
+        for(var i:list){
+            ret.put(i.get("name").toString(),(BigDecimal)i.get("number"));
+        }
+        return ret;
+    }
+
+//    访客排行榜
+    public List<Map<String,Long>> getVisitorTop() {
+        var list=overviewDao.getVisitorTop();
+        var ret=new ArrayList<Map<String,Long>>();
+        for(var m:list){
+            var t=new HashMap<String,Long>();
+            t.put(m.get("ip").toString(),(Long)m.get("number"));
+            ret.add(t);
+        }
+        return ret;
+    }
+
+//    访客最爱的页面
+    public Map<String,Long> getVisitorPage() {
+        var list= overviewDao.getVisitorPage();
+        var ret=new HashMap<String,Long>();
+        for(var i:list){
+            ret.put(i.get("url").toString(),(Long)i.get("number"));
         }
         return ret;
     }

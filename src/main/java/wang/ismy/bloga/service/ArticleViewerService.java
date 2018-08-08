@@ -16,6 +16,7 @@ public class ArticleViewerService {
     @Autowired
     private IArticleViewer iArticleViewer;
 
+//    插入一条文章访问数据
     public ArticleViewer insert(ArticleViewer viewer){
         return viewerRepository.save(viewer);
     }

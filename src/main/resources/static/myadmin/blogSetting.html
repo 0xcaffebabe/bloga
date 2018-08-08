@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>博客设置</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .container-fluid .row{
+            padding:5px;
+        }
+        #main{
+            padding:50px;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="navbar-brand">
+                    <p style="color: white;font-weight: bold;font-size: 18px;">IM后台管理</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div id="login-user">
+
+                    <div class="btn-group">
+
+                        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-user"></span> MY9527</button>
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caret"></span>
+
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#"><span class="glyphicon glyphicon-user"></span>个人信息</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-off"></span>注销</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<div>
+    <div class="col-md-2">
+        <button class="btn btn-primary"  id="menuBtn">菜单 ↓</button>
+        <ul class="nav nav-pills nav-stacked text-center" id="leftNav">
+                   </ul>
+    </div>
+
+    <div class="container-fluid col-md-10"  id="context">
+        <ol class="breadcrumb">
+            <li><a href="main.html">主页</a></li>
+            <li class="active">博客设置</li>
+        </ol>
+
+        <div class="container-fluid" id="main">
+            <div class="row">
+                <div class="col-md-3 text-center">网站首页标题</div>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" id="site-title">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 text-center">网站首页关键词</div>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" id="site-keyWord">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 text-center">网站副页附加词</div>
+                <div class="col-md-9">
+                    <input type="text" id="site-sideLine" class="form-control"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 text-center">网站首页描述</div>
+                <div class="col-md-9">
+                    <textarea class="form-control" id="site-description" cols="30" rows="3"></textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 text-center">网站robots.txt</div>
+                <div class="col-md-9">
+                    <textarea class="form-control" id="site-robots" cols="30" rows="3"></textarea>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-md-3 text-center">网站关于页面内容</div>
+                <div class="col-md-9">
+                    <textarea class="form-control" id="site-about" cols="30" rows="3"></textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 text-center">网站联系页面内容</div>
+                <div class="col-md-9">
+                    <textarea class="form-control" id="site-contact" cols="30" rows="3"></textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="row">
+                    <div class="col-md-3 text-center">阿里云OOSID</div>
+                    <div class="col-md-9">
+                        <textarea class="form-control" id="site-oosid" cols="30" rows="3"></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 text-center">阿里云OOS密钥</div>
+                    <div class="col-md-9">
+                        <textarea class="form-control" id="site-ooss" cols="30" rows="3"></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 text-center">阿里云地址</div>
+                    <div class="col-md-9">
+                        <textarea class="form-control" id="site-address" cols="30" rows="3"></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 text-center">阿里云OOSbucketName</div>
+                    <div class="col-md-9">
+                        <textarea class="form-control" id="site-bucket" cols="30" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-primary"style="float:right" id="updateBtn">更新</button>
+        </div>
+
+
+
+
+
+    </div>
+
+</div>
+</body>
+
+<script type="text/javascript" src="js/jquery.js"></script>
+
+<script type="text/javascript" src="js/bootstrap.js"></script>
+
+<script src="js/Chart.js"></script>
+<script type="text/javascript" src=js/custom.js></script>
+<script src="js/blogSetting.js"></script>
+<script>
+
+</script>
+</html>

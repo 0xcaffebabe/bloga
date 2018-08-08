@@ -9,6 +9,7 @@ import wang.ismy.bloga.service.SettingService;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/ws/setting")
@@ -17,18 +18,30 @@ public class SettingController {
     @Autowired
     private SettingService settingService;
 
+//    获取所有设置
     @GetMapping("")
     @Token
     public Object getAllSettings(@RequestParam("token") String token){
         return settingService.getSettings();
     }
 
+//    根据key获取设置
     @GetMapping("/{key}")
     @Token
     public Object getSetting(@RequestParam("token") String token, @PathVariable("key") String key){
 
         return settingService.getSettingByKey(key);
     }
+
+    //根据ID获取设置
+    @GetMapping("/id/{key}")
+    @Token
+    public Object getSettingById(@RequestParam("token") String token, @PathVariable("key") Integer id){
+
+        return settingService.getSettingById(id);
+    }
+
+//    新增设置
     @PutMapping("")
     @Token
     public Object addSetting(@RequestParam("token") String token,
@@ -36,6 +49,7 @@ public class SettingController {
         return settingService.addSetting(setting);
     }
 
+//    更新设置
     @PostMapping("")
     @Token
     public Object updateSetting(@RequestParam("token") String token,
@@ -43,13 +57,15 @@ public class SettingController {
         return settingService.updateSetting(setting);
     }
 
-    @DeleteMapping("{key}")
+//    根据key删除设置
+    @DeleteMapping("/{key}")
     @Token
     public Object deleteSettingByKey(@RequestParam("token") String token,
                                      @PathVariable("key") String key){
         return settingService.deleteSettingByKey(key);
     }
 
+//    搜索设置
     @GetMapping("/search/{keyWord}")
     @Token
     public Object getSettingBySearch(@RequestParam("token") String token,
@@ -65,6 +81,20 @@ public class SettingController {
         return settingService.deleteSettingBatch(idList);
     }
 
+    //批量更新
+    @PostMapping("/batch")
+    @Token
+    public Object updateBatch(@RequestParam("token") String token,
+                                     @RequestBody Map<String,String> map){
+        return settingService.updateBatch(map);
+    }
+
+    //获取网站设置
+    @GetMapping("/site")
+    @Token
+    public Object siteSetting(@RequestParam("token") String token){
+        return settingService.siteSetting();
+    }
 
 
 }

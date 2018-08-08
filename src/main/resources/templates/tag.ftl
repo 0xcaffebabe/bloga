@@ -7,17 +7,7 @@
     <meta name="description" content="<%=sys.getValue("index-description")%>">
     <meta name="viewport" content="width=device-width">
 
-    <!-- Bootstrap styles -->
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <!-- Font-Awesome -->
-    <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
-
-    <!-- Google Webfonts -->
-
-    <!-- Styles -->
-    <!--[if lt IE 9]>
-    <script src="/js/vendor/google/html5-3.6-respond-1.1.0.min.js"></script>
-    <![endif]-->
+    <#include "style.ftl">
 
     <link rel="stylesheet" type="text/css" href="css/normalize.css" />
     <link rel="stylesheet" type="text/css" href="css/htmleaf-demo.css">
@@ -62,5 +52,6 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/modernizr.js"></script>
 <script src="js/index.js"></script>
+<script src="/js/custom.js"></script>
 </body>
 </html>

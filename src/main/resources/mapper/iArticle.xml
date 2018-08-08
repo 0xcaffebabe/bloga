@@ -57,9 +57,9 @@
     </select>
     <!--获取edge推荐文章-->
     <select id="getRecommendArticles" parameterType="int" resultType="wang.ismy.bloga.entity.Article">
-        SELECT id,title
+         SELECT id,title
         FROM article
-        ORDER BY rand() limit #{length}
+        ORDER BY MINUTE(now())%id DESC limit #{length}
     </select>
     <!--获取归档列表-->
     <select id="getFile" resultType="String">
@@ -94,12 +94,12 @@
          ORDER BY id DESC
          LIMIT #{offset},#{length}
     </select>
-    
+    <!--获取搜索文章的数量-->
     <select id="getArticlesNumberBySearch" parameterType="String" resultType="int">
         SELECT COUNT(id) FROM article WHERE title like '%' #{keyWord} '%' or content like '%' #{keyWord} '%' or
         tags like '%' #{keyWord} '%'
     </select>
-
+    <!--获取搜索文章的数量-->
     <select id="getArticlesBySearch" parameterType="map" resultType="wang.ismy.bloga.entity.Article">
          SELECT id,content,create_time,last_edit_time,tags,title,
          (SELECT COUNT(*) FROM article_viewer where article_viewer.article_id=article.id)+browse_number browse_number,

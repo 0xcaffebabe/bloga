@@ -3,21 +3,26 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="wang.ismy.bloga.dao.inter.ISetting">
+
+    <!--根据key获取一个设置-->
    <select id="getSettingByKey" parameterType="string" resultType="wang.ismy.bloga.entity.Setting">
        SELECT id,setting_key,setting_value,remarks FROM setting
        WHERE setting_key = #{key}
    </select>
 
+    <!--根据ID删除设置-->
     <delete id="deleteSettingById" parameterType="int">
         DELETE FROM setting
         WHERE id=#{id}
     </delete>
 
+    <!--根据key删除设置-->
     <delete id="deleteSettingByKey" parameterType="string">
         DELETE FROM setting
         WHERE setting_key=#{id}
     </delete>
 
+    <!--更新设置-->
     <update id="updateSetting" parameterType="wang.ismy.bloga.entity.Setting">
         UPDATE setting
         <set>
@@ -34,12 +39,13 @@
         WHERE id=#{id}
     </update>
 
+    <!--搜索设置-->
     <select id="getSettingBySearch" parameterType="String" resultType="wang.ismy.bloga.entity.Setting">
         SELECT id,setting_key,setting_value,remarks FROM setting
        WHERE setting_key like '%' #{keyWord} '%' or setting_value like '%' #{keyWord} '%' or remarks like '%' #{keyWord} '%'
     </select>
 
-    <!--批量删除-->
+    <!--使用ID列表批量删除-->
     <delete id="deleteSettingBatch" parameterType="list">
         DELETE FROM setting
         WHERE
@@ -48,4 +54,9 @@
             #{item}
         </foreach>
     </delete>
+    <!--获取网站设置-->
+    <select id="siteSetting" resultType="map">
+      SELECT setting_key,setting_value FROM setting
+      WHERE setting_key like 'site-%'
+    </select>
 </mapper>

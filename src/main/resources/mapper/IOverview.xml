@@ -3,46 +3,115 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="wang.ismy.bloga.dao.inter.IOverview">
+
+    <!--获取以前的日概况-->
     <select id="getOlderOverview" parameterType="int" resultType="map">
-      SELECT "olderDay-requests" name,COUNT(*) FROM log
-      WHERE DATE_FORMAT(time,'%Y-%m-%d') = date_format(date_sub(now(),interval #{older} day),'%Y-%m-%d')
-UNION
-SELECT "olderDay-visitors",COUNT(distinct ip) FROM log
-WHERE DATE_FORMAT(time,'%Y-%m-%d') = date_format(date_sub(now(),interval #{older} day),'%Y-%m-%d')
-UNION
-SELECT "olderDay-pages",COUNT(distinct url) FROM log
-WHERE DATE_FORMAT(time,'%Y-%m-%d') = date_format(date_sub(now(),interval #{older} day),'%Y-%m-%d')
-UNION
-SELECT "olderDay-reads",COUNT(*) FROM log
-WHERE DATE_FORMAT(time,'%Y-%m-%d') = date_format(date_sub(now(),interval #{older} day),'%Y-%m-%d')
+        SELECT "olderDay-requests" name,COUNT(*) FROM log
+        WHERE DATE_FORMAT(time,'%Y-%m-%d') = date_format(date_sub(now(),interval #{older} day),'%Y-%m-%d')
+        UNION
+        SELECT "olderDay-visitors",COUNT(distinct ip) FROM log
+        WHERE DATE_FORMAT(time,'%Y-%m-%d') = date_format(date_sub(now(),interval #{older} day),'%Y-%m-%d')
+        UNION
+        SELECT "olderDay-pages",COUNT(distinct url) FROM log
+        WHERE DATE_FORMAT(time,'%Y-%m-%d') = date_format(date_sub(now(),interval #{older} day),'%Y-%m-%d')
+        UNION
+        SELECT "olderDay-reads",COUNT(*) FROM log
+        WHERE DATE_FORMAT(time,'%Y-%m-%d') = date_format(date_sub(now(),interval #{older} day),'%Y-%m-%d')
     </select>
 
+    <!--获取今日数据概况-->
     <select id="getTodayOverview"  resultType="map">
-          SELECT "today-requests" name,COUNT(*) FROM log where DAY(time)=DAY(now())
-      and MONTH(time)=MONTH(now()) and YEAR(time)=YEAR(now())
-UNION
-SELECT "today-visitors",COUNT(distinct ip) FROM log where DAY(time)=DAY(now())
-and MONTH(time)=MONTH(now()) and YEAR(time)=YEAR(now())
-UNION
-SELECT "today-pages",COUNT(distinct url) FROM log where DAY(time)=DAY(now())
-and MONTH(time)=MONTH(now()) and YEAR(time)=YEAR(now()) and url not like '%.css'
-and url not like '%.js'
-UNION
-SELECT "today-reads",COUNT(*) FROM log where id in(select log_id from article_viewer)
-and DAY(time)=DAY(now()) and MONTH(time)=MONTH(now()) and YEAR(time)=YEAR(now());
+            SELECT "today-requests" name,COUNT(*) FROM log where DAY(time)=DAY(now())
+            and MONTH(time)=MONTH(now()) and YEAR(time)=YEAR(now())
+            UNION
+            SELECT "today-visitors",COUNT(distinct ip) FROM log where DAY(time)=DAY(now())
+            and MONTH(time)=MONTH(now()) and YEAR(time)=YEAR(now())
+            UNION
+            SELECT "today-pages",COUNT(distinct url) FROM log where DAY(time)=DAY(now())
+            and MONTH(time)=MONTH(now()) and YEAR(time)=YEAR(now()) and url not like '%.css'
+            and url not like '%.js'
+            UNION
+            SELECT "today-reads",COUNT(*) FROM log where id in(select log_id from article_viewer)
+            and DAY(time)=DAY(now()) and MONTH(time)=MONTH(now()) and YEAR(time)=YEAR(now());
     </select>
 
+    <!--获取地区排行-->
     <select id="getRegionSort" resultType="wang.ismy.bloga.entity.Region">
-      SELECT country,province,city,count FROM region ORDER BY count DESC
+      SELECT country,province,city,count FROM region ORDER BY count DESC LIMIT 10
     </select>
 
+    <!--获取浏览器排行-->
     <select id="getBrowsers" resultType="map">
         SELECT ua,COUNT(ua) from log GROUP BY ua ORDER BY COUNT(ua) DESC
     </select>
-    
+
+    <!--获取各时段请求数分布-->
     <select id="getTimeInterval" resultType="map">
         SELECT HOUR(time),COUNT(id) FROM log
         where DAY(time)=DAY(now()) and MONTH(time)=MONTH(now()) and YEAR(time)=YEAR(now())
         GROUP BY HOUR(time)
+    </select>
+
+    <!--获取今日来访蜘蛛-->
+    <select id="getTodaySpider" resultType="map">
+        SELECT ua,COUNT(id) FROM log where DATE_FORMAT(time,'%Y-%m-%d')=DATE_FORMAT(NOW(),'%Y-%m-%d')
+        and (ua like '%spider%' or ua like '%bot%') GROUP BY ua ORDER BY COUNT(id) DESC;
+    </select>
+
+    <!--历史来访蜘蛛-->
+    <select id="getWholeSpider" resultType="map">
+        SELECT ua,COUNT(id) FROM log where  ua like '%spider%' or ua like '%bot%' GROUP BY ua;
+    </select>
+
+    <!--爬虫最爱的页面-->
+    <select id="getTop10" resultType="map">
+        SELECT url,COUNT(id) FROM log where  (ua like '%spider%' or ua like '%bot%')
+        AND (url NOT LIKE '%.js' AND url NOT LIKE '%.css') GROUP BY url ORDER BY COUNT(id) DESC LIMIT 5;
+    </select>
+
+    <!--七日爬虫趋势-->
+    <select id="getTend" resultType="int">
+        SELECT COUNT(id) FROM log WHERE (ua like '%spider%' or ua like '%bot%')
+        AND time BETWEEN DATE_SUB(now(),interval 7 day) and NOW() GROUP BY DAY(time) ORDER BY time
+    </select>
+
+    <!--爬虫来访时间段分布-->
+    <select id="getInterval" resultType="int">
+        SELECT COUNT(id) FROM log WHERE (ua like '%spider%' or ua like '%bot%') GROUP BY HOUR(time) ORDER BY HOUR(time);
+    </select>
+
+    <!--今日性能数据-->
+    <select id="performanceToday" resultType="map">
+        SELECT "today-sqls" name ,COUNT(id) number FROM sql_log WHERE DATE_FORMAT(time,'%Y-%m-%d')=DATE_FORMAT(NOW(),'%Y-%m-%d')
+        UNION
+        SELECT "today-sqls-response-time" name ,AVG(delay) number FROM sql_log WHERE DATE_FORMAT(time,'%Y-%m-%d')=DATE_FORMAT(NOW(),'%Y-%m-%d')
+        UNION
+        SELECT "today-response-time" name ,AVG(delay) number FROM log WHERE DATE_FORMAT(time,'%Y-%m-%d')=DATE_FORMAT(NOW(),'%Y-%m-%d')
+    </select>
+
+    <!--SQL各时段执行数-->
+    <select id="performanceInterval" resultType="map">
+        SELECT HOUR(time) hour,COUNT(id) number
+        FROM sql_log WHERE DATE_FORMAT(time,'%Y-%m-%d')=DATE_FORMAT(NOW(),'%Y-%m-%d') GROUP BY HOUR(time)
+    </select>
+
+    <!--当日访客平均留存时间-->
+    <select id="getVisitorOver" resultType="map">
+        SELECT 'today' name,AVG(residence_time) number FROM stay_time
+        WHERE DATE_FORMAT(time,'%Y-%m-%d')=DATE_FORMAT(NOW(),'%Y-%m-%d')
+        UNION
+        SELECT 'history' name,AVG(residence_time) number FROM stay_time
+    </select>
+
+    <!--历史访客平均留存时间-->
+    <select id="getVisitorTop" resultType="map">
+        SELECT DISTINCT ip,COUNT(id) number FROM stay_time GROUP BY ip ORDER BY COUNT(id) DESC
+        LIMIT 5
+    </select>
+
+    <!--最受访客欢迎的页面排行-->
+    <select id="getVisitorPage" resultType="map">
+        SELECT DISTINCT url,COUNT(id) number FROM stay_time GROUP BY url ORDER BY COUNT(id) DESC
+        LIMIT 5
     </select>
 </mapper>

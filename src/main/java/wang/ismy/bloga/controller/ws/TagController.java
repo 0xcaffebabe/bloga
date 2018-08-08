@@ -17,12 +17,14 @@ public class TagController {
     @Autowired
     private TagService tagService;
 
+//    获取所有标签
     @GetMapping("")
     @Token
     public Object getAllTags(@RequestParam("token") String token){
         return tagService.getAll();
     }
 
+//    新增标签
     @PutMapping("")
     @Token
     public Object addTag(@RequestParam("token") String token,
@@ -30,6 +32,7 @@ public class TagController {
         return tagService.addTag(tag);
     }
 
+//    根据ID删除标签
     @DeleteMapping("/{id}")
     @Token
     public Object deleteTag(@RequestParam("token") String token,
@@ -37,6 +40,7 @@ public class TagController {
         return tagService.deleteTag(id);
     }
 
+//    根据ID列表批量删除标签
     @DeleteMapping("")
     @Token
     public Object deleteTagBatch(@RequestParam("token") String token,
@@ -44,6 +48,7 @@ public class TagController {
         return tagService.deleteTagBatch(idLis);
     }
 
+//    搜索标签
     @GetMapping("/search/{keyWord}")
     @Token
     public Object searchTag(@RequestParam("token") String token,

@@ -8,6 +8,7 @@ import wang.ismy.bloga.dao.repository.SettingRepository;
 import wang.ismy.bloga.entity.Setting;
 
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class SettingDao {
@@ -54,5 +55,9 @@ public class SettingDao {
 
     public int deleteSettingBatch(List<Integer> idList) {
         return iSetting.deleteSettingBatch(idList);
+    }
+
+    public List<Map<String,String>> siteSetting() {
+        return iSetting.siteSetting();
     }
 }

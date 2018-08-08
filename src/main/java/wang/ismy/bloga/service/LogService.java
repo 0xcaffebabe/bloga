@@ -26,9 +26,13 @@ public class LogService {
     @Autowired
     private RegionService regionService;
 
+//    增加一条日志
     public Log addLog(Log log){
         Log returnLog=logDao.addLog(log);
         if(returnLog.getUrl().startsWith("/article")){
+//            如果是以/article开头的话
+
+            //同时记录给文章浏览模块
             ArticleViewer viewer=new ArticleViewer();
             viewer.setLogId(log.getId());
             Integer articleId;
