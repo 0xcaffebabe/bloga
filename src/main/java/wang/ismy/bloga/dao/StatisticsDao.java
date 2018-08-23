@@ -17,4 +17,8 @@ public class StatisticsDao {
     public List<Map<String,Object>> getVisitorsStatistics(){
         return iStatistics.getVisitorsStatistics();
     }
+
+    public List<String> getOnlineUser() {
+        return iStatistics.getOnlineUser();
+    }
 }

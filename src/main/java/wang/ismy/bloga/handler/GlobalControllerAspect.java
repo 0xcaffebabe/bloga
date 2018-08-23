@@ -67,8 +67,6 @@ public class GlobalControllerAspect {
         }
         long end=System.currentTimeMillis();
 
-        System.err.println("执行"+point.getTarget().getClass().getName()+"的"+point.getSignature().getName()+"方法(before),耗时:"+
-                (end-start)+"ms");
     }
 
     @Around("pointCut()")

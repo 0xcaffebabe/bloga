@@ -5,9 +5,37 @@
 	<title>管理员登录</title>
 	
 
-	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
 
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<style>
+		/*登录页相关开始*/
+		#loginPane{
+			padding:10px;
+		}
+
+		#loginPane h1{
+			font-size:1000%;
+		}
+
+		#loginPane-edit{
+			margin-top: 8%;
+		}
+
+		.form-control{
+			max-width: 400px;
+			margin:0 auto;
+		}
+
+		.form-group input[type=button]{
+			margin-top: 10px;
+		}
+
+		#loginName{
+			color:#ccc;
+			vertical-align: middle;
+		}
+		/*登录页相关结束*/
+	</style>
 </head>
 <body class="gray-bg">
 	
@@ -18,19 +46,20 @@
 		</div>
 
 		<div id="loginPane-edit" >
+
 			 <div class="form-group">
     				<input type="text" class="form-control" id="userName" placeholder="用户名">
   			</div>
   			<div class="form-group">
-    				
+
     				<input type="password" class="form-control" id="password" placeholder="密码">
 
   			</div>
 
   			</div>
-  			
+
   			<div class="form-group">
-    				<input type="button"  class="form-control btn btn-primary" value="登录" onclick="checkUser()">
+    				<input type="button"  class="form-control btn btn-primary" value="登录" onclick="login()">
   			</div>
   			
 		</div>
@@ -39,11 +68,39 @@
 
 </body>
 
-<script type="text/javascript" src="js/jquery.js"></script>
-<script src="js/Chart.js"></script>
-<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script src="/js/Chart.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 
-<script src="./js/custom.js"></script>
-<script src="./js/md5.js"></script>
-<script src="./js/index.js"></script>
+<script src="/js/custom1.js"></script>
+<script src="/js/md5.js"></script>
+<script>
+    $("#loginPane").show(800);
+
+	function login(){
+        var user=$("#userName").val();
+
+        var password=$("#password").val();
+
+        $.ajax({
+            url:"/ws/renzheng",
+
+            method:"POST",
+
+			headers:{"Blog":"Restful"},
+
+			data:{
+                "user":user,
+				"password":hex_md5(password)
+			}
+			,
+			success:function(){
+                window.location="/"
+			}
+			,error:function(){
+                showAlert("失败","登录失败");
+			}
+        });
+	}
+</script>
 </html>

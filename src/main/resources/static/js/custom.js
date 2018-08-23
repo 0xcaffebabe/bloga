@@ -38,3 +38,23 @@ function heartBeat(){
         });
     },10000);
 }
+
+function showOnlineUser(){
+    var ret="";
+    $.ajax({
+       url:"/ws/st/online",
+       method:"GET",
+       success:function(data){
+
+           for(var i=0;i<data.length;i++){
+               ret+=data[i]+"</br>";
+           }
+
+           showAlert("在线的人",ret);
+       }
+       ,
+        error:function(data){
+
+        }
+    });
+}

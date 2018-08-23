@@ -10,4 +10,6 @@ import java.util.Map;
 public interface IStatistics {
 
     public List<Map<String,Object>> getVisitorsStatistics();
+
+    List<String> getOnlineUser();
 }

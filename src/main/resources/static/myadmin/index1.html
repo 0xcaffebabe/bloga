@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>后台登录</title>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        body{
+
+            background-color: rgb(28,28,28);
+        }
+        #consoleInput{
+
+            background:rgb(28,28,28);
+            border:none;
+            color:white;
+            outline:none;
+            font-size: 18px;
+            display:inline;
+            width:auto;
+
+        }
+        #consoleInputControll{
+            position: absolute;
+
+        }
+        span{
+            color:rgb(238,238,238);
+            display:inline;
+            font-size: 18px;
+        }
+        #consolePane{
+            color:rgb(238,238,238);
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+<div id="consolePane"></div>
+<div id="consoleInputControll">
+    <span>博客 登录 ></span>
+    <input type="text" name="" id="consoleInput" placeholder="">
+</div>
+
+</body>
+
+<script src="js/jquery.js"></script>
+<script src="js/Chart.js"></script>
+<script src="./js/custom.js"></script>
+<script src="./js/md5.js"></script>
+<script src="js/index.js"></script>
+<script>
+    if(location.pathname=="/myadmin"){
+        location="/myadmin/";
+    }
+
+    window.onload=function(){
+        $("#consoleInput").focus();
+        $("#consoleInput").width($("body").width()-$("span").width());
+    }
+
+    window.onresize=function(){
+        $("#consoleInput").width($("body").width()-$("span").width());
+    }
+
+    var userName="";
+    var password="";
+
+    function systemOut(content){
+        $("#consolePane").html($("#consolePane").html()+content+"</br>");
+    }
+
+
+
+    function clean(){
+        $("#consolePane").html("");
+    }
+
+    $("#consoleInput").keydown(function(event){
+        if(event.keyCode==13){
+            if($("#consoleInput").val()=="clean"){
+                clean();
+                $("#consoleInput").val("");
+                return;
+            }
+
+            if($("#consoleInput").val()==""){
+                systemOut("博客 登录 >");
+            }else{
+                if($("#consoleInput").attr("type")=="password"){
+
+                }else{
+
+                    systemOut("博客 登录 >"+$("#consoleInput").val());
+                }
+
+
+                if(userName==""){
+                    userName= $("#consoleInput").val();
+                    $("#consoleInput").attr("type","password");
+                    systemOut("请输入密码");
+                    $("#consoleInput").val("");
+                }else{
+
+                    password=$("#consoleInput").val();
+
+                    if(userName!="" && password !=""){
+                        login(userName,password);
+
+                    }
+                }
+
+
+
+
+
+            }
+
+
+
+        }
+    })
+
+
+</script>
+</html>

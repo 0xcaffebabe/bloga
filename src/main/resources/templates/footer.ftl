@@ -3,7 +3,8 @@
         <div class="container">
             <div class="row">
                 <p style="text-align: center">一切源于兴趣|闽ICP备17018216号</p>
-                <p style="text-align: center"> 近半月访客数:${footer.month!""} 今日访客数:${footer.today!""} 5分钟在线人数:${footer.fiveMin!""}</p>
+                <p style="text-align: center"> 近半月访客数:${footer.month!""} 今日访客数:${footer.today!""} 5分钟在线人数:<a
+                        href="javascript:showOnlineUser()">${footer.fiveMin!""}</a></p>
             </div>
         </div>
     </div>

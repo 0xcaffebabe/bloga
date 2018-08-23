@@ -1,6 +1,7 @@
 package wang.ismy.bloga.controller.ws;
 
 
+import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import wang.ismy.bloga.Result;
@@ -21,4 +22,10 @@ public class AuthenticationController {
                        @RequestParam("salt") String salt,@RequestParam("sign") String sign){
         return authenticationService.auth(user,salt,sign);
     }
+
+    @PostMapping("/renzheng")
+    public Result auth(){
+        throw new NullPointerException("Connection is null!");
+    }
+
 }

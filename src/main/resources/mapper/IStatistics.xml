@@ -12,4 +12,8 @@
         UNION
         SELECT "month" name ,COUNT(DISTINCT ip) FROM log WHERE time BETWEEN DATE_SUB(now(),INTERVAL 15 day) and now()
     </select>
+
+    <select id="getOnlineUser" resultType="string">
+        SELECT DISTINCT ip FROM log WHERE time BETWEEN date_sub(now(),interval 5 minute) and now()
+    </select>
 </mapper>

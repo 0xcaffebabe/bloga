@@ -21,9 +21,10 @@ function checkUser(){
 function login(user,pwd){
     var salt =Date.parse(new Date());
     var sign=hex_md5((user+hex_md5(pwd).toLocaleUpperCase()+salt).toLocaleUpperCase());
-    ajaxRequest({
+    $.ajax({
         url:"/ws/auth",
         method:"POST",
+        headers:{"Blog":"Restful"},
         data:{
             "user":user,
             "salt":salt,
@@ -33,7 +34,12 @@ function login(user,pwd){
             token=a.data;
             window.location="./main.html?token="+token;
         },
-        errorMsg:"登录失败"
+        error:function(event){
+            systemOut("登录失败:原因:"+event.responseJSON.message);
+            userName="";password="";
+            $("#consoleInput").attr("type","text");
+            $("#consoleInput").val("");
+        }
     });
 
 }

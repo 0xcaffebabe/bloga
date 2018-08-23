@@ -182,9 +182,14 @@ public class BlogController {
         return "index";
     }
 
-    @GetMapping("/myadmin")
+    @GetMapping("/admin")
     public String backEnd(){
         return "/myadmin/index.html";
+    }
+
+    @GetMapping("/myadmin")
+    public String backEnd1(){
+        return "/myadmin/index1.html";
     }
 
     //蜘蛛爬取规则

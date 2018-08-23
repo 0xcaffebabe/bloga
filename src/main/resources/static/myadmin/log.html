@@ -109,16 +109,9 @@
                             <th>URL</th>
                             <th>UA</th>
                             <th>日期</th>
-                            <th>耗时</th>
+                            <th>耗时(ms)</th>
                         </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>127.0.0.1</td>
-                            <td>/</td>
-                            <td>chrome</td>
-                            <td>2018.8.05.12:30:00</td>
-                            <td>30ms</td>
-                        </tr>
+                        <tbody></tbody>
                     </table>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="visitor">
@@ -126,17 +119,11 @@
                         <tr>
                             <th>ID</th>
                             <th>IP</th>
-                            <th>URL</th>
+                            <th>停留时间(s)</th>
                             <th>日期</th>
-                            <th>停留时间</th>
+                            <th>URL</th>
                         </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>127.0.0.1</td>
-                            <td>/</td>
-                            <td>2018.8.05.12:30:00</td>
-                            <td>30s</td>
-                        </tr>
+                        <tbody></tbody>
                     </table>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="exception">
@@ -147,13 +134,7 @@
                             <th>日期</th>
                             <th>操作</th>
                         </tr>
-                        <tr>
-                            <td>1</td>
-                            <td style="max-width: 250px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;">Failed to convert value of type
-                                'java.lang.String' to required type 'java.lang.Integer'; nested exception is java.lang.NumberFormatException: For input string: "robots.txt"</td>
-                            <td>2018.8.05.12:30:00</td>
-                            <td><button class="btn btn-primary">查看</button></td>
-                        </tr>
+                        <tbody></tbody>
                     </table>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="sql">
@@ -165,15 +146,7 @@
                             <th>耗时</th>
                             <th>操作</th>
                         </tr>
-                        <tr>
-                            <td>1</td>
-                            <td style="max-width: 250px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;">SELECT id,title
-                                FROM article
-                                ORDER BY rand() limit ?</td>
-                            <td>2018.8.05.12:30:00</td>
-                            <td>5ms</td>
-                            <td><button class="btn btn-primary">查看</button></td>
-                        </tr>
+                        <tbody></tbody>
                     </table>
                 </div>
             </div>

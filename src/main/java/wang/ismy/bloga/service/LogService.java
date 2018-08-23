@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import wang.ismy.bloga.dao.LogDao;
-import wang.ismy.bloga.entity.ArticleViewer;
-import wang.ismy.bloga.entity.Log;
-import wang.ismy.bloga.entity.Region;
+import wang.ismy.bloga.entity.*;
 import wang.ismy.bloga.service.ws.IpService;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class LogService {
@@ -63,5 +65,64 @@ public class LogService {
         }
 
         return returnLog;
+    }
+
+    public List<Log> getRequestLog(){
+        var list= logDao.getRequestLog();
+
+        var ret=new ArrayList<Log>();
+        for(var map :list){
+            Log log=new Log();
+            log.setId((Integer) map.get("id"));
+            log.setIp(map.get("ip").toString());
+            log.setUrl(map.get("url").toString());
+            log.setUa(map.get("ua").toString());
+            log.setTime((Date) map.get("time"));
+            log.setDelay((Integer)map.get("delay"));
+            ret.add(log);
+        }
+        return ret;
+    }
+
+    public List<StayTime> getStayTimeLog(){
+        var list= logDao.getStayTimeLog();
+        var ret=new ArrayList<StayTime>();
+        for(var map :list){
+           StayTime stayTime=new StayTime();
+            stayTime.setId((Integer) map.get("id"));
+            stayTime.setIp(map.get("ip").toString());
+            stayTime.setUrl(map.get("url").toString());
+            stayTime.setResidenceTime((Integer)map.get("residence_time"));
+            stayTime.setTime((Date) map.get("time"));
+            ret.add(stayTime);
+        }
+        return ret;
+    }
+
+    public List<Situation> getSituationLog(){
+        var list= logDao.getSituationLog();
+        var ret=new ArrayList<Situation>();
+        for(var map :list){
+            Situation situation=new Situation();
+            situation.setId((Integer) map.get("id"));
+            situation.setMsg(map.get("msg").toString());
+            situation.setTime((Date) map.get("time"));
+            ret.add(situation);
+        }
+        return ret;
+    }
+
+
+    public List<SqlLog> getSqlLog(){
+        var list= logDao.getSqlLog();
+        var ret=new ArrayList<SqlLog>();
+        for(var map :list){
+            SqlLog log=new SqlLog();
+            log.setId((Integer) map.get("id"));
+            log.setSentence(map.get("sentence").toString());
+            log.setTime((Date) map.get("time"));
+            ret.add(log);
+        }
+        return ret;
     }
 }
