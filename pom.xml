@@ -5,7 +5,7 @@
 
     <groupId>wang.ismy</groupId>
     <artifactId>bloga</artifactId>
-    <version>1.1.0 release</version>
+    <version>1.2.0 release</version>
     <packaging>jar</packaging>
 
     <name>bloga</name>

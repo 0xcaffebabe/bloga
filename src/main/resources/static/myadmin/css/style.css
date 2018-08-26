@@ -45,6 +45,17 @@
 	color:rgb(238,238,238);
 }
 
+#region-pane{
+	height: 324px;
+}
+
+#browser-pane{
+	height: 324px;
+}
+
+#interval-pane{
+	height: 540px;
+}
 /*主页相关结束*/
 
 /*文章相关开始*/
@@ -154,6 +165,22 @@ a:hover{
 	}
 	#menuBtn{
 		display: inline;
+	}
+
+	#forthPane h1{
+		font-size: 500%;
+	}
+
+	#region-pane{
+		height: 200%;
+	}
+
+	#browser-pane{
+		height: 200%;
+	}
+
+	#interval-pane{
+		height: 648px;
 	}
 }
 

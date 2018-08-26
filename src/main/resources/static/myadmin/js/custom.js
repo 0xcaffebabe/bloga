@@ -1,6 +1,12 @@
 Chart.defaults.global.defaultFontColor = "rgb(238,238,238)";
 Chart.defaults.global.defaultFontSize=14;
 
+
+//如果窗口尺寸小于991px
+if(window.innerWidth<991){
+    Chart.defaults.global.defaultFontSize=22;
+}
+
 var token=location.search.substring(location.search.indexOf("?token=")+7,32+location.search.indexOf("?token=")+7);
 //动态载入导航们
 var fileName=getMiddleText(location.pathname,"/myadmin/","");
