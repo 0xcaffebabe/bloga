@@ -38,4 +38,9 @@ public class CommentDao {
     public Comment addComment(Comment comment){
         return repository.save(comment);
     }
+
+    public List<Comment> getCommentListByArticleId(Integer articleId) {
+
+        return repository.findAllByBelongArticle(articleId);
+    }
 }

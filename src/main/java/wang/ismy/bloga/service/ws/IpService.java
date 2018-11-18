@@ -5,6 +5,7 @@ import net.ipip.datx.City;
 import net.ipip.datx.IPv4FormatException;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import wang.ismy.bloga.entity.Region;
@@ -18,6 +19,8 @@ public class IpService {
     private City city;
 
     //根据IP返回一个地区对象
+
+    @Cacheable
     public Region getRegionByIp(String ip) throws IPv4FormatException {
         String[] ret=city.find(ip);
         String country="";

@@ -2,7 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="wang.ismy.bloga.dao.inter.IArticle">
+    <cache flushInterval="60000"></cache>
     <!--根据文章ID删除文章-->
     <delete id="deleteArticle" parameterType="int">
         DELETE FROM article
@@ -51,15 +53,22 @@
     </select>
     <!--获取edge相关文章-->
     <select id="getRelevantArticles" parameterType="map" resultType="wang.ismy.bloga.entity.Article">
-        SELECT id,title
-        FROM article
-        ORDER BY rand() limit #{length}
+            SELECT id,title
+            FROM article
+            ORDER BY rand() limit #{length}
     </select>
     <!--获取edge推荐文章-->
     <select id="getRecommendArticles" parameterType="int" resultType="wang.ismy.bloga.entity.Article">
-         SELECT id,title
-        FROM article
-        ORDER BY MINUTE(now())%id DESC limit #{length}
+        SELECT
+	    id,
+	    title
+        FROM
+	    article
+        WHERE
+	    id IN ( SELECT t.article_id FROM (
+	    SELECT article_id FROM article_viewer GROUP BY article_id
+	    ORDER BY COUNT( article_id ) DESC LIMIT #{length}
+	    ) AS t )
     </select>
     <!--获取归档列表-->
     <select id="getFile" resultType="String">

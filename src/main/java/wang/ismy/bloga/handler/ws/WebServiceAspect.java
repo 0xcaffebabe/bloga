@@ -24,7 +24,6 @@ public class WebServiceAspect {
 
     @Around("tokenAuth()")
     public Object around(ProceedingJoinPoint point) throws Throwable {
-        System.out.println(point.getThis().getClass().getName());
         var token=(String)point.getArgs()[0];
         if(token.equals(cacheService.get("token"))){
             Result result=new Result();

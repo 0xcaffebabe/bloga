@@ -4,10 +4,13 @@ import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class Comment extends wang.ismy.bloga.entity.Entity {
+public class Comment extends wang.ismy.bloga.entity.Entity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -88,6 +88,7 @@ public class GlobalControllerAspect {
         try {
             object = point.proceed();
         } catch (Throwable throwable) {
+            throwable.printStackTrace();
             throw new RuntimeException(throwable);
         }
 

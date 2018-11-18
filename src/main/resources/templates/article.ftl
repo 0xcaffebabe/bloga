@@ -10,8 +10,6 @@
 
     <#include "style.ftl">
 
-
-
     <style>
         img{
             display:block;height:auto;max-width:100%
@@ -94,6 +92,22 @@
 
                     <h2><i class="fa fa-comments"></i> 0 评论</h2>
 
+                    <#list commentList as comment>
+                        <div class="media">
+                            <div class="media-left">
+                                <a href="#">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    <#--<img class="media-object" src="..." alt="...">-->
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">${comment.name} -- ${comment.time}</h4>
+                                <div>
+                                    ${comment.content}
+                                </div>
+                            </div>
+                        </div>
+                    </#list>
 
 
                 </aside>
@@ -113,12 +127,12 @@
                             </div>
                         </div>
                         <input type="text" name="id" style="display: none;" value="72"/>
-                        <input type="url" name="website" id="comment-url" placeholder="你的网址" class="form-control input-lg">
+
 
                         <textarea rows="10" name="message" id="comment-body" placeholder="你要说的" class="form-control input-lg"></textarea>
 
                         <div class="buttons clearfix">
-                            <button type="submit" class="btn btn-xlarge btn-clean-one" onclick="alert('还没写好');return false;">提交</button>
+                            <button type="submit" class="btn btn-xlarge btn-clean-one" onclick="submitComment();return false;">提交</button>
                         </div>
                     </form>
                 </aside>
@@ -147,5 +161,30 @@
 <script src="/js/modernizr.js"></script>
 <script src="/js/index.js"></script>
 <script src="/js/custom.js"></script>
+<script>
+    function submitComment(){
+        var submitObj={
+            nickName:$("#comment-name").val(),
+            email:$("#comment-email").val(),
+            articleId:location.pathname.replace("/article/",""),
+            content:$("#comment-body").val()
+        };
+        $.ajax({
+            url:"/ws/comment",
+            method:"PUT",
+            headers:{"Content-Type":"application/json"},
+            data:JSON.stringify(submitObj)
+            ,
+            success:function (data) {
+               alert("评论成功");
+               location.reload();
+            }
+            ,
+            error:function (data) {
+                alert("评论失败");
+            }
+        })
+    }
+</script>
 </body>
 </html>

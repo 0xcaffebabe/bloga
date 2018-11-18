@@ -40,6 +40,7 @@ public class EdgeService {
 
 //    获取边缘那块东西的显示模型
     public Map<String,Object> getEdge(Integer articleId){
+        System.err.println("now articleId:"+articleId);
         var map=new HashMap<String,Object>();
         map.put("relevantArticles",articleService.getRelevantArticles(articleId));
         map.put("recommendArticles",articleService.getRecommendArticles());

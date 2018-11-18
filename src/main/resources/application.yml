@@ -1,8 +1,23 @@
 spring:
+  mail:
+    username: admin@ismy.wang
+    password: 388.mynameiscjp
+    host: smtp.ismy.wang
+    port: 465
+    default-encoding: UTF-8
+    properties:
+               mail:
+                 smtp:
+                   auth: true # 使用
+                   starttls: # 使用 SSL 安全协议，必须配置如下
+                     enable: true
+                     required: true
+
+    protocol: smtps # 协议
   datasource:
-     url: jdbc:mysql://127.0.0.1:3306/bloga?useUnicode=true&characterEncoding=utf8&useSSL=true
+     url: jdbc:mysql://127.0.0.1:3306/bloga?useUnicode=true&characterEncoding=utf8&useSSL=true&allowMultiQueries=true
      username: root
-     password: 123456
+     password: Root@@715711877
      driver-class-name: com.mysql.jdbc.Driver
   jpa:
     hibernate:
@@ -32,7 +47,7 @@ mybatis:
 
 logging:
   level:
-     wang.ismy.bloga.dao : info
+     wang.ismy.bloga.dao : debug
 
 
 server:

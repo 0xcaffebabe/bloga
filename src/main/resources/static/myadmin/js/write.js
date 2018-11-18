@@ -11,7 +11,9 @@ var id=getMiddleText(location.search,"&id=","");
 editor.customConfig.onchange = function (html) {
     // 监控变化，同步更新
     saveContent();
-    $("#tip").html("最近的一次保存:"+dateFormat(new Date()));
+    $("#tip").html("最近的一次保存:"+dateFormat(new Date())+"，字数:"+editor.txt.text().length);
+
+
 };
 //上传图片设置
 editor.customConfig.uploadImgServer = '/ws/upload?token='+token;

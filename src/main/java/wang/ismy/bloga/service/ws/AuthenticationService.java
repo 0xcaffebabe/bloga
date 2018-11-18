@@ -8,8 +8,10 @@ import wang.ismy.bloga.Result;
 import wang.ismy.bloga.constant.UserEnum;
 import wang.ismy.bloga.exception.AuthenticationException;
 import wang.ismy.bloga.service.CacheService;
+import wang.ismy.bloga.service.MailService;
 import wang.ismy.bloga.service.UserService;
 
+import java.util.Date;
 import java.util.Random;
 
 @Service
@@ -20,6 +22,9 @@ public class AuthenticationService {
 
     @Autowired
     private CacheService cacheService;
+
+    @Autowired
+    private MailService mailService;
 
 //    认证接口
     public Result auth(String userName, String salt, String sign){
@@ -54,6 +59,7 @@ public class AuthenticationService {
             }
             result.setData(token);
             CacheService.cachePool.put(token,user);
+            
             return result;
         }else{
             //抛出身份认证失败异常

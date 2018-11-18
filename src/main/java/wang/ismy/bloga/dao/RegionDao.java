@@ -6,6 +6,8 @@ import wang.ismy.bloga.dao.inter.IRegion;
 import wang.ismy.bloga.dao.repository.RegionRepository;
 import wang.ismy.bloga.entity.Region;
 
+import java.util.List;
+
 @Repository
 public class RegionDao {
 
@@ -29,5 +31,9 @@ public class RegionDao {
 
     public Region insert(Region region) {
         return regionRepository.save(region);
+    }
+
+    public List<Region> insertBatch(List<Region> regionList){
+        return regionRepository.saveAll(regionList);
     }
 }

@@ -5,13 +5,14 @@ import net.ipip.datx.IPv4FormatException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import wang.ismy.bloga.constant.LogEnum;
 import wang.ismy.bloga.dao.LogDao;
 import wang.ismy.bloga.entity.*;
+import wang.ismy.bloga.exception.LogException;
 import wang.ismy.bloga.service.ws.IpService;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 public class LogService {
@@ -67,8 +68,8 @@ public class LogService {
         return returnLog;
     }
 
-    public List<Log> getRequestLog(){
-        var list= logDao.getRequestLog();
+    public List<Log> getRequestLog(int delay){
+        var list= logDao.getRequestLog(delay);
 
         var ret=new ArrayList<Log>();
         for(var map :list){
@@ -76,7 +77,12 @@ public class LogService {
             log.setId((Integer) map.get("id"));
             log.setIp(map.get("ip").toString());
             log.setUrl(map.get("url").toString());
-            log.setUa(map.get("ua").toString());
+            try{
+                log.setUa(map.get("ua").toString());
+            }catch (NullPointerException e){
+
+            }
+
             log.setTime((Date) map.get("time"));
             log.setDelay((Integer)map.get("delay"));
             ret.add(log);
@@ -113,16 +119,25 @@ public class LogService {
     }
 
 
-    public List<SqlLog> getSqlLog(){
-        var list= logDao.getSqlLog();
+    public List<SqlLog> getSqlLog(int delay){
+        var list= logDao.getSqlLog(delay);
         var ret=new ArrayList<SqlLog>();
         for(var map :list){
             SqlLog log=new SqlLog();
             log.setId((Integer) map.get("id"));
             log.setSentence(map.get("sentence").toString());
             log.setTime((Date) map.get("time"));
+            log.setDelay((Integer) map.get("delay"));
             ret.add(log);
         }
         return ret;
+    }
+
+    public int cleanLog(String date){
+        if(date==null){
+            throw new LogException(LogEnum.DATE_NULL);
+        }
+
+        return logDao.cleanLog(date);
     }
 }

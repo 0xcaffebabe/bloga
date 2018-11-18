@@ -70,7 +70,7 @@
 				<button class="btn btn-danger"><span class="glyphicon glyphicon-edit"></span>&nbsp;删除评论</button>
 			</div>
 			
-			<table class="table table-hover table-striped table-condensed table-responsive">
+			<table class="table table-hover table-striped table-condensed table-responsive" id="commentPane">
 				<tr>
 					<th>ID</th>
 					<th>父ID</th>
@@ -80,14 +80,6 @@
 					<th>正文</th>
 				</tr>
 
-				<tr>
-					<td>1</td>
-					<td>0</td>
-					<td>JAVASCRIPT...</td>
-					<td>MY</td>
-					<td>admin@ismy.wang</td>
-					<td>的范德萨发的发的....</td>
-				</tr>
 			</table>
 
 			<ul class="pagination" style="float:center">
@@ -112,6 +104,30 @@
 <script src="js/custom.js"></script>
 
 <script>
-	
+    getCommentList();
+	function getCommentList(){
+	    $.ajax({
+			url:"/ws/comment?token="+token,
+			success:function(data){
+			    var list = data.data;
+			    for(var i=0;i<list.length;i++){
+			        var str="<tr>";
+			        str+="<td>"+list[i].id+"</td>";
+                    str+="<td>"+list[i].parentId+"</td>";
+                    str+="<td>"+list[i].belongArticle+"</td>";
+                    str+="<td>"+list[i].name+"</td>";
+                    str+="<td>"+list[i].email+"</td>";
+                    str+="<td>"+list[i].time+"</td>";
+
+                    str+="</tr>";
+			        $("#commentPane").append(str)
+				}
+			}
+			,
+			error:function (data) {
+				console.log(data);
+            }
+		})
+	}
 </script>
 </html>

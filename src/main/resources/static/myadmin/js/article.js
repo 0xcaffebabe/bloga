@@ -151,6 +151,11 @@ function showPaging(){
         return false;
     });
 }
+
+function showArtivleViewer(articleId){
+
+}
+
 //展示文章数据
 function showArticles(){
     //隐藏表格
@@ -185,7 +190,7 @@ function showArticles(){
             "</td>\n" +
             "<td class=\"hidden-xs\">"+dateFormat(articleList[i].createTime)+"</td>\n" +
             "<td class=\"hidden-xs\">"+dateFormat(articleList[i].lastEditTime)+"</td>\n" +
-            "<td>"+articleList[i].browseNumber+"</td>\n" +
+            "<td><a href=''>"+articleList[i].browseNumber+"</a></td>\n" +
             "<td>0</td>\n" +
             "<td><button class='btn btn-warning' onclick='window.location=\"./write.html?token="+
             token+"&id="+articleList[i].id+"\"'>修改</button></td>"+

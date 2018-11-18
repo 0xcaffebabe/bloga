@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import wang.ismy.bloga.annotation.BlogEdge;
 import wang.ismy.bloga.entity.Article;
 import wang.ismy.bloga.service.ArticleService;
+import wang.ismy.bloga.service.CommentService;
 import wang.ismy.bloga.service.SettingService;
 import wang.ismy.bloga.util.PagingUtils;
 import wang.ismy.bloga.util.TextUtils;
@@ -27,6 +28,9 @@ public class BlogController {
 
     @Autowired
     private SettingService settingService;
+
+    @Autowired
+    private CommentService commentService;
 
     private String siteTitle;
 
@@ -90,6 +94,7 @@ public class BlogController {
         map.put("webTitle",article.getTitle()+" - "+siteSideLine);
         map.put("keyWord",keyWord+","+article.getTags());
         map.put("description",TextUtils.Html2Text(article.getContent()));
+        map.put("commentList",commentService.getCommentListByArticleId(id));
         return "article";
     }
     //处理标签分类页分页

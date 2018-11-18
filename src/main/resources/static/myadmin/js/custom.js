@@ -46,7 +46,7 @@ function checkToken(){
             success:function(data){
                 if(data.data==null){
                     showAlert("错误","登录超时",function(){
-                        location="./index.html";
+                        location="/myadmin/";
                     });
                 }
             }

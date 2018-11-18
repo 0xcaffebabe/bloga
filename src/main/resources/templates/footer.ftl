@@ -16,8 +16,8 @@
 
 </footer>
 
-<script src="/js/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="/js/modernizr.js"></script>
 <script src="/js/index.js"></script>
 <script src="/js/custom.js"></script>

@@ -61,4 +61,13 @@ public class CommentDaoTest {
         comment=dao.addComment(comment);
         assertEquals("admin@qq.com",comment.getEmail());
     }
+
+    /*
+    * admin
+    * */
+    @Test
+    public void articleId(){
+
+        assertEquals(1,dao.getCommentListByArticleId(78).size());
+    }
 }

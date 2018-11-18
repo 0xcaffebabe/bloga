@@ -56,4 +56,8 @@ public class CommentService {
 
         return commentDao.deleteComment(id);
     }
+
+    public List<Comment> getCommentListByArticleId(Integer articleId){
+        return commentDao.getCommentListByArticleId(articleId);
+    }
 }
